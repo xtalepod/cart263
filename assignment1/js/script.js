@@ -28,10 +28,9 @@ function setup() {
   // newPixel.addEventListener('click', remove)
     let pixelDiv = document.getElementById('pixel');
     pixelDiv.appendChild(newPixel);
-
-    //add an event listener to the document for keydown that calls a function rotate
-      document.addEventListener('keydown', rotate)
   }
+  //add an event listener to the document for keydown that calls a function rotate
+  document.addEventListener('keydown', rotate)
 }
 
 
@@ -53,19 +52,21 @@ function paint(e) {
 
 
 function rotate(e) {
-  //we don't do this here
-  // let pixel = e.target
-//instead we do something like this....
-let pixel = document.addEventListener('keydown', rotate);
+  console.log(rotation);
 
-  if (e.keydown === 39) {
-    rotation = +1;
+  if (e.keyCode === 39) {
+    rotation += 1;
   }
-  else (e.keydown === 37) {
-    rotation = -1;
+  else if (e.keyCode === 37) {
+    rotation -= 1;
   }
-  
 
+//this gives us all of the pixels on the page
+   let pixels = document.getElementsByClassName('pixel');
+
+   for (let i = 0; i < pixels.length; i ++) {
+     pixels[i].style.transform = `rotate(${rotation}deg)`;
+   }
 }
 
 //resetPixel function is CALLING the pixel variable created in function
