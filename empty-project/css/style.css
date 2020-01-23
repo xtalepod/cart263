@@ -1,0 +1,18 @@
+body {
+  background-color: orange;
+  width: 1000px;
+  margin: 0 auto;
+  margin-top: 50px;
+  font: "Courier new";
+
+}
+
+.redacted {
+  background-color: black;
+  color: transparent;
+}
+
+.revealed {
+  background-color: transparent;
+  color: purple;
+}
