@@ -24,13 +24,13 @@ function setup() {
     //'eventListener' goes into quotations and comes first, the function
 // follows (here it is paint)
     newPixel.addEventListener('mouseover', paint);
-  //add an event listener to the document for keydown that calls a function rotate
-    // newPixel.addEventListener('keydown', rotate);
-
   //add an addEventListener to the document for click that calls a function remove
   // newPixel.addEventListener('click', remove)
     let pixelDiv = document.getElementById('pixel');
     pixelDiv.appendChild(newPixel);
+
+    //add an event listener to the document for keydown that calls a function rotate
+      document.addEventListener('keydown', rotate)
   }
 }
 
@@ -53,7 +53,19 @@ function paint(e) {
 
 
 function rotate(e) {
-  let pixel = e.target
+  //we don't do this here
+  // let pixel = e.target
+//instead we do something like this....
+let pixel = document.addEventListener('keydown', rotate);
+
+  if (e.keydown === 39) {
+    rotation = +1;
+  }
+  else (e.keydown === 37) {
+    rotation = -1;
+  }
+  
+
 }
 
 //resetPixel function is CALLING the pixel variable created in function
@@ -61,11 +73,3 @@ function rotate(e) {
 function resetPixel(pixel) {
 pixel.style.backgroundColor = 'white';
 }
-
-function rotate () {
-
-}
-//
-// function remove(pixel) {
-//
-// }*********************************************/
