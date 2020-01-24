@@ -18,19 +18,18 @@ function setup() {
   //a regular for loop that counts from 0 to 1000 and goes through each pixel
   for (let i = 0; i < 1000; i++) {
     //add a DOM function to create a new div and store the div in a pixel variable proper syntax note: you need to put div in the brackets here
-
-    let newPixel = document.createElement('div');
-    /*add a class attribute to newPixel element using the setAttribute() function
+    let pixel = document.createElement('div');
+    /*add a class attribute to pixel element using the setAttribute() function
     this allows us "to assign the correct" CSS styling*/
-    newPixel.setAttribute('class', 'pixel');
+    pixel.setAttribute('class', 'pixel');
     let pixelDiv = document.getElementById('pixel');
     //add the new element to the page's body using the body's appendChild()function
-    pixelDiv.appendChild(newPixel);
+    pixelDiv.appendChild(pixel);
     //add a mouseover event listener to each pixel element that specifies a function called paint
-    newPixel.addEventListener('mouseover', paint);
+    pixel.addEventListener('mouseover', paint);
 
   }
-  //add an event listener to the document for keydown that calls a function rotate
+  //add an event listener to the document for keydown that calls function rotate()
   document.addEventListener('keydown', rotate)
 }
 
@@ -51,20 +50,19 @@ function paint(e) {
   setTimeout(resetPixel, 2000, pixel);
 }
 
-
+//define a function called rotate with a parameter of e that rotates all pixels by 1 degree clockwise when the right arrow key is pressed and counterclock wise when the left arrow key is pressed
 function rotate(e) {
-  console.log(rotation);
-
+//a boolean to check if either key is pressed using their keyCode and if its pressed rotate
   if (e.keyCode === 39) {
     rotation += 1;
   } else if (e.keyCode === 37) {
     rotation -= 1;
   }
-
-  //this gives us all of the pixels on the page
+  //you need to create a new variable because this gives us access to all of the pixels on the page, make it equal to the DOM and get the element we want (which is the CSS pixel class)
   let pixels = document.getElementsByClassName('pixel');
-
+  //then you need to create a for loop to run through the pixels array
   for (let i = 0; i < pixels.length; i++) {
+    //apply rotation using the CSS transform style to every pixel when one of the keys are being pressed. the notation in the template literal is for CSS and calls global variable rotation we declared at the start
     pixels[i].style.transform = `rotate(${rotation}deg)`;
   }
 }
