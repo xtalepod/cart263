@@ -1,41 +1,44 @@
 "use strict";
 
 /********************************************************************
-Title of Project
-Author Name
+Pixel painter 2.almost0
+christale, adapted from pippin barr's template
 
-This is a template. Fill in the title, author, and this description
-to match your project! Write JavaScript to do amazing things below!
-
+move the mouse, watch the colours change, left right left right make those pixels trippy
 *********************************************************************/
-//a global variable called rotation that starts at 0
+//declare a global variable called rotation that starts at 0
 let rotation = 0;
 
+//to set up the webpage to load, it's set to "call back" in setup
 window.addEventListener('load', setup);
 
+//the setup function
+//In this section the div elements are added so that we can
 function setup() {
-  console.log('setup')
-//a for loop that runs 1000 times
+//a regular for loop that counts from 0 to 1000 and goes through each pixel
   for (let i = 0; i < 1000; i ++) {
-    //you need to put div in the brackets here
+    /*add a DOM function to create a new div and store the div in a pixel variable
+    proper syntax note: you need to put div in the brackets here
+    */
     let newPixel = document.createElement('div');
+    /*add a class attribute to newPixel element using the setAttribute() function
+    this allows us "to assign the correct" CSS styling*/
     newPixel.setAttribute('class','pixel');
-    //add a mouseover event listenner to each pixel element
-    //'eventListener' goes into quotations and comes first, the function
-// follows (here it is paint)
-    newPixel.addEventListener('mouseover', paint);
-  //add an addEventListener to the document for click that calls a function remove
-  // newPixel.addEventListener('click', remove)
     let pixelDiv = document.getElementById('pixel');
+    //add the new element to the page's body using the body's appendChild()function
     pixelDiv.appendChild(newPixel);
+    //add a mouseover event listener to each pixel element that specifies a function called paint
+    newPixel.addEventListener('mouseover', paint);
+
   }
   //add an event listener to the document for keydown that calls a function rotate
   document.addEventListener('keydown', rotate)
 }
 
 
-
+//define a function called paint with a parameter called 'e'
 function paint(e) {
+  //create a new variable and store e.target (an event handler) in it
   let pixel = e.target;
 
   let red = (Math.floor(Math.random()*255));
@@ -43,7 +46,7 @@ function paint(e) {
   let blue = (Math.floor(Math.random()*255));
 
   let colourValue = `rgb(${red},${green},${blue})`;
-
+//set the pixel background colour to the RGB variable by accessing the pixels CSS style property
   pixel.style.backgroundColor = colourValue;
   //always give a function and a delay
   //we are telling it WHICH pixel in the last parameter

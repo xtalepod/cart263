@@ -2,13 +2,13 @@ body {
 
 }
 
+/*a class for our pixel, which sets the background to black, makes each pixel a rectangle
+and positions them to "float left of their containers"
+'this makes the pixels display continously instead of one per line'
+*/
 .pixel {
   background-color: black;
   width: 40px;
   height: 100px;
   float: left;
 }
-
-/* .rotated {
-  transform: rotate(1deg);
-} */
