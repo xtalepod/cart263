@@ -7,8 +7,20 @@ and positions them to "float left of their containers"
 'this makes the pixels display continously instead of one per line'
 */
 .pixel {
-  background-color: black;
-  width: 40px;
+
+  width: 0;
+      height: 0;
+      border-left: 50px solid ;
+      border-right: 50px solid transparent;
+      border-bottom: 100px solid transparent;
+      float: left;
+  /* width: 50px;
+    height: 25px;
+    background-color: black;
+    border-radius: 100px/50px;
+    float:left; */
+  /* background-color: black; */
+  /* width: 4px;
   height: 100px;
-  float: left;
+  float: left; */
 }
