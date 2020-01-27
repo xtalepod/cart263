@@ -10,6 +10,9 @@ to match your project! Write JavaScript to do amazing things below!
 
 *********************************************************************/
 
+let $secretsFound = 0;
+let $secretsTotal;
+
 //this is the standard magical thing that lets you start using the jQuery library online
 //ready is a special event
 $(document).ready(setup);
@@ -18,6 +21,9 @@ function setup() {
   // This code will run when the document is ready!
   setInterval(update,200);
   $('span').on('click',spanClicked);
+  //store the result
+  $secretsTotal = $('.secret').length;
+  $('#displayTotal').text("my little secrets" + $secretsFound "of" + $secretsTotal)
 }
 
 function update() {
