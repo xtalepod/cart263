@@ -16,8 +16,8 @@ body {
 h1{
   font-size: 50px;
   line-height:20px;
-  width: 1000px;
-  height: 200px;
+  /* width: 1000px;
+  height: 200px; */
   background-color: black;
   float: left;
  }
@@ -25,15 +25,15 @@ h1{
 /* Redacted elements need to be blanked out */
 .redacted {
   background-color: black;
-  color: purple;
+  color: black;
   text-decoration: none;
 }
 
 /* Revealed elements need to be highlighted because it's a disaster! */
 .revealed {
   background-color: transparent;
-  text-decoration: underline;
-  color: purple;
+  text-decoration: none;
+  color: black;
 }
 
 .found {
