@@ -75,6 +75,7 @@ function updateSpan() {
     $(this).removeClass('redacted');
     $(this).addClass('revealed');
   }
+}
 
 //a function to reveal the secrets and track how many have been found
   function revealSecret(){
@@ -88,9 +89,8 @@ function updateSpan() {
     console.log(secretsFound);
 //remove the mouseover once a secret is found
     $('.found').off('mouseover');
-
   }
-}
+
 
 // A version using anonymous functions if you're interested:
 
