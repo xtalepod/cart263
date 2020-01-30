@@ -18,6 +18,6 @@ body {
 }
 /* adding a class called found to brightly highlight a secret once it has been found */
 .secret {
-background-color: green;
-colour: transparent;
+background-color: black;
+colour: green;
 }

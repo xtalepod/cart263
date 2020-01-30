@@ -10,8 +10,17 @@ to match your project! Write JavaScript to do amazing things below!
 
 *********************************************************************/
 
+//set variables for secretsFound and secretsTotal
 let $secretsFound = 0;
 let $secretsTotal;
+
+// a variable to store all the jQuery spans
+let $allSpans;
+//a variable to store all the redacted spans
+let $redactedSpans;
+//a variable to store all the secret spans
+let $secretSpans;
+
 
 //this is the standard magical thing that lets you start using the jQuery library online
 //ready is a special event
@@ -21,14 +30,23 @@ function setup() {
   // This code will run when the document is ready!
   setInterval(update,200);
   $('span').on('click',spanClicked);
-  //store the result
+  //to calculate how many secrets are found: select the secret class and check the .length property and store the results in $secretsTotal
   $secretsTotal = $('.secret').length;
-  $('#displayTotal').text("my little secrets" + $secretsFound "of" + $secretsTotal)
+  console.log($secretTotal);
+
+  $redactedTotal = $('.redacted').length;
+  $redactedRevealed = $('.revealed').length;
+  $redactedSpans = $('.redacted');
+  /*use jQuery text() function to set the appropriate span to the $secretsTotal value
+  note: the hashtag syntax $('#IDselector') calls a jQuery ID selector*/
+  $('#displayTotalFound').text("my little secrets" + $secretsFound "of" + $secretsTotal)
+  $('secrets').on('mouseover', secretRevealed)
 }
 
 function update() {
   console.log("updateeeee");
-  //use single quotation to call the element
+  /*
+  note: only single quotation syntax $('span') calls an HTML tag element*/
     $('span').each(updateSpan);
 }
 
