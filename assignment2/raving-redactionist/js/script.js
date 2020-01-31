@@ -19,7 +19,9 @@ const UPDATE_FREQUENCY = 500;
 // A place to store the jQuery selection of all spans
 let $spans;
 
+//Add a variable to track how many secrets were found
 let secretsFound = 0;
+//Add a variable to track how many secrets there are total, add $ because it will use jQuery
 let $secretsTotal;
 
 
@@ -37,10 +39,10 @@ function setup() {
   // Set an interval of 500 milliseconds to update the state of the page
   setInterval(update, UPDATE_FREQUENCY);
 
-//find the total amount of secrets
+/*Calculate the total number of secrets on the page by selecting the secret class
+and checking the .length property result and store it in your $secretsTotal variable!*/
   $secretsTotal = $('.secret').length;
-  console.log($secretsTotal);
-//write the total number of secrets on the screen
+//Set the appropriate span on the page to this value using jQuery's text() function
   $('#scoreDisplayText').text($secretsTotal);
 //create an event handler so when you mouseover a secret, reveal it
   $('.secret').on('mouseover',revealSecret);
@@ -85,8 +87,6 @@ function updateSpan() {
     secretsFound += 1;
 //write the number of secrets found on the screen
     $('#countingTheSecrets').text(secretsFound);
-//console log cause its not working
-    console.log(secretsFound);
 //remove the mouseover once a secret is found
     $('.found').off('mouseover');
   }
