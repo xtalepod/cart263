@@ -44,7 +44,8 @@ and checking the .length property result and store it in your $secretsTotal vari
   $secretsTotal = $('.secret').length;
 //Set the appropriate span on the page to this value using jQuery's text() function
   $('#scoreDisplayText').text($secretsTotal);
-//create an event handler so when you mouseover a secret, reveal it
+/*Add an event mouseover to all secrets using jQuery to select the secret class
+and use the on() to attach an event for mouseover. To do this define an event handler function (revealSecret)*/
   $('.secret').on('mouseover',revealSecret);
 }
 
