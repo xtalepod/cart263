@@ -8,20 +8,32 @@ Raving Redactionist CSS.
 body {
   font-family: Courier, monospace;
   width: 1000px;
-  margin-left: 20px;
+  margin-left: 200px;
   margin-top: 20px;
   background-color: purple;
 }
 
 /* Header element used to stylize the score */
 h1{
-  line-height:200px;
+  /* line-height:200px; */
   width: inherit;
-  height: 200px;
+  height: 20px;
   background-color: black;
   font-size: 50px;
-  color: purple;
+  color: orange;
   float: left;
+}
+
+ #countingTheSecrets{
+   /* margin-right: 30px; */
+   color: orange;
+   font-size: 55px;
+ }
+
+ #scoreDisplayText{
+   /* margin-left: 30px; */
+   color: orange;
+   font-size: inherit;
  }
 
 /* Redacted elements need to be blanked out */
