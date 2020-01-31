@@ -16,7 +16,7 @@ body {
 /* Header element used to stylize the score */
 h1{
   line-height:200px;
-  width: 500px;
+  width: inherit;
   height: 200px;
   background-color: black;
   font-size: 50px;
