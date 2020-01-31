@@ -15,11 +15,12 @@ body {
 
 /* Header element used to stylize the score */
 h1{
-  font-size: 50px;
-  line-height:20px;
-  /* width: 1000px;
-  height: 200px; */
+  line-height:200px;
+  width: 500px;
+  height: 200px;
   background-color: black;
+  font-size: 50px;
+  color: purple;
   float: left;
  }
 

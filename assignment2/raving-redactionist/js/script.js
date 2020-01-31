@@ -1,20 +1,22 @@
 "use strict";
 
 /*****************
+the raving radactionist by pippin barr altered by christale terris
+select the secret parts to learn my secret
 
+lyrics from
 dirty little secret
 by the all american rejects
+https://www.youtube.com/watch?v=gPDcwjJ8pLg
 
-You are redacting a document, but it keeps becoming unredacted!
-Click the secret information to hide it, don't let all the
-secrets become revealed!
-
+in order to complete this assignment i used the jQuery website, class notes, the class repository, and help from friends.
+for the record: i am still behind in my understanding of all the languages (but am chill about it)
 ******************/
 
 // The chance a span will be revealed per update
 const REVEAL_POSSIBILITY = 0.1;
 // How often to update the spans (potentially revealing them)
-const UPDATE_FREQUENCY = 500;
+const UPDATE_FREQUENCY = 5000;
 
 // A place to store the jQuery selection of all spans
 let $spans;
@@ -88,7 +90,7 @@ function updateSpan() {
     secretsFound += 1;
 //Select the span containing the count of secrets found and set its text to be the value of counter variable (secretsFound) using jQuery text() function
     $('#countingTheSecrets').text(secretsFound);
-//Remove the mouseover once a secret is found
+//Remove the mouseover once a secret is found using the jQuery off function()
     $('.found').off('mouseover');
   }
 
