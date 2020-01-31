@@ -80,15 +80,15 @@ function updateSpan() {
   }
 }
 
-//a function to reveal the secrets and track how many have been found
+//This is the event handler function for revealSecret()
   function revealSecret(){
-//add a class to the found secrets
+//Add the CSS .found class to the element that was mouseover. In a mouse event hanlder this refers to the targeted element*
     $(this).addClass('found');
-//increase the number of secrets found by 1
+//Increase the counter variable by 1
     secretsFound += 1;
-//write the number of secrets found on the screen
+//Select the span containing the count of secrets found and set its text to be the value of counter variable (secretsFound) using jQuery text() function
     $('#countingTheSecrets').text(secretsFound);
-//remove the mouseover once a secret is found
+//Remove the mouseover once a secret is found
     $('.found').off('mouseover');
   }
 
