@@ -1,3 +1,32 @@
-body {
 
+/* https://developer.mozilla.org/en-US/docs/Web/CSS/radial-gradient */
+body {
+/* background: repeating-radial-gradient(#e66465, #9198e5 20%); */
+background-image: url(../assets/images/acrocorinth02.jpg) no-repeat;
+ width: 600px;
+margin: 0 auto;
+margin-top: 100px;
+font-family: Courier, monospace;
+font-style: oblique;
+font-size: 12px;
+padding: 300px 100px;
+text-align: center;
+line-height: 20px;
+}
+
+/* this is just the tital */
+
+#title{
+  color:green;
+  /* padding: 10px;
+  max-width: 100px; */
+  transform: rotate(1.6turn);
+}
+
+/* //this is just a slight rotated clown head */
+.annoying{
+  padding: 100px;
+  max-width: 100px;
+  /* transform: rotate(10deg); */
+  transform: matrix(1, 2, 3, 4, 5, 6);
 }
