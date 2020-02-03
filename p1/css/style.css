@@ -1,32 +1,99 @@
 
 /* https://developer.mozilla.org/en-US/docs/Web/CSS/radial-gradient */
 body {
-/* background: repeating-radial-gradient(#e66465, #9198e5 20%); */
-background-image: url(../assets/images/acrocorinth02.jpg) no-repeat;
- width: 600px;
-margin: 0 auto;
-margin-top: 100px;
-font-family: Courier, monospace;
-font-style: oblique;
-font-size: 12px;
-padding: 300px 100px;
-text-align: center;
-line-height: 20px;
+  width: 100px;
+  margin: 0 auto;
+  margin-top: 100px;
+  font-family: Courier, monospace;
+  font-style: oblique;
+  font-size: 12px;
+  padding: 300px 100px;
+  text-align: center;
+  line-height: 20px;
+
 }
 
 /* this is just the tital */
 
 #title{
   color:green;
-  /* padding: 10px;
-  max-width: 100px; */
+  padding: 10px;
+  max-width: 100px;
+   -webkit-transform: rotateY(130deg); 
   transform: rotate(1.6turn);
 }
 
-/* //this is just a slight rotated clown head */
-.annoying{
-  padding: 100px;
-  max-width: 100px;
-  /* transform: rotate(10deg); */
-  transform: matrix(1, 2, 3, 4, 5, 6);
+/* https://www.w3schools.com/cssref/playit.asp?filename=playcss_outline-color&preval=invert */
+#doyouloveme{
+  /* margin-left: 50; */
+  padding:20px 100px;
+  text-align: left;
+  position: absolute;
+  top: 40px; left: 40px;
+  color:black;
+  border:2px solid yellow;
+  outline-style:outset;
+  outline-color:rgb(255,130,255);
 }
+
+
+#itsokay{
+  /* margin-left: 50; */
+  padding:20px 100px;
+  text-align: left;
+  position: absolute;
+  top: 40px; right: 40px;
+  color:black;
+    border:2px solid yellow;
+    outline-style:outset;
+    outline-color:rgb(255,130,255);
+}
+
+#scrollbox{
+
+  padding:20px 100px;
+  text-align: left;
+  position: absolute;
+  top: 400px; right: 40px;
+  color:black;
+    border:2px solid yellow;
+    outline-style:outset;
+    outline-color:rgb(255,130,255);
+}
+
+/* #cactus { */
+  /* position: absolute; */
+  /* top: 370px; right: 200px; */
+  /* color:black; */
+/* } */
+
+#imsorry1{
+  padding:20px 100px;
+  text-align: left;
+  position: absolute;
+  top: 100px; right: 40px;
+  color:black;
+    border:2px solid yellow;
+    outline-style:dotted;
+    outline-color:rgb(255,130,255);
+
+}
+
+#log{
+  padding:20px 100px;
+  text-align: left;
+  position: absolute;
+  top: 100px; left: 40px;
+  color:black;
+
+
+}
+
+
+/* //this is just a slight rotated clown head */
+/* .annoying{ */
+  /* padding: 10px; */
+  /* max-width: 100px; */
+  /* transform: rotate(10deg); */
+  /* transform: matrix(1, 2, 3, 4, 5, 6); */
+/* } */
