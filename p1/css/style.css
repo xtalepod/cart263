@@ -12,6 +12,29 @@ body {
   line-height: 20px;
 
 }
+div{
+  color:green;
+  padding: 1px;
+  max-width: 100px;
+  background-color: black;
+  border:2px solid yellow;
+  outline-style:outset;
+  outline-color:rgb(255,130,255);
+
+}
+
+#scrollbox{
+
+  padding:20px 100px;
+  text-align: left;
+  position: absolute;
+  top: 400px; right: 40px;
+  color:black;
+    border:2px solid yellow;
+    outline-style:outset;
+    outline-color:rgb(255,130,255);
+    background-color: white;
+}
 
 /* this is just the tital */
 
@@ -19,7 +42,7 @@ body {
   color:green;
   padding: 10px;
   max-width: 100px;
-   -webkit-transform: rotateY(130deg); 
+   -webkit-transform: rotateY(130deg);
   transform: rotate(1.6turn);
 }
 
@@ -49,24 +72,6 @@ body {
     outline-color:rgb(255,130,255);
 }
 
-#scrollbox{
-
-  padding:20px 100px;
-  text-align: left;
-  position: absolute;
-  top: 400px; right: 40px;
-  color:black;
-    border:2px solid yellow;
-    outline-style:outset;
-    outline-color:rgb(255,130,255);
-}
-
-/* #cactus { */
-  /* position: absolute; */
-  /* top: 370px; right: 200px; */
-  /* color:black; */
-/* } */
-
 #imsorry1{
   padding:20px 100px;
   text-align: left;
@@ -85,15 +90,6 @@ body {
   position: absolute;
   top: 100px; left: 40px;
   color:black;
-
+  background-color: white;
 
 }
-
-
-/* //this is just a slight rotated clown head */
-/* .annoying{ */
-  /* padding: 10px; */
-  /* max-width: 100px; */
-  /* transform: rotate(10deg); */
-  /* transform: matrix(1, 2, 3, 4, 5, 6); */
-/* } */

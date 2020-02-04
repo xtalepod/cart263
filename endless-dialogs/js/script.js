@@ -1,4 +1,4 @@
-"use strict";
+ "use strict";
 
 /*****************
 
@@ -88,6 +88,7 @@ function addDialog() {
   newDialogSFX.currentTime = 0;
   newDialogSFX.play();
 
+
   // Dynamically create a div and store it in a variable. This is the div
   // we will turn into a dialog box. Set its title at the same time.
   let $dialog = $(`<div></div>`).attr(`title`, `Question`);
@@ -111,9 +112,9 @@ function addDialog() {
       "Yes?": function() {
         $(this).dialog(`close`);
       },
-      "No?": function() {
-        $(this).dialog(`close`);
-      }
+      // "No?": function() {
+      //   $(this).dialog(`close`);
+      // }
     },
     // The 'close' option lets us specify a function to call when the dialog is closed
     close: closeDialog,
