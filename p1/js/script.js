@@ -18,7 +18,7 @@ const INITIAL_DIALOG_DELAY = 2000;
 const MIN_DIALOG_DELAY_TIME = 2000;
 const MAX_DIALOG_DELAY_TIME = 20000;
 
-//dialog box array
+//An array to hold all the dialog which will appear as pop up boxes
 let dialogBoxes = [
   "eros",
   "i think theres something missing inside me",
@@ -27,17 +27,18 @@ let dialogBoxes = [
   "i am self assured",
   "have you read the wiki page 'how to let go?'",
   "during the latter part of this period, children begin to use attachment figures(familiar people) as a secure base to explore from and return to. parental responses lead to the development of patterns of attachment; these, in turn, lead to internal working models which will guide the individual 's feelings, thoughts and expectations in later relationships.[2] separation anxiety or grief following the loss of an attachment figure is considered to be a normal and adaptive for response an attached infant.these behaviours may have evolved because they increase the probability of survival of the child.",
-  "i'm a demisexual."
+  "demisexual."
 ];
 //
 // // Load sound effects for dialogs appearing and being dismissed
 // let newDialogSFX = new Audio("assets/sounds/dialog_new.wav");
 // let dismissDialogSFX = new Audio("assets/sounds/dialog_dismiss.wav");
 
+//Load sound effects for the dumpster fire (dollySFX) and when the user interacts with the buttons (icqSFX)
 let dollySFX = new Audio("assets/sounds/dollyparton.wav");
 let icqSFX = new Audio("assets/sounds/icq.mp3");
 
-//from the in class exercise eater
+//Declare 3 JavaScript variables to hold the elements used in the dumpster fire
 let $flames;
 let $dumpster;
 let $love;
@@ -47,8 +48,10 @@ let $love;
 const MAX_MOUSE_MOVES = 20;
 let mouseMoves = 0;
 
+//The THING we do in javascript so the webpage knows its time to load our data
 $(document).ready(setup);
 
+//A function to set up the actions to take place when the buttons are pressed, turning the Javascript variables into
 function setup() {
   console.log("setting up");
 
@@ -56,8 +59,8 @@ function setup() {
   // $(document).on('mousemove', mouseMoved);
 
   //https://api.jquery.com/fadeToggle/
-  $("button").first().click(function() {
-    $("p").first().fadeToggle("slow", "linear");
+  $("#itsokay").click(function() {
+    // $("p").first().fadeToggle("slow", "linear");
     addDialog();
     $("#ilovemyself").append("<div>i love myself</div>");
     // Play the new dialog sound effect
@@ -65,21 +68,23 @@ function setup() {
     icqSFX.play();
   });
   //this button shows the word no over and over again when you click it + plus i'm sorry fades in and out
-  $("button").last().click(function() {
-    $("p").last().fadeToggle("fast", function() {
+  $("#doyouloveme").click(function() {
+    // $("p").last().fadeToggle("fast", function() {
       $("#no").append("<div>no</div>");
       $("#imsorry").append("<div>i'm sorry</div>");
-    });
+    // });
     // Play the new dialog sound effect
     icqSFX.currentTime = 0;
     icqSFX.play();
   });
+  console.log($("no"));
 
-  //from week 4 in class assignment eater
+  //Get the elements from the page!
   $flames = $('#flames');
   $dumpster = $('#dumpster');
   $love = $('#love');
 
+//Make the love element draggable... I can remove the start and stop function because I'm not using it but for now I'll keep it to remember something is possible
   $love.draggable({
     start: function() {
       // buzzSound.play();
@@ -89,8 +94,9 @@ function setup() {
     }
   });
 
-  //on drop is a hanlder that takes parameters
+  //Make the dumpster element droppable
   $dumpster.droppable({
+    //The drop option specifies a function to call when a drop is completed*
     drop: onDrop
   });
 }
@@ -102,14 +108,10 @@ function setup() {
 //     mouseMoves = 0;
 //   }
 // }
-// addDialog()
-//
-// The key function. It adds a stupid dialog to a random position
-// on the screen.
+
+// A function that makes the dialog boxes show up randomly + randomly reveal the questions
+//https://github.com/pippinbarr/cart263-2020/blob/master/activities/jqueryui/eat-up/js/script.js
 function addDialog() {
-  // // Play the new dialog sound effect
-  // newDialogSFX.currentTime = 0;
-  // newDialogSFX.play();
 
   // Dynamically create a div and store it in a variable. This is the div
   // we will turn into a dialog box. Set its title at the same time.
