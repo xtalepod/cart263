@@ -1,4 +1,4 @@
-/* https://developer.mozilla.org/en-US/docs/Web/CSS/radial-gradient */
+
 body {
   width: 100px;
   margin: 0 auto;
@@ -10,9 +10,11 @@ body {
   text-align: left;
   line-height: 20px;
   background-color: rgb(255, 230, 230);
+/* a background style https://developer.mozilla.org/en-US/docs/Web/CSS/radial-gradient */
   background: radial-gradient( #ffff00, #b3d1ff, #ff6699);
 }
 
+/*the scroll box that holds text https://www.quackit.com/html/codes/html_scroll_box.cfm */
 #scrollbox {
   padding: 20px 100px;
   text-align: right;
@@ -27,6 +29,7 @@ body {
   background-color: transparent;
 }
 
+/*a button */
 /* https://www.w3schools.com/cssref/playit.asp?filename=playcss_outline-color&preval=invert */
 #doyouloveme {
   /* margin-left: 50; */
@@ -45,6 +48,7 @@ body {
   outline-color: rgb(255, 130, 255);
 }
 
+/*a button */
 #itsokay {
   /* margin-left: 50; */
   padding: 20px 100px;
@@ -61,6 +65,7 @@ body {
   background-color: #b3d1ff;;
 }
 
+/*text that appears when you click itsokay button*/
 #ilovemyself {
   padding: 20px 100px;
   text-align: left;
@@ -73,6 +78,7 @@ body {
   outline-color: rgb(255, 130, 255)
 }
 
+/*text that appears when you click do you love me button*/
 #no {
   padding: 20px 100px;
   text-align: left;
@@ -86,10 +92,12 @@ body {
   outline-color: none;
 }
 
+/* a container that holds the dumpster and the explosion pictures*/
 #dumpsterfire {
   position: relative;
 }
 
+/* styles for all the images on the page*/
 #explosion {
   position: absolute;
   top: 0px;

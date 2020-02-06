@@ -60,7 +60,6 @@ function setup() {
 
   //https://api.jquery.com/fadeToggle/
   $("#itsokay").click(function() {
-    // $("p").first().fadeToggle("slow", "linear");
     addDialog();
     $("#ilovemyself").append("<div>i love myself</div>");
     // Play the new dialog sound effect
@@ -69,7 +68,6 @@ function setup() {
   });
   //this button shows the word no over and over again when you click it + plus i'm sorry fades in and out
   $("#doyouloveme").click(function() {
-    // $("p").last().fadeToggle("fast", function() {
       $("#no").append("<div>no</div>");
       $("#imsorry").append("<div>i'm sorry</div>");
     // });
@@ -111,7 +109,6 @@ function setup() {
 
 // A function that makes the dialog boxes show up randomly + randomly reveal the questions
 function addDialog() {
-
   // Dynamically create a div and store it in a variable. This is the div
   // we will turn into a dialog box. Set its title at the same time.
   let $dialog = $(`<div></div>`).attr(`title`, `spiral`);
@@ -161,13 +158,13 @@ function closeDialog() {
 
 // randomInRange()
 //
-// Returns a random number between min and max
-function randomInRange(min, max) {
-  return min + (Math.random() * (max - min));
-}
+// // Returns a random number between min and max
+// function randomInRange(min, max) {
+//   return min + (Math.random() * (max - min));
+// }
 
+//This function gets called when the draggable element is dragged over the droppable element. When the element is dropped: play dolly parton, set the dumpster on fire, and open a dialog box.
 //https://github.com/pippinbarr/cart263-2020/blob/master/activities/jqueryui/eat-up/js/script.js
-//This function gets called when the draggable element is dragged over the droppable element
 function onDrop(event, ui) {
 //When the user drops the love fire onto the dumpster we want to keep the dumpster on the page, play dolly parton, and start the explosion
 //play dolly en loop (loop requires a boolean)
