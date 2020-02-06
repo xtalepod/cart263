@@ -110,7 +110,6 @@ function setup() {
 // }
 
 // A function that makes the dialog boxes show up randomly + randomly reveal the questions
-//https://github.com/pippinbarr/cart263-2020/blob/master/activities/jqueryui/eat-up/js/script.js
 function addDialog() {
 
   // Dynamically create a div and store it in a variable. This is the div
@@ -167,22 +166,16 @@ function randomInRange(min, max) {
   return min + (Math.random() * (max - min));
 }
 
-
+//https://github.com/pippinbarr/cart263-2020/blob/master/activities/jqueryui/eat-up/js/script.js
+//This function gets called when the draggable element is dragged over the droppable element
 function onDrop(event, ui) {
-  console.log("dropped");
-  dollySFX.currentTime = 0;
+//When the user drops the love fire onto the dumpster we want to keep the dumpster on the page, play dolly parton, and start the explosion
+//play dolly en loop (loop requires a boolean)
+  dollySFX.loop = true;
   dollySFX.play();
-  // $dumpster.adding();
-  //if you wanted to have more tha one fly you would use ui
-  //adding .remove makes the fly vanish after its been dragged
-  // ui.draggable.remove();
-  // // Play the new dialog sound effect
-
-  $(this).attr('src', 'assets/images/pinkdumpster.png', '50');
+  //add the explosion! use the .attr() function to let us change specific attributes on HTML elements by specifying the attribute
+  //and then and then what we want to set it to - in this case the 'src' attribute to the closed image
   $(this).attr('src', 'assets/images/explosion.gif');
-  //you need to set a boolean for the loop! at least in this case
-  // chewingSound.loop = true;
-  // chewingSound.play();
+//also add a dialog box
   addDialog();
-
 }
