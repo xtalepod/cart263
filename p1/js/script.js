@@ -27,47 +27,75 @@ let dialogBoxes = [
   "the state of being infatuated or obsessed with another person",
   "typically experienced involuntarily and characterized by a strong desire for reciprocation",
   "i am self assured",
-  "have you read the wiki page 'how to let go?'"
+  "have you read the wiki page 'how to let go?'",
+  "during the latter part of this period, children begin to use attachment figures(familiar people) as a secure base to explore from and return to. parental responses lead to the development of patterns of attachment; these, in turn, lead to internal working models which will guide the individual 's feelings, thoughts and expectations in later relationships.[2] separation anxiety or grief following the loss of an attachment figure is considered to be a normal and adaptive for response an attached infant.These behaviours may have evolved because they increase the probability of survival of the child.",
+  "demi."
 ];
 //
 // // Load sound effects for dialogs appearing and being dismissed
 // let newDialogSFX = new Audio("assets/sounds/dialog_new.wav");
 // let dismissDialogSFX = new Audio("assets/sounds/dialog_dismiss.wav");
 
+let dollySFX = new Audio ("assets/sounds/dollyparton.wav");
+
 // We want to track how much the mouse is moved and when it reaches a maximum
 // create a new dialog, so here are a constant and a variable to track that
 const MAX_MOUSE_MOVES = 20;
 let mouseMoves = 0;
 
+//from the in class exercise eater
+let $flames;
+let $dumpster;
+let $love;
+
 $(document).ready(setup);
 
-function setup () {
+function setup() {
   console.log("setting up");
 
-// Whenever the mouse moves, call the mouseMoved function
-$(document).on('mousemove', mouseMoved);
-// After one second, add a dialog to the page... i dont want this event
-// setTimeout(addDialog, INITIAL_DIALOG_DELAY);
+  // Whenever the mouse moves, call the mouseMoved function
+  // $(document).on('mousemove', mouseMoved);
 
-//https://api.jquery.com/fadeToggle/
-  $( "button" ).first().click(function() {
-  $( "p" ).first().fadeToggle( "slow", "linear" );
-});
-//this button shows the word no over and over again when you click it + plus i'm sorry fades in and out
-$( "button" ).last().click(function() {
-  $( "p" ).last().fadeToggle( "fast", function() {
-    $( "#no" ).append( "<div>no</div>" );
-  });
-});
-}
-
-function mouseMoved(){
-  mouseMoves++;
-  if (mouseMoves > MAX_MOUSE_MOVES) {
+  //https://api.jquery.com/fadeToggle/
+  $("button").first().click(function() {
+    $("p").first().fadeToggle("slow", "linear");
     addDialog();
-    mouseMoves = 0;
-  }
+    $("#ilovemyself").append("<div>i love myself</div>");
+  });
+  //this button shows the word no over and over again when you click it + plus i'm sorry fades in and out
+  $("button").last().click(function() {
+    $("p").last().fadeToggle("fast", function() {
+      $("#no").append("<div>no</div>");
+    });
+  });
+
+  //from week 4 in class assignment eater
+  $flames = $('#flames');
+  $dumpster = $('#dumpster');
+  $love = $('#love');
+
+  $love.draggable({
+    start: function() {
+      // buzzSound.play();
+    },
+    stop: function() {
+      // buzzSound.pause();
+    }
+  });
+
+  //on drop is a hanlder that takes parameters
+  $dumpster.droppable({
+    drop: onDrop
+  });
 }
+
+// function mouseMoved() {
+//   mouseMoves++;
+//   if (mouseMoves > MAX_MOUSE_MOVES) {
+//     addDialog();
+//     mouseMoves = 0;
+//   }
+// }
 // addDialog()
 //
 // The key function. It adds a stupid dialog to a random position
@@ -76,7 +104,6 @@ function addDialog() {
   // // Play the new dialog sound effect
   // newDialogSFX.currentTime = 0;
   // newDialogSFX.play();
-
 
   // Dynamically create a div and store it in a variable. This is the div
   // we will turn into a dialog box. Set its title at the same time.
@@ -91,15 +118,12 @@ function addDialog() {
   // Now we have our div on the page, transform it into a dialog with jQuery UI's
   // .dialog() method, supplying a number of options to configure it
   $dialog.dialog({
-    // The 'buttons' option lets us specify buttons to appear in the dialog as
-    // the properties of an object. The property name is used as the button text
-    // and the property contains a function that will be called when that button
-    // is clicked. Note how you can have quote marks around a property name (important
-    // if you want to include spaces for instance.)
-    // In this case both buttons just close the dialog
+    //from endless dialog
     buttons: {
-      "Yes?": function() {
-        $(this).dialog(`close`);
+      "ask me again": function() {
+        if ($(this).dialog(`close`)) {
+          $(this).attr('src', 'assets/images/pinkdumpster.png', '500');
+        };
       },
       // "No?": function() {
       //   $(this).dialog(`close`);
@@ -129,8 +153,6 @@ function closeDialog() {
   // dismissDialogSFX.play();
   // Choose a random delay time (in ms)
   let delay = randomInRange(MIN_DIALOG_DELAY_TIME, MAX_DIALOG_DELAY_TIME);
-  // Set a timeout and add a new dialog after the delay. Dismiss a dialog, and you just get another one back
-  // setTimeout(addDialog, delay);
 }
 
 // randomInRange()
@@ -139,11 +161,23 @@ function closeDialog() {
 function randomInRange(min, max) {
   return min + (Math.random() * (max - min));
 }
-//
-//
-//
-// function rotateTitle() {
-//   limerenceTitleRotation +=1;
-//   //select the header to rotate
-//   $('#title').text(limerenceTitleRotation);
-// }
+
+
+function onDrop(event, ui) {
+  console.log("dropped");
+  dollySFX.currentTime = 0;
+  dollySFX.play();
+  // $dumpster.adding();
+  //if you wanted to have more tha one fly you would use ui
+  //adding .remove makes the fly vanish after its been dragged
+  // ui.draggable.remove();
+  // // Play the new dialog sound effect
+
+  $(this).attr('src', 'assets/images/pinkdumpster.png', '50');
+  // $(this).attr('src', 'assets/images/explosion.gif');
+  //you need to set a boolean for the loop! at least in this case
+  // chewingSound.loop = true;
+  // chewingSound.play();
+  addDialog();
+
+}
