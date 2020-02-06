@@ -2,15 +2,13 @@
 
 /********************************************************************
 
-Title of Project
-Author Name
+feelings i can't control
+christale terris
 
 This is a template. Fill in the title, author, and this description
 to match your project! Write JavaScript to do amazing things below!
 
 *********************************************************************/
-//heart, dumpster, gif,
-let limerenceTitleRotation;
 
 //from pippin's endless dialog
 // How long the program waits before displaying it's opening gambit
@@ -28,26 +26,26 @@ let dialogBoxes = [
   "typically experienced involuntarily and characterized by a strong desire for reciprocation",
   "i am self assured",
   "have you read the wiki page 'how to let go?'",
-  "during the latter part of this period, children begin to use attachment figures(familiar people) as a secure base to explore from and return to. parental responses lead to the development of patterns of attachment; these, in turn, lead to internal working models which will guide the individual 's feelings, thoughts and expectations in later relationships.[2] separation anxiety or grief following the loss of an attachment figure is considered to be a normal and adaptive for response an attached infant.These behaviours may have evolved because they increase the probability of survival of the child.",
-  "demi."
+  "during the latter part of this period, children begin to use attachment figures(familiar people) as a secure base to explore from and return to. parental responses lead to the development of patterns of attachment; these, in turn, lead to internal working models which will guide the individual 's feelings, thoughts and expectations in later relationships.[2] separation anxiety or grief following the loss of an attachment figure is considered to be a normal and adaptive for response an attached infant.these behaviours may have evolved because they increase the probability of survival of the child.",
+  "i'm a demisexual."
 ];
 //
 // // Load sound effects for dialogs appearing and being dismissed
 // let newDialogSFX = new Audio("assets/sounds/dialog_new.wav");
 // let dismissDialogSFX = new Audio("assets/sounds/dialog_dismiss.wav");
 
-let dollySFX = new Audio ("assets/sounds/dollyparton.wav");
-let icqSFX = new Audio ("assets/sounds/icq.mp3");
-
-// We want to track how much the mouse is moved and when it reaches a maximum
-// create a new dialog, so here are a constant and a variable to track that
-const MAX_MOUSE_MOVES = 20;
-let mouseMoves = 0;
+let dollySFX = new Audio("assets/sounds/dollyparton.wav");
+let icqSFX = new Audio("assets/sounds/icq.mp3");
 
 //from the in class exercise eater
 let $flames;
 let $dumpster;
 let $love;
+
+// We want to track how much the mouse is moved and when it reaches a maximum
+// create a new dialog, so here are a constant and a variable to track that
+const MAX_MOUSE_MOVES = 20;
+let mouseMoves = 0;
 
 $(document).ready(setup);
 
@@ -62,11 +60,15 @@ function setup() {
     $("p").first().fadeToggle("slow", "linear");
     addDialog();
     $("#ilovemyself").append("<div>i love myself</div>");
+    // Play the new dialog sound effect
+    icqSFX.currentTime = 0;
+    icqSFX.play();
   });
   //this button shows the word no over and over again when you click it + plus i'm sorry fades in and out
   $("button").last().click(function() {
     $("p").last().fadeToggle("fast", function() {
       $("#no").append("<div>no</div>");
+      $("#imsorry").append("<div>i'm sorry</div>");
     });
     // Play the new dialog sound effect
     icqSFX.currentTime = 0;
@@ -129,9 +131,6 @@ function addDialog() {
           $(this).attr('src', 'assets/images/pinkdumpster.png', '500');
         };
       },
-      // "No?": function() {
-      //   $(this).dialog(`close`);
-      // }
     },
     // The 'close' option lets us specify a function to call when the dialog is closed
     close: closeDialog,
