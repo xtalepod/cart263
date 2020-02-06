@@ -37,6 +37,7 @@ let dialogBoxes = [
 // let dismissDialogSFX = new Audio("assets/sounds/dialog_dismiss.wav");
 
 let dollySFX = new Audio ("assets/sounds/dollyparton.wav");
+let icqSFX = new Audio ("assets/sounds/icq.mp3");
 
 // We want to track how much the mouse is moved and when it reaches a maximum
 // create a new dialog, so here are a constant and a variable to track that
@@ -67,6 +68,9 @@ function setup() {
     $("p").last().fadeToggle("fast", function() {
       $("#no").append("<div>no</div>");
     });
+    // Play the new dialog sound effect
+    icqSFX.currentTime = 0;
+    icqSFX.play();
   });
 
   //from week 4 in class assignment eater
@@ -174,7 +178,7 @@ function onDrop(event, ui) {
   // // Play the new dialog sound effect
 
   $(this).attr('src', 'assets/images/pinkdumpster.png', '50');
-  // $(this).attr('src', 'assets/images/explosion.gif');
+  $(this).attr('src', 'assets/images/explosion.gif');
   //you need to set a boolean for the loop! at least in this case
   // chewingSound.loop = true;
   // chewingSound.play();
