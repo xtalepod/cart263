@@ -1,4 +1,4 @@
-/* https://developer.mozilla.org/en-US/docs/Web/CSS/radial-gradient */
+
 body {
   width: 100px;
   margin: 0 auto;
@@ -10,9 +10,11 @@ body {
   text-align: left;
   line-height: 20px;
   background-color: rgb(255, 230, 230);
+/* a background style https://developer.mozilla.org/en-US/docs/Web/CSS/radial-gradient */
   background: radial-gradient( #ffff00, #b3d1ff, #ff6699);
 }
 
+/*the scroll box that holds text https://www.quackit.com/html/codes/html_scroll_box.cfm */
 #scrollbox {
   padding: 20px 100px;
   text-align: right;
@@ -27,6 +29,7 @@ body {
   background-color: transparent;
 }
 
+/*a button */
 /* https://www.w3schools.com/cssref/playit.asp?filename=playcss_outline-color&preval=invert */
 #doyouloveme {
   /* margin-left: 50; */
@@ -45,6 +48,7 @@ body {
   outline-color: rgb(255, 130, 255);
 }
 
+/*a button */
 #itsokay {
   /* margin-left: 50; */
   padding: 20px 100px;
@@ -61,6 +65,7 @@ body {
   background-color: #b3d1ff;;
 }
 
+/*text that appears when you click itsokay button*/
 #ilovemyself {
   padding: 20px 100px;
   text-align: left;
@@ -73,10 +78,11 @@ body {
   outline-color: rgb(255, 130, 255)
 }
 
+/*text that appears when you click do you love me button*/
 #no {
   padding: 20px 100px;
   text-align: left;
-  font-size: 5;
+  font-size: 50;
   position: absolute;
   top: 100px;
   left: 40px;
@@ -86,6 +92,17 @@ body {
   outline-color: none;
 }
 
+/* a container that holds the dumpster and the explosion pictures*/
+#dumpsterfire {
+  position: relative;
+}
+
+/* styles for all the images on the page*/
+#explosion {
+  position: absolute;
+  top: 0px;
+  left: 200px;
+}
 #dumpster {
   padding: 20px 100px;
   text-align: left;
@@ -110,4 +127,33 @@ body {
   top: 300px;
   right: 140px;
   background-color: transparent;
+}
+
+/* css properties related to the jQuery UI dialog boxes style */
+
+.ui-dialog-titlebar {
+background-color: pink;
+background-image: none;
+color: black;
+font-weight: bold;
+}
+
+.ui-dialog {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: .2em;
+    outline: 0;
+    background-color: transparent;
+}
+
+.ui-widget-content {
+    border: 2px solid #dddddd;
+    background: #ffffff;
+    background-color: inherit;
+    color: #333333;
+}
+.ui-widget {
+    font-family: inherit;
+    font-size: 1em;
 }
