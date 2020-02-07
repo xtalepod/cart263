@@ -24,7 +24,16 @@ let dialogBoxes = [
   "i am self assured",
   "have you read the wiki page 'how to let go?'",
   "during the latter part of this period, children begin to use attachment figures(familiar people) as a secure base to explore from and return to. parental responses lead to the development of patterns of attachment; these, in turn, lead to internal working models which will guide the individual 's feelings, thoughts and expectations in later relationships.[2] separation anxiety or grief following the loss of an attachment figure is considered to be a normal and adaptive for response an attached infant.these behaviours may have evolved because they increase the probability of survival of the child.",
-  "demisexual."
+  "demisexual.",
+  "sisyphus throws hissy fits!",
+  "agape",
+  "philia",
+  "philautia myself tonight",
+  "storge",
+  "pragma",
+  "ludus",
+  "mania"
+
 ];
 
 //Load sound effects for the dumpster fire (dollySFX) and when the user interacts with the buttons (icqSFX)
