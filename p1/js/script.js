@@ -100,7 +100,7 @@ function addDialog() {
     //from endless dialog
     buttons: {
       "ask me again": function() {
-          addDialog
+          addDialog();
       },
     },
     // The 'containment' option lets us specify where the dialog can go on the screen. 'body' means it will be
