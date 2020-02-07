@@ -102,8 +102,8 @@ body {
 #dumpster {
   padding: 20px 100px;
   position: absolute;
-  top: 330px;
-  right: 500px;
+  top: 530px;
+  left: 200px;
   background-color: transparent;
 }
 

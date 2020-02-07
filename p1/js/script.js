@@ -26,10 +26,6 @@ let dialogBoxes = [
   "during the latter part of this period, children begin to use attachment figures(familiar people) as a secure base to explore from and return to. parental responses lead to the development of patterns of attachment; these, in turn, lead to internal working models which will guide the individual 's feelings, thoughts and expectations in later relationships.[2] separation anxiety or grief following the loss of an attachment figure is considered to be a normal and adaptive for response an attached infant.these behaviours may have evolved because they increase the probability of survival of the child.",
   "demisexual."
 ];
-//
-// // Load sound effects for dialogs appearing and being dismissed
-// let newDialogSFX = new Audio("assets/sounds/dialog_new.wav");
-// let dismissDialogSFX = new Audio("assets/sounds/dialog_dismiss.wav");
 
 //Load sound effects for the dumpster fire (dollySFX) and when the user interacts with the buttons (icqSFX)
 let dollySFX = new Audio("assets/sounds/dollyparton.wav");
@@ -39,11 +35,6 @@ let icqSFX = new Audio("assets/sounds/icq.mp3");
 let $flames;
 let $dumpster;
 let $love;
-
-// We want to track how much the mouse is moved and when it reaches a maximum
-// create a new dialog, so here are a constant and a variable to track that
-const MAX_MOUSE_MOVES = 20;
-let mouseMoves = 0;
 
 //The THING we do in javascript so the webpage knows its time to load our data
 $(document).ready(setup);
@@ -64,22 +55,21 @@ function setup() {
   $("#doyouloveme").click(function() {
     $("#no").append("<div>no</div>");
     $("#imsorry").append("<div>i'm sorry</div>");
-  // Play the new dialog sound effect
-  icqSFX.currentTime = 0;
-  icqSFX.play();
-});
-//Get the elements from the page!
-$flames = $('#flames');
-$dumpster = $('#dumpster');
-$love = $('#love');
-
-//Make the love element draggable
-$love.draggable();
-//Make the dumpster element droppable
-$dumpster.droppable({
-  //The drop option specifies a function to call when a drop is completed*
-  drop: onDrop
-});
+    // Play the new dialog sound effect
+    icqSFX.currentTime = 0;
+    icqSFX.play();
+  });
+  //Get the elements from the page!
+  $flames = $('#flames');
+  $dumpster = $('#dumpster');
+  $love = $('#love');
+  //Make the love element draggable
+  $love.draggable();
+  //Make the dumpster element droppable
+  $dumpster.droppable({
+    //The drop option specifies a function to call when a drop is completed*
+    drop: onDrop
+  });
 }
 
 // A function that makes the dialog boxes show up randomly + randomly reveal the questions
@@ -106,8 +96,6 @@ function addDialog() {
         };
       },
     },
-    // The 'close' option lets us specify a function to call when the dialog is closed
-    close: closeDialog,
     // The 'containment' option lets us specify where the dialog can go on the screen. 'body' means it will be
     // contained within the body tag, and can't be dragged out of it.
     containment: 'body'
@@ -119,14 +107,6 @@ function addDialog() {
     top: Math.random() * ($(window).height() - $dialog.parent().height()),
     left: Math.random() * ($(window).width() - $dialog.parent().width())
   });
-}
-
-// closeDialog()
-//
-// Closes the dialog with a sound effect and sets a timer to open a new one
-function closeDialog() {
-  // Choose a random delay time (in ms)
-  let delay = randomInRange(MIN_DIALOG_DELAY_TIME, MAX_DIALOG_DELAY_TIME);
 }
 
 //This function gets called when the draggable element is dragged over the droppable element. When the element is dropped: play dolly parton, set the dumpster on fire, and open a dialog box.
