@@ -100,6 +100,7 @@ function addDialog() {
     //from endless dialog
     buttons: {
       "ask me again": function() {
+          addDialog();
         if ($(this).dialog(`close`)) {
           $(this).attr('src', 'assets/images/pinkdumpster.png', '500');
         };
