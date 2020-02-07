@@ -1,13 +1,10 @@
 "use strict";
 
 /********************************************************************
-
 feelings i can't control
 christale terris
-
 This is a template. Fill in the title, author, and this description
 to match your project! Write JavaScript to do amazing things below!
-
 *********************************************************************/
 
 //from pippin's endless dialog
@@ -53,11 +50,8 @@ $(document).ready(setup);
 
 //A function to set up the actions to take place when the buttons are pressed, turning the Javascript variables into
 function setup() {
-  console.log("setting up");
 
-  // Whenever the mouse moves, call the mouseMoved function
-  // $(document).on('mousemove', mouseMoved);
-
+  //this button shows the words i lvoe myself over and over again when you click it + plays ICQ sound
   //https://api.jquery.com/fadeToggle/
   $("#itsokay").click(function() {
     addDialog();
@@ -66,48 +60,30 @@ function setup() {
     icqSFX.currentTime = 0;
     icqSFX.play();
   });
-  //this button shows the word no over and over again when you click it + plus i'm sorry fades in and out
+  //this button shows the word no over and over again when you click it + plus i'm sorry fades in and out + plays ICQ sound
   $("#doyouloveme").click(function() {
-      $("#no").append("<div>no</div>");
-      $("#imsorry").append("<div>i'm sorry</div>");
-    // });
-    // Play the new dialog sound effect
-    icqSFX.currentTime = 0;
-    icqSFX.play();
-  });
-  console.log($("no"));
+    $("#no").append("<div>no</div>");
+    $("#imsorry").append("<div>i'm sorry</div>");
+  // Play the new dialog sound effect
+  icqSFX.currentTime = 0;
+  icqSFX.play();
+});
+//Get the elements from the page!
+$flames = $('#flames');
+$dumpster = $('#dumpster');
+$love = $('#love');
 
-  //Get the elements from the page!
-  $flames = $('#flames');
-  $dumpster = $('#dumpster');
-  $love = $('#love');
-
-//Make the love element draggable... I can remove the start and stop function because I'm not using it but for now I'll keep it to remember something is possible
-  $love.draggable({
-    start: function() {
-      // buzzSound.play();
-    },
-    stop: function() {
-      // buzzSound.pause();
-    }
-  });
-
-  //Make the dumpster element droppable
-  $dumpster.droppable({
-    //The drop option specifies a function to call when a drop is completed*
-    drop: onDrop
-  });
+//Make the love element draggable
+$love.draggable();
+//Make the dumpster element droppable
+$dumpster.droppable({
+  //The drop option specifies a function to call when a drop is completed*
+  drop: onDrop
+});
 }
 
-// function mouseMoved() {
-//   mouseMoves++;
-//   if (mouseMoves > MAX_MOUSE_MOVES) {
-//     addDialog();
-//     mouseMoves = 0;
-//   }
-// }
-
 // A function that makes the dialog boxes show up randomly + randomly reveal the questions
+//https://pippinbarr.github.io/cart263-2020/examples/jqueryui/endless-dialogs/
 function addDialog() {
   // Dynamically create a div and store it in a variable. This is the div
   // we will turn into a dialog box. Set its title at the same time.
@@ -149,30 +125,27 @@ function addDialog() {
 //
 // Closes the dialog with a sound effect and sets a timer to open a new one
 function closeDialog() {
-  // Play the dismissal sound, ding!
-  // dismissDialogSFX.currentTime = 0;
-  // dismissDialogSFX.play();
   // Choose a random delay time (in ms)
   let delay = randomInRange(MIN_DIALOG_DELAY_TIME, MAX_DIALOG_DELAY_TIME);
 }
 
-// randomInRange()
-//
-// // Returns a random number between min and max
-// function randomInRange(min, max) {
-//   return min + (Math.random() * (max - min));
-// }
-
 //This function gets called when the draggable element is dragged over the droppable element. When the element is dropped: play dolly parton, set the dumpster on fire, and open a dialog box.
 //https://github.com/pippinbarr/cart263-2020/blob/master/activities/jqueryui/eat-up/js/script.js
 function onDrop(event, ui) {
-//When the user drops the love fire onto the dumpster we want to keep the dumpster on the page, play dolly parton, and start the explosion
-//play dolly en loop (loop requires a boolean)
+  //When the user drops the love fire onto the dumpster we want to keep the dumpster on the page, play dolly parton, and start the explosion
+  //play dolly en loop (loop requires a boolean)
   dollySFX.loop = true;
   dollySFX.play();
   //add the explosion! use the .attr() function to let us change specific attributes on HTML elements by specifying the attribute
   //and then and then what we want to set it to - in this case the 'src' attribute to the closed image
   $(this).attr('src', 'assets/images/explosion.gif');
-//also add a dialog box
+  //also add a dialog box
   addDialog();
+}
+
+randomInRange()
+
+// Returns a random number between min and max
+function randomInRange(min, max) {
+  return min + (Math.random() * (max - min));
 }
