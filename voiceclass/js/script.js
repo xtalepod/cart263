@@ -219,15 +219,24 @@ function handleGuess() {
     $('.guess').remove();
     setTimeout(newRound,1000);
   }
+  else {
+    $(this).effect('shake');
+    sayBackwards($correctButton.text());
+  }
 }
 
 function sayBackwards(text) {
-  let backwardsText = text.split('').reserve().join('');
+  let backwardsText = text.split('').reverse().join('');
+
+  // Set some random numbers for the voice's pitch and rate parameters for a bit of fun
   let options = {
-    rate: 1,
-    pitch: 1
+    pitch: Math.random(),
+    rate: Math.random()
   };
-  responsiveVoice.speak("hello world", "UK English Man", options);
+
+  // Use ResponsiveVoice to speak the string we generated, with UK English Male voice
+  // and the options we just specified.
+  responsiveVoice.speak(backwardsText, 'UK English Male', options);
 }
 
 
