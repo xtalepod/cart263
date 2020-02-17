@@ -201,25 +201,12 @@ function newRound() {
 //
 // Uses ResponsiveVoice to say the specified text backwards!
 function sayBackwards(text) {
-  // We create a reverse version of the name by:
-  // 1. using .split('') to split the string into an array with each character
-  // as a separate element.
-  // e.g. "bat" -> ['b','a','t']
-  // 2. using .reverse() on the resulting array to create a reverse version
-  // e.g. ['b','a','t'] -> ['t','a','b']
-  // 3. using .join('') on the resulting array to create a string version of the array
-  // with each element forming the string (joined together with nothing in between)
-  // e.g. ['t','a','b'] -> "tab"
-  // (We do this all in one line using "chaining" because .split() returns an array for
-  // for .reverse() to work on, and .reverse() returns an array for .join() to work on.)
   let backwardsText = text.split('').reverse().join('');
-
   // Set some random numbers for the voice's pitch and rate parameters for a bit of fun
   let options = {
     pitch: Math.random(),
     rate: Math.random()
   };
-
   // Use ResponsiveVoice to speak the string we generated, with UK English Male voice
   // and the options we just specified.
   responsiveVoice.speak(backwardsText, 'UK English Male', options);
@@ -259,6 +246,7 @@ function handleGuess() {
     $('.guess').remove();
     // Start a new round
     setTimeout(newRound, 1000);
+    // sayBackwards($correctButton.text());
   }
   else {
     // Otherwise they were wrong, so shake the clicked button
