@@ -160,7 +160,7 @@ $(document).ready(setup);
 
 function setup() {
   //to setup the score we need to create a jQuery variable and store it in an html element which in this case is a div
-
+newRound();
   let $score = $('<div></div>');
   //then we can attach the addClass event listener and our score variable
   //addClass is used to add more property to each selected element or change the property of the selected element
@@ -180,31 +180,30 @@ function setup() {
     // variable names means that annyang will call the function
     // specified with EVERYTHING it heard from that point on...
     let command = {
-      "I give up": function() {
+      'I give up': function() {
         $score.text(score);
         score = 0;
         $correctButton.effect("shake");
+        $('body').css('background-color', 'black');
         newRound();
-      }
-      "I think is it *tag": function() {
+      },
+      'I think is it *tag': function() {
         sayBackwards($correctButton.text());
         score += 1;
+        newRound();
       }
+    };
       // Now we've defined the commands we give them to annyang
       // by using its .addCommands() function.
       annyang.addCommands(command);
       // Finally we tell annyang to start listening with its
       // .start() function
       annyang.start();
-      // Choose a phrase for the user to say first
-      // currentPhrase = getNewPhrase();
-      // $command = $('#command');
-      // // Display the phrase on the page
-      // $command.text(`Say, "I am ${currentPhrase}."`);
     }
   }
   //after you make your utton funtion doing this should make your button appear on the age!
-  // addButton();
+  addButton();
+  console.log(addButton);
 
   function addButton(label) {
     //create a div element and store it in a new variabled called $button**!!
@@ -249,21 +248,14 @@ function setup() {
       //use the css class selector and the jquery remove
       //when the correct button is clicked remove the buttons
       //start a new round after 1 second
-      //the score increases by 1
-      //the score is still displayed
       $('.guess').remove();
       setTimeout(newRound, 1000);
-      score += 1;
-      $('.score').text(score);
+
     } else {
       //when a round is given up by saying "i give up" make it shake
       //say it backwards
-      //the score doesn't change because you gave up
-      //the score is still displayed
-      $(this).effect('shake');
+      // $(this).effect('shake');
       sayBackwards($correctButton.text());
-      score = 0;
-      $('.score').text(score);
     }
   }
 
