@@ -20,12 +20,14 @@ let magicAnswers = [
   "outlook not so good",
   "ask again later",
   "yes it is decidely so"
-]
+];
 // // An array for questions the user can ask the magic 8 ball
 let magicQuestions = [
-  "is climate change real",
-  "can we break the glass ceiling"
-]
+  "climate change real",
+  "can we break the glass ceiling",
+  "can we abolish the patriarchy",
+  "will zombies take over"
+];
 //
 // // A variable to store the current thing the user
 // // should be saying. Starts as nothing.
@@ -36,6 +38,9 @@ let currentAnswer = '';
 let $command;
 //A variable to store the answer text element
 let $answer;
+
+//how often to update the answer selected
+const UPDATE_FREQUENCY = 5000;
 
 $(document).ready(setup);
 
@@ -49,7 +54,7 @@ function setup() {
     // variable names means that annyang will call the function
     // specified with EVERYTHING it heard from that point on...
     var command = {
-      "is *magicQuestions":
+      "eight ball *magicQuestions":
       handleUserSpeech
     };
     // Now we've defined the commands we give them to annyang
@@ -62,13 +67,17 @@ function setup() {
     currentPhrase = getNewPhrase();
     $command = $('#command');
     // Display the phrase on the page
-    $command.text(`Dear tragic eight ball is "${currentPhrase}?"`);
+    $command.text(`Dear tragic eight ball "${currentPhrase}?"`);
   }
-  // answer = getNewAnswer();    // showAnswer();
-      // answer =getNewAnswer();
       $answer = $('#answer');
-      $answer.text(`The Oracle says ${currentAnswer}.`);
-      console.log($answer);
+      $answer.text(`The Oracle says ${currentAnswer}`);
+      // setInterval(updateAnswer, UPDATE_FREQUENCY);
+
+      $("#askagain").click(function() {
+        // location.reload();
+    });
+
+      console.log('#askagain');
 };
 
 
@@ -83,28 +92,21 @@ function handleUserSpeech(phrase) {
   // We check whether the user said what they were told to say
   // by comparing what annyang heard (phrase) with the
   // currentPhrase variable
-  // let answer = currentAnswer;
     currentAnswer = getNewAnswer();
   if (phrase === currentPhrase) {
-    // If they said the right thing, we emphasise it...
-    // (Note the use of backslash (\) to "escape" the apostrophe in That's
-    // so that it doesn't interfere with our string.)
-    // eightBallPicture.effect('shake');
-    // $command.text(`That's right. You are ${phrase}.`);
-    // Get a new thing for them to say
-    // $command.text(`The oracle predicts ${phrase}.`);
+//if they said the right thing
+    $command.text('oh god thats dark')
     currentPhrase = getNewPhrase();
-    // answer = currentAnswer;
-    // currentAnswer = getNewAnswer();
     // And tell them to say it
-    $command.append(` Ask again? "is ${phrase}."`);
-    $answer.append(` the answer is ${currentAnswer}."`);
+    // $command.append(`Ask again? "is ${phrase}."`);
+    $answer.append(`the answer is ${currentAnswer}.`);
   }
   // else {
   //   // If they said the wrong thing, correct them and demand
   //   // they say it.
   //   $command.text(`That's not right. Say "I am ${currentPhrase}".`);
   // }
+    // setInterval(updateAnswer, UPDATE_FREQUENCY);
 }
 
 
@@ -123,19 +125,9 @@ function getNewPhrase() {
   return newPhrase;
 }
 
-// function showAnswer(reply) {
-//
-// if (reply === currentAnswer) {
-//   //chose an answer to respond to the user's question
-// //
-//   $answerText = $('#answerText');
-//   //display the answer on the page
-//   $answerText.text(`I'm sorry but "${reply}."`);
-//   // magicAnswers = getNewAnswer;
-// }
-// }
-
 function getNewAnswer() {
+
+    // if ()
   // Select a random index into the magicQuestions array
   // This little formula of taking the floor of a random
   // number between 0 and 1 times the length of an array
@@ -146,3 +138,7 @@ function getNewAnswer() {
   // Set the current phrase
   return newAnswer;
 }
+
+// function updateAnswer() {
+//
+// }
