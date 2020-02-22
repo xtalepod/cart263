@@ -181,8 +181,8 @@ newRound();
     // specified with EVERYTHING it heard from that point on...
     let command = {
       'I give up': function() {
-        $score.text(score);
         score = 0;
+        $score.text(score);
         $correctButton.effect("shake");
         $('body').css('background-color', 'black');
         newRound();
@@ -190,6 +190,7 @@ newRound();
       'I think is it *tag': function() {
         sayBackwards($correctButton.text());
         score += 1;
+        $score.text(score);
         newRound();
       }
     };
@@ -247,14 +248,14 @@ newRound();
     if ($(this).text() === $correctButton.text()) {
       //use the css class selector and the jquery remove
       //when the correct button is clicked remove the buttons
-      //start a new round after 1 second
       $('.guess').remove();
+      //start a new round after 1 second
       setTimeout(newRound, 1000);
 
     } else {
       //when a round is given up by saying "i give up" make it shake
       //say it backwards
-      // $(this).effect('shake');
+      $(this).effect('shake');
       sayBackwards($correctButton.text());
     }
   }
@@ -272,28 +273,3 @@ newRound();
     // and the options we just specified.
     responsiveVoice.speak(backwardsText, 'UK English Male', options);
   }
-
-
-  //from pippins game
-  // function handleUserSpeech(phrase) {
-  //
-  //   // We check whether the user said what they were told to say
-  //   // by comparing what annyang heard (phrase) with the
-  //   // currentPhrase variable
-  //   if (phrase === currentPhrase) {
-  //     // If they said the right thing, we emphasise it...
-  //     // (Note the use of backslash (\) to "escape" the apostrophe in That's
-  //     // so that it doesn't interfere with our string.)
-  //     // $command.text(`Say it again ${phrase}.`);
-  //     // sayBackwards($correctButton.text());
-  //     // Get a new thing for them to say
-  //     currentPhrase = getNewPhrase();
-  //     // And tell them to say it
-  //     $command.append(` Now say "I am ${currentPhrase}."`);
-  //   }
-  //   else {
-  //     // If they said the wrong thing, correct them and demand
-  //     // they say it.
-  //     $command.text(`That's not right. Say "I am ${currentPhrase}".`);
-  //   }
-  // }
