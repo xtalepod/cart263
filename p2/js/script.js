@@ -38,6 +38,8 @@ let currentAnswer = '';
 let $command;
 //A variable to store the answer text element
 let $answer;
+//a variable to hold the eye
+let $eye;
 
 //how often to update the answer selected
 const UPDATE_FREQUENCY = 5000;
@@ -54,8 +56,7 @@ function setup() {
     // variable names means that annyang will call the function
     // specified with EVERYTHING it heard from that point on...
     var command = {
-      "eight ball *magicQuestions":
-      handleUserSpeech
+      "eight ball *magicQuestions": handleUserSpeech
     };
     // Now we've defined the commands we give them to annyang
     // by using its .addCommands() function.
@@ -69,15 +70,15 @@ function setup() {
     // Display the phrase on the page
     $command.text(`Dear tragic eight ball "${currentPhrase}?"`);
   }
-      $answer = $('#answer');
-      $answer.text(`The Oracle says ${currentAnswer}`);
-      // setInterval(updateAnswer, UPDATE_FREQUENCY);
+  $answer = $('#answer');
+  $answer.hide().text(`The Oracle says ${currentAnswer}`);
+  // setInterval(updateAnswer, UPDATE_FREQUENCY);
 
-      $("#askagain").click(function() {
-        // location.reload();
-    });
+  $("#askagain").click(function() {});
+  //get my eye element from the page
+  $eye = $('#eye');
+  $eye.hide();
 
-      console.log('#askagain');
 };
 
 
@@ -92,13 +93,16 @@ function handleUserSpeech(phrase) {
   // We check whether the user said what they were told to say
   // by comparing what annyang heard (phrase) with the
   // currentPhrase variable
-    currentAnswer = getNewAnswer();
+  currentAnswer = getNewAnswer();
   if (phrase === currentPhrase) {
-//if they said the right thing
+    //if they said the right thing
     $command.text('oh god thats dark')
     currentPhrase = getNewPhrase();
+    $eye.fadeIn("slow");
+    $eye.effect("shake");
     // And tell them to say it
     // $command.append(`Ask again? "is ${phrase}."`);
+    $answer.fadeIn(3000);
     $answer.append(`the answer is ${currentAnswer}.`);
   }
   // else {
@@ -106,7 +110,7 @@ function handleUserSpeech(phrase) {
   //   // they say it.
   //   $command.text(`That's not right. Say "I am ${currentPhrase}".`);
   // }
-    // setInterval(updateAnswer, UPDATE_FREQUENCY);
+  // setInterval(updateAnswer, UPDATE_FREQUENCY);
 }
 
 
@@ -127,7 +131,7 @@ function getNewPhrase() {
 
 function getNewAnswer() {
 
-    // if ()
+  // if ()
   // Select a random index into the magicQuestions array
   // This little formula of taking the floor of a random
   // number between 0 and 1 times the length of an array
