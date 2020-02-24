@@ -48,6 +48,23 @@ $(document).ready(setup);
 
 function setup() {
 
+  $( function() {
+    $( "#dialog-confirm" ).dialog({
+      resizable: false,
+      height: "auto",
+      width: 400,
+      modal: true,
+      buttons: {
+        "Delete all items": function() {
+          $( this ).dialog( "close" );
+        },
+        Cancel: function() {
+          $( this ).dialog( "close" );
+        }
+      }
+    });
+  } );
+
   // Make sure annyang is available...
   if (annyang) {
     // Add the commands to annyang. That is it should listen
@@ -77,7 +94,7 @@ function setup() {
   $("#askagain").click(function() {});
   //get my eye element from the page
   $eye = $('#eye');
-  $eye.hide();
+  // $eye.hide();
 
 };
 
