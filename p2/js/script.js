@@ -40,6 +40,7 @@ let $command;
 let $answer;
 //a variable to hold the eye
 let $eye;
+let $answerButton;
 
 //how often to update the answer selected
 const UPDATE_FREQUENCY = 5000;
@@ -49,6 +50,7 @@ $(document).ready(setup);
 function setup() {
 
   // Make sure annyang is available...
+  addDialog();
   if (annyang) {
     // Add the commands to annyang. That is it should listen
     // for "I am..." or "I'm..." followed by some number of words.
@@ -61,6 +63,7 @@ function setup() {
     // Now we've defined the commands we give them to annyang
     // by using its .addCommands() function.
     annyang.addCommands(command);
+    console.log(command);
     // Finally we tell annyang to start listening with its
     // .start() function
     annyang.start();
@@ -73,11 +76,15 @@ function setup() {
   $answer = $('#answer');
   $answer.hide().text(`The Oracle says ${currentAnswer}`);
   // setInterval(updateAnswer, UPDATE_FREQUENCY);
+  $("#askagain").click(function() {
+console.log(1);
+  });
 
-  $("#askagain").click(function() {});
+$answerButton = $('#askagain');
+$answerButton.hide();
   //get my eye element from the page
   $eye = $('#eye');
-  $eye.hide();
+  // $eye.hide();
 
 };
 
@@ -101,16 +108,15 @@ function handleUserSpeech(phrase) {
     $eye.fadeIn("slow");
     $eye.effect("shake");
     // And tell them to say it
-    // $command.append(`Ask again? "is ${phrase}."`);
     $answer.fadeIn(3000);
     $answer.append(`the answer is ${currentAnswer}.`);
+    $answerButton.fadeIn(5000);
   }
   // else {
   //   // If they said the wrong thing, correct them and demand
   //   // they say it.
   //   $command.text(`That's not right. Say "I am ${currentPhrase}".`);
   // }
-  // setInterval(updateAnswer, UPDATE_FREQUENCY);
 }
 
 
@@ -143,6 +149,36 @@ function getNewAnswer() {
   return newAnswer;
 }
 
-// function updateAnswer() {
-//
-// }
+
+function addDialog() {
+  // Dynamically create a div and store it in a variable. This is the div
+  // we will turn into a dialog box. Set its title at the same time.
+  let $dialog = $(`<div></div>`).attr(`title`, `spiral`);
+  // Choose a random question text from the array
+  let question = magicQuestions[Math.floor(randomInRange(0, magicQuestions.length))];
+  // Add a p tag to the dialog div that contains the question text
+  $dialog.append(`<p>${question}</p>`);
+  // Finally, add the div to the page
+  $('body').append($dialog);
+
+  // Now we have our div on the page, transform it into a dialog with jQuery UI's
+  // .dialog() method, supplying a number of options to configure it
+  $dialog.dialog({
+    //from endless dialog
+    buttons: {
+      "ask me again": function() {
+          addDialog();
+      },
+    },
+    // The 'containment' option lets us specify where the dialog can go on the screen. 'body' means it will be
+    // contained within the body tag, and can't be dragged out of it.
+    containment: 'body'
+  });
+}
+
+randomInRange()
+
+// Returns a random number between min and max
+function randomInRange(min, max) {
+  return min + (Math.random() * (max - min));
+}
