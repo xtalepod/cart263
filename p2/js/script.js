@@ -29,6 +29,8 @@ let magicQuestions = [
   "will zombies take over"
 ];
 //
+
+// let specialQuestion = "will we survive?"
 // // A variable to store the current thing the user
 // // should be saying. Starts as nothing.
 let currentPhrase = '';
@@ -48,22 +50,24 @@ $(document).ready(setup);
 
 function setup() {
 
-  $( function() {
-    $( "#dialog-confirm" ).dialog({
-      resizable: false,
-      height: "auto",
-      width: 400,
-      modal: true,
-      buttons: {
-        "Delete all items": function() {
-          $( this ).dialog( "close" );
-        },
-        Cancel: function() {
-          $( this ).dialog( "close" );
-        }
-      }
-    });
-  } );
+//https://jqueryui.com/dialog/#modal-message
+  // $( function() {
+  //   $( "#dialog-confirm" ).dialog({
+  //     resizable: false,
+  //     height: "auto",
+  //     width: 400,
+  //     modal: true,
+  //     buttons: {
+  //       "i accept": function() {
+  //         $( this ).dialog( "close" );
+  //       },
+  //       //i dont accept
+  //       // Cancel: function() {
+  //       //   $( this ).dialog( "close" );
+  //       // }
+  //     }
+  //   });
+  // } );
 
   // Make sure annyang is available...
   if (annyang) {
@@ -73,7 +77,10 @@ function setup() {
     // variable names means that annyang will call the function
     // specified with EVERYTHING it heard from that point on...
     var command = {
-      "eight ball *magicQuestions": handleUserSpeech
+      "eight ball *magicQuestions[0]": handleUserSpeech0,
+        "eight ball *magicQuestions[1]": handleUserSpeech1,
+          "eight ball *magicQuestions[2]": handleUserSpeech2,
+            "eight ball *magicQuestions[4]": handleUserSpeech3
     };
     // Now we've defined the commands we give them to annyang
     // by using its .addCommands() function.
@@ -87,14 +94,14 @@ function setup() {
     // Display the phrase on the page
     $command.text(`Dear tragic eight ball "${currentPhrase}?"`);
   }
+
   $answer = $('#answer');
   $answer.hide().text(`The Oracle says ${currentAnswer}`);
-  // setInterval(updateAnswer, UPDATE_FREQUENCY);
+
 
   $("#askagain").click(function() {});
   //get my eye element from the page
   $eye = $('#eye');
-  // $eye.hide();
 
 };
 
@@ -105,7 +112,7 @@ function setup() {
 // "I am X". 'phrase' will contain the X part.
 // Checks whether the user said what they were told to say
 // and reacts accordingly.
-function handleUserSpeech(phrase) {
+function handleUserSpeech0(phrase) {
   console.log(handleUserSpeech);
   // We check whether the user said what they were told to say
   // by comparing what annyang heard (phrase) with the
@@ -113,7 +120,7 @@ function handleUserSpeech(phrase) {
   currentAnswer = getNewAnswer();
   if (phrase === currentPhrase) {
     //if they said the right thing
-    $command.text('oh god thats dark')
+    // $command.text('oh god thats dark')
     currentPhrase = getNewPhrase();
     $eye.fadeIn("slow");
     $eye.effect("shake");
@@ -121,6 +128,7 @@ function handleUserSpeech(phrase) {
     // $command.append(`Ask again? "is ${phrase}."`);
     $answer.fadeIn(3000);
     $answer.append(`the answer is ${currentAnswer}.`);
+      // $("#askagain").click(function() {});
   }
   // else {
   //   // If they said the wrong thing, correct them and demand
@@ -130,7 +138,83 @@ function handleUserSpeech(phrase) {
   // setInterval(updateAnswer, UPDATE_FREQUENCY);
 }
 
+function handleUserSpeech1(phrase) {
+  console.log(handleUserSpeech);
+  // We check whether the user said what they were told to say
+  // by comparing what annyang heard (phrase) with the
+  // currentPhrase variable
+  currentAnswer = getNewAnswer();
+  if (phrase === currentPhrase) {
+    //if they said the right thing
+    // $command.text('oh god thats dark')
+    currentPhrase = getNewPhrase();
+    $eye.fadeIn("slow");
+    $eye.effect("shake");
+    // And tell them to say it
+    // $command.append(`Ask again? "is ${phrase}."`);
+    $answer.fadeIn(3000);
+    $answer.append(`the answer is ${currentAnswer}.`);
+      // $("#askagain").click(function() {});
+  }
+  // else {
+  //   // If they said the wrong thing, correct them and demand
+  //   // they say it.
+  //   $command.text(`That's not right. Say "I am ${currentPhrase}".`);
+  // }
+  // setInterval(updateAnswer, UPDATE_FREQUENCY);
+}
 
+function handleUserSpeech3(phrase) {
+  console.log(handleUserSpeech);
+  // We check whether the user said what they were told to say
+  // by comparing what annyang heard (phrase) with the
+  // currentPhrase variable
+  currentAnswer = getNewAnswer();
+  if (phrase === currentPhrase) {
+    //if they said the right thing
+    // $command.text('oh god thats dark')
+    currentPhrase = getNewPhrase();
+    $eye.fadeIn("slow");
+    $eye.effect("shake");
+    // And tell them to say it
+    // $command.append(`Ask again? "is ${phrase}."`);
+    $answer.fadeIn(3000);
+    $answer.append(`the answer is ${currentAnswer}.`);
+      // $("#askagain").click(function() {});
+  }
+  // else {
+  //   // If they said the wrong thing, correct them and demand
+  //   // they say it.
+  //   $command.text(`That's not right. Say "I am ${currentPhrase}".`);
+  // }
+  // setInterval(updateAnswer, UPDATE_FREQUENCY);
+}
+
+function handleUserSpeech4(phrase) {
+  console.log(handleUserSpeech);
+  // We check whether the user said what they were told to say
+  // by comparing what annyang heard (phrase) with the
+  // currentPhrase variable
+  currentAnswer = getNewAnswer();
+  if (phrase === currentPhrase) {
+    //if they said the right thing
+    // $command.text('oh god thats dark')
+    currentPhrase = getNewPhrase();
+    $eye.fadeIn("slow");
+    $eye.effect("shake");
+    // And tell them to say it
+    // $command.append(`Ask again? "is ${phrase}."`);
+    $answer.fadeIn(3000);
+    $answer.append(`the answer is ${currentAnswer}.`);
+      // $("#askagain").click(function() {});
+  }
+  // else {
+  //   // If they said the wrong thing, correct them and demand
+  //   // they say it.
+  //   $command.text(`That's not right. Say "I am ${currentPhrase}".`);
+  // }
+  // setInterval(updateAnswer, UPDATE_FREQUENCY);
+}
 getNewPhrase()
 
 // Returns a random phrase from the magicQuestions array
