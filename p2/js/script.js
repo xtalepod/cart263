@@ -23,13 +23,15 @@ let magicAnswers = [
 ];
 // // An array for questions the user can ask the magic 8 ball
 let magicQuestions = [
-  "climate change real",
-  "can we break the glass ceiling",
-  "can we abolish the patriarchy",
-  "will zombies take over"
+    'can we break the glass ceiling',
+  'is climate change real',
+  'can we abolish the patriarchy',
+  'will zombies take over',
+  'i love bananas'
 ];
+(console.log(magicQuestions.length));
 //
-
+// console.log("magicQuestions[0]");
 // let specialQuestion = "will we survive?"
 // // A variable to store the current thing the user
 // // should be saying. Starts as nothing.
@@ -77,11 +79,14 @@ function setup() {
     // variable names means that annyang will call the function
     // specified with EVERYTHING it heard from that point on...
     var command = {
-      "eight ball *magicQuestions[0]": handleUserSpeech0,
-        "eight ball *magicQuestions[1]": handleUserSpeech1,
-          "eight ball *magicQuestions[2]": handleUserSpeech2,
-            "eight ball *magicQuestions[4]": handleUserSpeech3
+      // "eight ball *magicQuestions.[0]": handleUserSpeech0,
+        // "eight ball *magicQuestions.[1]": handleUserSpeech,
+        //   "eight ball *magicQuestions.[2]": handleUserSpeech,
+            "eight ball *magicQuestions": handleUserSpeech
     };
+    // for (let i = 0; i < magicQuestions.length; i++) {
+    //   console.log(magicQuestions[i])
+    // }
     // Now we've defined the commands we give them to annyang
     // by using its .addCommands() function.
     annyang.addCommands(command);
@@ -106,21 +111,26 @@ function setup() {
 };
 
 
-// handleUserSpeech(phrase)
+// handleUserSpeechGeneral(phrase)
 //
 // Called by annyang when it hears a sentence of the form
 // "I am X". 'phrase' will contain the X part.
 // Checks whether the user said what they were told to say
 // and reacts accordingly.
-function handleUserSpeech0(phrase) {
+function handleUserSpeech(phrase) {
   console.log(handleUserSpeech);
   // We check whether the user said what they were told to say
   // by comparing what annyang heard (phrase) with the
   // currentPhrase variable
+  for (let i = 0; i < magicQuestions.length; i++) {
+    console.log(magicQuestions[i])}
   currentAnswer = getNewAnswer();
   if (phrase === currentPhrase) {
     //if they said the right thing
     // $command.text('oh god thats dark')
+    // for (let i = 0; i < magicQuestions.length; i++) {
+    //   console.log(magicQuestions[i])}
+    //
     currentPhrase = getNewPhrase();
     $eye.fadeIn("slow");
     $eye.effect("shake");
@@ -137,85 +147,36 @@ function handleUserSpeech0(phrase) {
   // }
   // setInterval(updateAnswer, UPDATE_FREQUENCY);
 }
+//
+// function handleUserSpeech0(phrase) {
+//   console.log(handleUserSpeech0);
+//   // We check whether the user said what they were told to say
+//   // by comparing what annyang heard (phrase) with the
+//   // currentPhrase variable
+//   currentAnswer = getNewAnswer();
+//   if (phrase === currentPhrase) {
+//     //if they said the right thing
+//     // $command.text('oh god thats dark')
+//     currentPhrase = getNewPhrase();
+//     $eye.fadeIn("slow");
+//     // $eye.effect("shake");
+//     $eye.hide();
+//     // And tell them to say it
+//     // $command.append(`Ask again? "is ${phrase}."`);
+//     $answer.fadeIn(3000);
+//     $answer.append(`the answer is ${currentAnswer}.`);
+//       // $("#askagain").click(function() {});
+//   }
+//   // else {
+  //   // If they said the wrong thing, correct them and demand
+  //   // they say it.
+  //   $command.text(`That's not right. Say "I am ${currentPhrase}".`);
+  // }
+  // setInterval(updateAnswer, UPDATE_FREQUENCY);
+// }
 
-function handleUserSpeech1(phrase) {
-  console.log(handleUserSpeech);
-  // We check whether the user said what they were told to say
-  // by comparing what annyang heard (phrase) with the
-  // currentPhrase variable
-  currentAnswer = getNewAnswer();
-  if (phrase === currentPhrase) {
-    //if they said the right thing
-    // $command.text('oh god thats dark')
-    currentPhrase = getNewPhrase();
-    $eye.fadeIn("slow");
-    $eye.effect("shake");
-    // And tell them to say it
-    // $command.append(`Ask again? "is ${phrase}."`);
-    $answer.fadeIn(3000);
-    $answer.append(`the answer is ${currentAnswer}.`);
-      // $("#askagain").click(function() {});
-  }
-  // else {
-  //   // If they said the wrong thing, correct them and demand
-  //   // they say it.
-  //   $command.text(`That's not right. Say "I am ${currentPhrase}".`);
-  // }
-  // setInterval(updateAnswer, UPDATE_FREQUENCY);
-}
 
-function handleUserSpeech3(phrase) {
-  console.log(handleUserSpeech);
-  // We check whether the user said what they were told to say
-  // by comparing what annyang heard (phrase) with the
-  // currentPhrase variable
-  currentAnswer = getNewAnswer();
-  if (phrase === currentPhrase) {
-    //if they said the right thing
-    // $command.text('oh god thats dark')
-    currentPhrase = getNewPhrase();
-    $eye.fadeIn("slow");
-    $eye.effect("shake");
-    // And tell them to say it
-    // $command.append(`Ask again? "is ${phrase}."`);
-    $answer.fadeIn(3000);
-    $answer.append(`the answer is ${currentAnswer}.`);
-      // $("#askagain").click(function() {});
-  }
-  // else {
-  //   // If they said the wrong thing, correct them and demand
-  //   // they say it.
-  //   $command.text(`That's not right. Say "I am ${currentPhrase}".`);
-  // }
-  // setInterval(updateAnswer, UPDATE_FREQUENCY);
-}
-
-function handleUserSpeech4(phrase) {
-  console.log(handleUserSpeech);
-  // We check whether the user said what they were told to say
-  // by comparing what annyang heard (phrase) with the
-  // currentPhrase variable
-  currentAnswer = getNewAnswer();
-  if (phrase === currentPhrase) {
-    //if they said the right thing
-    // $command.text('oh god thats dark')
-    currentPhrase = getNewPhrase();
-    $eye.fadeIn("slow");
-    $eye.effect("shake");
-    // And tell them to say it
-    // $command.append(`Ask again? "is ${phrase}."`);
-    $answer.fadeIn(3000);
-    $answer.append(`the answer is ${currentAnswer}.`);
-      // $("#askagain").click(function() {});
-  }
-  // else {
-  //   // If they said the wrong thing, correct them and demand
-  //   // they say it.
-  //   $command.text(`That's not right. Say "I am ${currentPhrase}".`);
-  // }
-  // setInterval(updateAnswer, UPDATE_FREQUENCY);
-}
-getNewPhrase()
+// getNewPhrase()
 
 // Returns a random phrase from the magicQuestions array
 function getNewPhrase() {
@@ -246,4 +207,3 @@ function getNewAnswer() {
 
 // function updateAnswer() {
 //
-// }
