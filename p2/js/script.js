@@ -100,6 +100,11 @@ function setup() {
     $command.text(`Dear tragic eight ball "${currentPhrase}?"`);
   }
 
+  // if (magicQuestions.includes(phrase)) {
+  // for (let i = 0; i < magicQuestions.length; i++) {
+  //   console.log(magicQuestions[i])}
+  //   }
+
   $answer = $('#answer');
   $answer.hide().text(`The Oracle says ${currentAnswer}`);
 
@@ -122,8 +127,11 @@ function handleUserSpeech(phrase) {
   // We check whether the user said what they were told to say
   // by comparing what annyang heard (phrase) with the
   // currentPhrase variable
+  if (magicQuestions.includes(phrase)) {
   for (let i = 0; i < magicQuestions.length; i++) {
     console.log(magicQuestions[i])}
+    }
+
   currentAnswer = getNewAnswer();
   if (phrase === currentPhrase) {
     //if they said the right thing
