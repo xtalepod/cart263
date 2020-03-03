@@ -3,19 +3,30 @@ body {
 }
 
 
-div.pixel {
-  /* background-color: black;
+div.pixel { */
+  background-color: black;
   width: 30px;
   height: 30px;
-  float: left; */
+  float: left;
   position: absolute;
 }
 
-#trapezoid {
+ #trapezoid {
    border-bottom: 100px solid pink;
    background-size: contain;
    border-left: 25px solid transparent;
    border-right: 25px solid transparent;
-   height: 20;
+   height: 20px;
    width: 100px;
+   /* position:absolute; */
+ }
+
+ #trapezoid2 {
+   border-bottom: 100px solid black;
+   background-size: contain;
+   border-left: 25px solid transparent;
+   border-right: 25px solid transparent;
+   height: 20px;
+   width: 100px;
+   /* position:absolute; */
  }

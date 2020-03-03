@@ -24,6 +24,7 @@ $(document).ready(setup);
 
 function setup() {
 
+//this is the dialog box that the user interacts with when they first enter the page
   //https://jqueryui.com/dialog/#modal-message
     $( function() {
       $( "#dialog-confirm" ).dialog({
@@ -43,12 +44,12 @@ function setup() {
       });
     } );
 
+//this is the same dialog box with responsive voice
   $( "#dialog-confirm" ).on('click',function () {
   // say() is a function defined below
     say("In this moment of social crisis, where even the most basic assertion that black lives matter is contested, we are drowning in “the facts” of inequality and injustice. Whether it is a new study on criminal justice disparities or another video of police brutality, demanding empirical evidence of systematic wrongdoing can have a kind of perverse quality—as if subjugated people must petition again and again for admission into the category of “human,” for which empathy is rationed andapplications are routinely denied. Ruha Benjamin");
-  showSpeaking();
-  setTimeout(hideSpeaking, 1000);
 });
+
 
   $(document).on('click',function () {
   // say() is a function defined below
@@ -62,6 +63,8 @@ function setup() {
   //   volume: 1
   // });
 
+//my left score box
+//https://api.jquery.com/mouseenter/
   let m = 0;
   $( "div.enterleave2" )
     .mouseenter(function() {
