@@ -23,13 +23,12 @@ let magicAnswers = [
 ];
 // // An array for questions the user can ask the magic 8 ball
 let magicQuestions = [
-    'can we break the glass ceiling',
+  'can we break the glass ceiling',
   'is climate change real',
   'can we abolish the patriarchy',
   'will zombies take over',
   'i love bananas'
 ];
-(console.log(magicQuestions.length));
 //
 // console.log("magicQuestions[0]");
 // let specialQuestion = "will we survive?"
@@ -45,8 +44,6 @@ let $answer;
 //a variable to hold the eye
 let $eye;
 
-//how often to update the answer selected
-const UPDATE_FREQUENCY = 5000;
 
 $(document).ready(setup);
 
@@ -79,10 +76,10 @@ function setup() {
     // variable names means that annyang will call the function
     // specified with EVERYTHING it heard from that point on...
     var command = {
-      // "eight ball *magicQuestions.[0]": handleUserSpeech0,
-        // "eight ball *magicQuestions.[1]": handleUserSpeech,
-        //   "eight ball *magicQuestions.[2]": handleUserSpeech,
-            "eight ball *magicQuestions": handleUserSpeech
+      //these magic questions are not related to the array i made
+      //you can just list the questions here with their own
+            // "*magicQuestions": handleUserSpeech,
+            "hello": handleUserSpeech
     };
     // for (let i = 0; i < magicQuestions.length; i++) {
     //   console.log(magicQuestions[i])
@@ -93,6 +90,7 @@ function setup() {
     // Finally we tell annyang to start listening with its
     // .start() function
     annyang.start();
+    console.log(annyang.start());
     // Choose a phrase for the user to say first
     currentPhrase = getNewPhrase();
     $command = $('#command');
@@ -100,10 +98,6 @@ function setup() {
     $command.text(`Dear tragic eight ball "${currentPhrase}?"`);
   }
 
-  // if (magicQuestions.includes(phrase)) {
-  // for (let i = 0; i < magicQuestions.length; i++) {
-  //   console.log(magicQuestions[i])}
-  //   }
 
   $answer = $('#answer');
   $answer.hide().text(`The Oracle says ${currentAnswer}`);
@@ -123,22 +117,30 @@ function setup() {
 // Checks whether the user said what they were told to say
 // and reacts accordingly.
 function handleUserSpeech(phrase) {
-  console.log(handleUserSpeech);
+  console.log(phrase);
+  // console.log(handleUserSpeech);
   // We check whether the user said what they were told to say
   // by comparing what annyang heard (phrase) with the
   // currentPhrase variable
-  if (magicQuestions.includes(phrase)) {
-  for (let i = 0; i < magicQuestions.length; i++) {
-    console.log(magicQuestions[i])}
-    }
+  // if (magicQuestions.includes(phrase)) {
+  // for (let i = 0; i < magicQuestions.length; i++) {
+  //   console.log(magicQuestions[i])}
+  //   }
 
-  currentAnswer = getNewAnswer();
   if (phrase === currentPhrase) {
     //if they said the right thing
     // $command.text('oh god thats dark')
     // for (let i = 0; i < magicQuestions.length; i++) {
     //   console.log(magicQuestions[i])}
-    //
+    // //
+    // if (phrase ==="bananas ones") {
+    //   doBananas();
+    // }
+    // else if (phrase === "patriarchy") {
+    //   doPatriarchy();
+    // }
+
+
     currentPhrase = getNewPhrase();
     $eye.fadeIn("slow");
     $eye.effect("shake");
@@ -153,7 +155,8 @@ function handleUserSpeech(phrase) {
   //   // they say it.
   //   $command.text(`That's not right. Say "I am ${currentPhrase}".`);
   // }
-  // setInterval(updateAnswer, UPDATE_FREQUENCY);
+
+  currentAnswer = getNewAnswer();
 }
 //
 // function handleUserSpeech0(phrase) {

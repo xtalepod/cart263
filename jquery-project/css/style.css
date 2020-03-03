@@ -1,3 +1,40 @@
 body {
 
 }
+
+
+
+div.out {
+  width: 40%;
+  height: 320px;
+  margin: 0 15px;
+  background-image: url("computer.gif");
+  background-color: #d6edfc;
+  float: left;
+}
+div.in {
+  width: 60%;
+  height: 90%;
+  background-color: #fc0;
+  margin: 10px auto;
+}
+p {
+  line-height: 1em;
+  margin: 0;
+  padding: 0;
+}
+
+
+#scrollbox {
+  padding: 20px 100px;
+  text-align: right;
+  font-size: 20px;
+  font-weight: bold;
+  position: absolute;
+  top: 400px;
+  right: 80px;
+  color: black;
+  border: 5px solid #ff6699;
+  outline-color: rgb(255, 130, 255);
+  background-color: transparent;
+}

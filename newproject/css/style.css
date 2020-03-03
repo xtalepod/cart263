@@ -1,0 +1,21 @@
+body {
+
+}
+
+
+div.pixel {
+  /* background-color: black;
+  width: 30px;
+  height: 30px;
+  float: left; */
+  position: absolute;
+}
+
+#trapezoid {
+   border-bottom: 100px solid pink;
+   background-size: contain;
+   border-left: 25px solid transparent;
+   border-right: 25px solid transparent;
+   height: 20;
+   width: 100px;
+ }
