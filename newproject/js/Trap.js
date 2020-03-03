@@ -19,13 +19,13 @@ $(this.element).css("top",this.y)
 
 }
 //
-// update() {
-//   this.x = this.x + this.speedX;
-//   this.y = this.y + this.speedY;
-//   $(this.element).css("left",this.x)
-//   $(this.element).css("top",this.y)
-// }
-//
+update() {
+  this.x = this.x + this.speedX;
+  this.y = this.y + this.speedY;
+  $(this.element).css("left",this.x)
+  $(this.element).css("top",this.y)
+}
+
 // checkBoundaries() {
 //   if (this.x < 0 || this.x > 1000) {
 //     this.speedX = this.speedX * -1
