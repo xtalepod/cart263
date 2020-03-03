@@ -30,21 +30,16 @@ $(document).ready(setup);
 
 function setup() {
 
-  $trap = $('#trapezoid');
-
-  // for (let i = 0; i < 5; i ++) {
-  //   let x = Math.floor(Math.random() + 100);
-  //   let y = Math.floor(Math.random() + 5);
-  //   trapazoids.push(new Trap (x,y,20,'#ff0000'));
-  // }
+  // $trap = $('#trapezoid');
+  $trap = $('#container');
 
   for (let i = 0; i < 5; i++) {
-  //  $trap.hide()
-    //  .fadeIn(300)
-    //  .mouseenter(function() {
-      //  $("p").first().text("enter");
-      //  $("p").last().text(++count);
-        // say("ahhhh");
+   // $trap.hide()
+   //   .fadeIn(300)
+   //   .mouseenter(function() {
+   //     $("p").first().text("enter");
+   //     $("p").last().text(++count);
+   //      say("ahhhh");
          let x = Math.floor(Math.random() * 100);
          let y = Math.floor(Math.random() * 500);
          trapazoids.push(new Trap (x, y, 20, '#ff0000'));
@@ -59,13 +54,9 @@ function say(text) {
   responsiveVoice.speak(text, voice, voiceParameters);
 }
 
-// function randomPosition() {
-//   let x = Math.random() * 100;
-//   let y = Math.random() * 250;
-// }
-
 function trapActions() {
-//
+
+
 for (let i = 0; i < trapazoids.length; i++) {
     $trap.hide()
     .fadeIn(300)
