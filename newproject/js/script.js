@@ -24,65 +24,55 @@ let count = 0;
 let $trap;
 //the array for the trapezoids
 let trapazoids = [];
-let x;
-let y;
-
 
 $(document).ready(setup);
 
 
 function setup() {
-  //   let $divs = $('div');
-  // $divs.hide();
-  // $divs.fadeIn(2000);
 
-  let $trap = $('#trapezoid');
+  $trap = $('#trapezoid');
 
-  for (let i = 0; i < 30; i ++) {
-    let x = Math.random() * 100;
-    let y = Math.random() * 250;
-    let speed = Math.random() * 15;
-    trapazoids.push();
-  }
+  // for (let i = 0; i < 5; i ++) {
+  //   let x = Math.floor(Math.random() + 100);
+  //   let y = Math.floor(Math.random() + 5);
+  //   trapazoids.push(new Trap (x,y,20,'#ff0000'));
+  // }
 
   for (let i = 0; i < 5; i++) {
-    $trap.hide()
-      .fadeIn(300)
-      .mouseenter(function() {
-        $("p").first().text("mouse enter");
-        $("p").last().text(++count);
-        say("ahhhh");
-      });
-  }
-
-  //   for (let i = 0; i < 4; i ++) {
-  //   let x = Math.random() * 100;
-  //   let y = Math.random() * 250;
-  //   // let speed = Math.random() * 15;
-  //   trapazoids.push();
+  //  $trap.hide()
+    //  .fadeIn(300)
+    //  .mouseenter(function() {
+      //  $("p").first().text("enter");
+      //  $("p").last().text(++count);
+        // say("ahhhh");
+         let x = Math.floor(Math.random() * 100);
+         let y = Math.floor(Math.random() * 500);
+         trapazoids.push(new Trap (x, y, 20, '#ff0000'));
+    //  });
   // }
-  //   trapActions();
+    trapActions();
 
+    }
 }
 
 function say(text) {
   responsiveVoice.speak(text, voice, voiceParameters);
 }
 
-function randomPosition() {
-  let x = Math.random() * 100;
-  let y = Math.random() * 250;
-}
-
-// function trapActions() {
-//
-// for (let i = 0; i < trapazoids.length; i++) {
-//     $trap.hide()
-//     .fadeIn(300)
-//     .mouseenter(function() {
-//       $("p").first().text("mouse enter");
-//       $("p").last().text(++count);
-//       say("ahhhh");
-//     });
-//   }
+// function randomPosition() {
+//   let x = Math.random() * 100;
+//   let y = Math.random() * 250;
 // }
+
+function trapActions() {
+//
+for (let i = 0; i < trapazoids.length; i++) {
+    $trap.hide()
+    .fadeIn(300)
+    .mouseenter(function() {
+      $("p").first().text("mouse enter");
+      $("p").last().text(++count);
+      say("ahhhh");
+    });
+  }
+}
