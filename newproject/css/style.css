@@ -13,7 +13,13 @@ body {
    position:absolute;
  } */
 
- * css properties related to the jQuery UI dialog boxes style */
+
+
+ .firstForm {
+   display: none;
+ }
+
+ /* * css properties related to the jQuery UI dialog boxes style */
  .ui-dialog-titlebar {
    background-color: pink;
    background-image: none;
