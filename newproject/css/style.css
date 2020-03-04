@@ -3,7 +3,7 @@ body {
 }
 
 
- #trapezoid {
+ /* #trapezoid {
    border-bottom: 100px solid pink;
    background-size: contain;
    border-left: 25px solid transparent;
@@ -11,4 +11,32 @@ body {
    height: 20px;
    width: 100px;
    position:absolute;
+ } */
+
+ * css properties related to the jQuery UI dialog boxes style */
+ .ui-dialog-titlebar {
+   background-color: pink;
+   background-image: none;
+   color: black;
+   font-weight: bold;
  }
+
+ .ui-dialog {
+   position: absolute;
+   top: 0;
+   left: 0;
+   padding: .2em;
+   outline: 0;
+   background-color: transparent;
+ }
+
+ .ui-widget-content {
+   border: 2px solid #dddddd;
+   background: #ffffff;
+   background-color: inherit;
+   color: #333333;
+ }
+
+ .ui-widget {
+   font-family: inherit;
+   font-size: 1em;

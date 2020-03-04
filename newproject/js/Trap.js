@@ -9,22 +9,24 @@ this.size = size;
 // this.velocity = velocity;
 this.color = color;
 this.element = $('<div>');
-$(this.element).css("width",this.size);
-$(this.element).css("height",this.size);
+$(this.element).css("width",80);
+$(this.element).css("height",80);
 $(this.element).css("background", this.color);
 $('#container').append(this.element);
 $(this.element).css("position","absolute");
 $(this.element).css("left",this.x)
 $(this.element).css("top",this.y)
+//
+
 
 }
-//
-update() {
-  this.x = this.x + this.speedX;
-  this.y = this.y + this.speedY;
-  $(this.element).css("left",this.x)
-  $(this.element).css("top",this.y)
-}
+// //
+// update() {
+//   this.x = this.x + this.speedX;
+//   this.y = this.y + this.speedY;
+//   $(this.element).css("left",this.x)
+//   $(this.element).css("top",this.y)
+// }
 
 // checkBoundaries() {
 //   if (this.x < 0 || this.x > 1000) {
