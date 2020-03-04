@@ -2,6 +2,12 @@ body {
 
 }
 
+#container {
+  width: 1000px;
+  height: 1000px;
+  background-color: transparent;
+}
+
 
  /* #trapezoid {
    border-bottom: 100px solid pink;
@@ -13,7 +19,10 @@ body {
    position:absolute;
  } */
 
-
+/* .button {
+  background-color: #4CAF50;
+  border-radius: 8px;
+} */
 
  .firstForm {
    display: none;
