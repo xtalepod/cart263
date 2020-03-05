@@ -181,3 +181,10 @@ function trapActions() {
       });
   }
 }
+
+
+//stone wall quote for image
+
+// An NYPD officer grabs a youth by the hair as another officer clubs a young man during a confrontation Aug. 31, 1970, in Greenwich Village after a Gay Power march in New York. The long history of police violence against LGBTQ communities - stretching back to Stonewall and beyond - has many opposing the inclusion of police in Pride events.
+//https://en.wikipedia.org/wiki/Shooting_of_Michael_Brown
+//Brown was unarmed and died on the street.[35][38] Less than 90 seconds passed from the time Wilson encountered Brown to the time of Brown's death.[39][40]
