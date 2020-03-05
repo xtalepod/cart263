@@ -23,7 +23,8 @@ let voiceParameters = {
   volume: 1
 }
 
-let count = 0;
+let countP = 0;
+let countE = 0;
 //the jQuery object for the trapezoid element
 let $trap;
 let $button;
@@ -119,7 +120,13 @@ function startButtonPressed() {
 function perversionButtonPressed() {
   body.css("background-image", 'url("./assets/images/chkpattern.jpg")');
 // https://stackoverflow.com/questions/34767900/jquery-replace-image-on-hover/34768036#34768036
-$("p").last().text(++count);
+  $("p").text(++countP);
+}
+
+function equalityButtonPressed() {
+  body.css("background-image", 'url("./assets/images/democracynow.png")');
+// https://stackoverflow.com/questions/34767900/jquery-replace-image-on-hover/34768036#34768036
+  $("p").text(++countP);
 }
 
 // function say(text) {
@@ -141,6 +148,8 @@ function speakingParameters(text) {
   responsiveVoice.speak(text, voice, voiceParameters);
 }
 
+
+
 // function say
 function trapActions() {
 
@@ -149,8 +158,8 @@ function trapActions() {
       .fadeIn(300)
       .mouseenter(function() {
         $("p").first().text("mouse enter");
-        $("p").last().text(++count);
-        say("ahhhh");
+        // $("p").last().text(++count);
+        speakingParameters("ahhhh");
       });
   }
 }
