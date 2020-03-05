@@ -95,7 +95,7 @@ function startButtonPressed() {
   start.css("display", "none");
   trapActions();
   // sets the background to the vaporwave picture
-  // body.css("background-image", 'url("./assets/images/chkpattern.jpg")');
+  body.css("background-image", 'url("./assets/images/chkpattern.jpg")');
   // show the first form and the counter
   // firstForm.css("display", "block");
   // modal dialog box
@@ -120,6 +120,8 @@ function say(text) {
   responsiveVoice.speak(text, voice, voiceParameters);
 }
 
+
+// function say
 function trapActions() {
 
   for (let i = 0; i < trapazoids.length; i++) {
