@@ -16,14 +16,14 @@ $(document).ready(setup);
 function setup() {
   console.log( $(".image-container"));
 
-  $(document).ready(function(){
-    $("p").click(function(){
-      alert("The paragraph was clicked.");
-        speakingParameters("i could say a lot of things");
-        $("p").hide();
-    });
-
-  });
+  // $(document).ready(function(){
+  //   $("p").click(function(){
+  //     alert("The paragraph was clicked.");
+  //       speakingParameters("i could say a lot of things");
+  //       $("p").hide();
+  //   });
+  //
+  // });
 
 // // https://stackoverflow.com/questions/34767900/jquery-replace-image-on-hover/34768036#34768036
 // //this calls the image container class from the HTML file and makes it so that each img src in that class changes (respectively) when the mouse hovers over

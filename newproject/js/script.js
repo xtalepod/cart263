@@ -58,6 +58,7 @@ function setup() {
   body = $("body");
 
   play.hide();
+  $trap.hide();
   //this is calling the html start div
    start.on('click',function () {
     // speakingParameters() is a function defined below
@@ -67,30 +68,12 @@ function setup() {
   for (let i = 0; i < 5 ; i++) {
     let x = Math.floor(Math.random() * 1000);
     let y = Math.floor(Math.random() * 500 + 100);
-    trapazoids.push(new Trap(x, y, 20, '#f62681'));
-    //  });
+    trapazoids.push(new Trap(x, y, 20, '#f62681', 20, 5));
     }
+    requestAnimationFrame(animationLoop);
 
       // interval to make a flashy random color background from my digital tears
   startInterval = setInterval(backgroundFlash, 100);
-
-  // // https://stackoverflow.com/questions/34767900/jquery-replace-image-on-hover/34768036#34768036
-  // //this calls the image container class from the HTML file and makes it so that each img src in that class changes (respectively) when the mouse hovers over
-    $(".image-container").mouseover(function () {
-    $(this).attr('src', $(this).data("hover"));
-  }).mouseout(function () {
-    $(this).attr('src', $(this).data("src"));
-  });
-
-  //these call the HTML id's of my two image-container class img src objects and use the say function to make them say their own things
-    $("#raffy").mouseenter(function() {
-     // say() is a function defined below
-       speakingParameters("insert raffy sounds");
-   });
-   $("#4chan").mouseenter(function() {
-    // say() is a function defined below
-      speakingParameters("again insert raffy sounds");
-  });
 
   }
 
@@ -108,26 +91,61 @@ function startButtonPressed() {
   clearInterval(startInterval);
   //show the play div
   play.show();
+  $trap.show();
   //hide the start div
   start.hide();
   // hide the div from the start
   start.css("display", "none");
-  trapActions();
   // sets the background to the vaporwave picture
   body.css("background-image", 'url("./assets/images/chkpattern.jpg")');
+
+// // // https://stackoverflow.com/questions/34767900/jquery-replace-image-on-hover/34768036#34768036
+// //this calls the image container class from the HTML file and makes it so that each img src in that class changes (respectively) when the mouse hovers over
+// also note to self this stuff should become its own function?
+  $(".image-container").mouseover(function () {
+  $(this).attr('src', $(this).data("hover"));
+  }).mouseout(function () {
+  $(this).attr('src', $(this).data("src"));
+  });
+
+  //these call the HTML id's of my two image-container class img src objects and use the say function to make them say their own things
+  $("#raffy").mouseenter(function() {
+   // say() is a function defined below
+     speakingParameters("blahblah");
+  });
+  $("#4chan").mouseenter(function() {
+  // say() is a function defined below
+    speakingParameters("okay");
+  });
+  // // also note to self this stuff should become its own function? WOULD END HERE
 }
 
+//a function to deal with what happens when the user clicks this button
 function perversionButtonPressed() {
   body.css("background-image", 'url("./assets/images/chkpattern.jpg")');
 // https://stackoverflow.com/questions/34767900/jquery-replace-image-on-hover/34768036#34768036
   $("p").text(++countP);
 }
 
+//a function to deal with what happens when the user clicks this button
 function equalityButtonPressed() {
   body.css("background-image", 'url("./assets/images/democracynow.png")');
 // https://stackoverflow.com/questions/34767900/jquery-replace-image-on-hover/34768036#34768036
   $("p").text(++countP);
 }
+
+function animationLoop() {
+  for (let i = 0; i < trapazoids.length; i ++) {
+    trapazoids[i].update();
+    trapazoids[i].checkBoundaries();
+    trapazoids[i].changeColor();
+    // $('.scoreClass').text(score);
+    // if (trapazoids[i].x < 500) {
+    //   score += 1;
+      // console.log(score);
+    }
+      requestAnimationFrame(animationLoop);
+  }
 
 // function say(text) {
 //   responsiveVoice.speak(text, voice, voiceParameters);
