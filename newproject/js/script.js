@@ -133,7 +133,7 @@ function equalityButtonPressed() {
 // https://stackoverflow.com/questions/34767900/jquery-replace-image-on-hover/34768036#34768036
   $("p").text(++countP);
 }
-
+//this function makes it so that the trapazoids do everything they're meant to do
 function animationLoop() {
   for (let i = 0; i < trapazoids.length; i ++) {
     trapazoids[i].update();
