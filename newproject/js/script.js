@@ -69,7 +69,6 @@ function setup() {
     trapazoids.push(new Trap(x, y, 20, '#f62681'));
     //  });
     }
-    // trapActions();
 
       // interval to make a flashy random color background from my digital tears
   startInterval = setInterval(backgroundFlash, 100);
@@ -85,11 +84,11 @@ function setup() {
   //these call the HTML id's of my two image-container class img src objects and use the say function to make them say their own things
     $("#raffy").mouseenter(function() {
      // say() is a function defined below
-       speakingParameters("In this moment of social crisis, where even the most basic assertion that black lives matter is contested, we are drowning in “the facts” of inequality and injustice. Whether it is a new study on criminal justice disparities or another video of police brutality, demanding empirical evidence of systematic wrongdoing can have a kind of perverse quality—as if subjugated people must petition again and again for admission into the category of “human,” for which empathy is rationed andapplications are routinely denied. Ruha Benjamin");
+       speakingParameters("insert raffy sounds");
    });
    $("#4chan").mouseenter(function() {
     // say() is a function defined below
-      speakingParameters("okay");
+      speakingParameters("again insert raffy sounds");
   });
 
   }
@@ -115,24 +114,12 @@ function startButtonPressed() {
   trapActions();
   // sets the background to the vaporwave picture
   body.css("background-image", 'url("./assets/images/chkpattern.jpg")');
-  // show the first form and the counter
-  // firstForm.css("display", "block");
-  // modal dialog box
-  // $("#form1").dialog({
-  //   dialogClass: "no-close",
-  //   modal: "true",
-  //   buttons: [{
-  //     text: "OK",
-  //     click: function() {
-  //       $(this).dialog("close");
-  //     }
-  //   }]
-  // });
 }
 
 function perversionButtonPressed() {
   body.css("background-image", 'url("./assets/images/chkpattern.jpg")');
 // https://stackoverflow.com/questions/34767900/jquery-replace-image-on-hover/34768036#34768036
+$("p").last().text(++count);
 }
 
 // function say(text) {
