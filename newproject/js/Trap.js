@@ -7,6 +7,7 @@ this.size = size;
 // this.speedX = speed;
 // this.speedY = speed;
 // this.velocity = velocity;
+// this.trapImage = trapImage;
 this.color = color;
 this.element = $('<div>');
 $(this.element).css("width",80);

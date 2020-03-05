@@ -27,12 +27,15 @@ let count = 0;
 //the jQuery object for the trapezoid element
 let $trap;
 let $button;
+let $pervButton;
+let $equalButton;
 //the array for the trapezoids
 let trapazoids = [];
 //html elements adapted from my digital tears
 let body;
 let firstForm;
 let start;
+let play;
 //internvals adapted from my digital tears
 let startInterval;
 
@@ -41,45 +44,26 @@ $(document).ready(setup);
 
 
 function setup() {
+  // $(document).one('mousedown', playMusic);
 
   $trap = $('#container');
   $button = $('button');
+  $pervButton = $('pervButton');
+  $equalButton = $('equalButton');
   //adapted from my digital tears
   start = $(".start");
+  play = $(".play");
   firstForm = $(".firstForm");
   body = $("body");
 
-  //https://jqueryui.com/dialog/#modal-message
-  // $(function() {
-  //   $("#dialog-confirm").dialog({
-  //     resizable: false,
-  //     height: "auto",
-  //     width: 400,
-  //     modal: true,
-  //     buttons: {
-  //       "i accept": function() {
-  //         $(this).dialog("close");
-  //       },
-  //       //i dont accept
-  //       // Cancel: function() {
-  //       //   $( this ).dialog( "close" );
-  //       // }
-  //     }
-  //   });
-  // });
-
-  // $("#dialog-confirm").on('click', function() {
-  //   //   // say() is a function defined below
-  //   say("In this moment of social crisis, where even the most basic assertion that black lives matter is contested, we are drowning in “the facts” of inequality and injustice. Whether it is a new study on criminal justice disparities or another video of police brutality, demanding empirical evidence of systematic wrongdoing can have a kind of perverse quality—as if subjugated people must petition again and again for admission into the category of “human,” for which empathy is rationed andapplications are routinely denied. Ruha Benjamin");
-  // });
-
-  //     //this is calling the html start div
+  play.hide();
+  //this is calling the html start div
    start.on('click',function () {
     // say() is a function defined below
       say("In this moment of social crisis, where even the most basic assertion that black lives matter is contested, we are drowning in “the facts” of inequality and injustice. Whether it is a new study on criminal justice disparities or another video of police brutality, demanding empirical evidence of systematic wrongdoing can have a kind of perverse quality—as if subjugated people must petition again and again for admission into the category of “human,” for which empathy is rationed andapplications are routinely denied. Ruha Benjamin");
   });
-
-  for (let i = 0; i < 5; i++) {
+  //
+  for (let i = 0; i < 5 ; i++) {
     let x = Math.floor(Math.random() * 1000);
     let y = Math.floor(Math.random() * 500 + 100);
     trapazoids.push(new Trap(x, y, 20, '#f62681'));
@@ -93,26 +77,27 @@ function setup() {
 
 
 // random color background from my digital tears
-function backgroundFlash() {
-  let r = Math.random()*255;
-  let g = Math.random()*0;
-  let b = Math.random()*199;
-  body.css("background-color", `rgb(${r},${g},${b})`)
-}
+// function backgroundFlash() {
+//   let r = Math.random()*255;
+//   let g = Math.random()*0;
+//   let b = Math.random()*199;
+//   body.css("background-color", `rgb(${r},${g},${b})`)
+// }
 
 function startButtonPressed() {
-  // // clear the flashy background interval
+  // clear the flashy background interval
   clearInterval(startInterval);
-  trapActions();
-  // sets the background to the vaporwave picture
-  body.css("background-image", 'url("./assets/images/chkpattern.jpg")');
+  //show the play div
+  play.show();
+  //hide the start div
+  start.hide();
   // hide the div from the start
   start.css("display", "none");
+  trapActions();
+  // sets the background to the vaporwave picture
+  // body.css("background-image", 'url("./assets/images/chkpattern.jpg")');
   // show the first form and the counter
-  firstForm.css("display", "block");
-
-  // counter.css("display", "block");
-  // incrementCount();
+  // firstForm.css("display", "block");
   // modal dialog box
   // $("#form1").dialog({
   //   dialogClass: "no-close",
@@ -126,6 +111,10 @@ function startButtonPressed() {
   // });
 }
 
+function perversionButtonPressed() {
+  body.css("background-image", 'url("./assets/images/chkpattern.jpg")');
+// https://stackoverflow.com/questions/34767900/jquery-replace-image-on-hover/34768036#34768036
+}
 
 function say(text) {
   responsiveVoice.speak(text, voice, voiceParameters);
