@@ -59,8 +59,8 @@ function setup() {
   play.hide();
   //this is calling the html start div
    start.on('click',function () {
-    // say() is a function defined below
-      say("In this moment of social crisis, where even the most basic assertion that black lives matter is contested, we are drowning in “the facts” of inequality and injustice. Whether it is a new study on criminal justice disparities or another video of police brutality, demanding empirical evidence of systematic wrongdoing can have a kind of perverse quality—as if subjugated people must petition again and again for admission into the category of “human,” for which empathy is rationed andapplications are routinely denied. Ruha Benjamin");
+    // speakingParameters() is a function defined below
+      speakingParameters("In this moment of social crisis, where even the most basic assertion that black lives matter is contested, we are drowning in “the facts” of inequality and injustice. Whether it is a new study on criminal justice disparities or another video of police brutality, demanding empirical evidence of systematic wrongdoing can have a kind of perverse quality—as if subjugated people must petition again and again for admission into the category of “human,” for which empathy is rationed andapplications are routinely denied. Ruha Benjamin");
   });
   //
   for (let i = 0; i < 5 ; i++) {
@@ -73,6 +73,25 @@ function setup() {
 
       // interval to make a flashy random color background from my digital tears
   startInterval = setInterval(backgroundFlash, 100);
+
+  // // https://stackoverflow.com/questions/34767900/jquery-replace-image-on-hover/34768036#34768036
+  // //this calls the image container class from the HTML file and makes it so that each img src in that class changes (respectively) when the mouse hovers over
+    $(".image-container").mouseover(function () {
+    $(this).attr('src', $(this).data("hover"));
+  }).mouseout(function () {
+    $(this).attr('src', $(this).data("src"));
+  });
+
+  //these call the HTML id's of my two image-container class img src objects and use the say function to make them say their own things
+    $("#raffy").mouseenter(function() {
+     // say() is a function defined below
+       speakingParameters("In this moment of social crisis, where even the most basic assertion that black lives matter is contested, we are drowning in “the facts” of inequality and injustice. Whether it is a new study on criminal justice disparities or another video of police brutality, demanding empirical evidence of systematic wrongdoing can have a kind of perverse quality—as if subjugated people must petition again and again for admission into the category of “human,” for which empathy is rationed andapplications are routinely denied. Ruha Benjamin");
+   });
+   $("#4chan").mouseenter(function() {
+    // say() is a function defined below
+      speakingParameters("okay");
+  });
+
   }
 
 
@@ -116,10 +135,24 @@ function perversionButtonPressed() {
 // https://stackoverflow.com/questions/34767900/jquery-replace-image-on-hover/34768036#34768036
 }
 
-function say(text) {
+// function say(text) {
+//   responsiveVoice.speak(text, voice, voiceParameters);
+// }
+
+
+function speakingParameters(text) {
+    let randomPitch = Math.random();
+    let randomVolume = Math.random();
+    let randomRate = Math.random();
+
+  let voiceParameters  = {
+     pitch: randomPitch,
+     rate: randomRate,
+     volume: 5
+   };
+
   responsiveVoice.speak(text, voice, voiceParameters);
 }
-
 
 // function say
 function trapActions() {
