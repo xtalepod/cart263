@@ -6,8 +6,8 @@ let voice = 'UK English Male';
 let countP = 0;
 let $counter;
 // let countE;
-
 let body;
+let question;
 
 let dialogBoxes = [
   "eros",
@@ -18,26 +18,58 @@ let dialogBoxes = [
   "have you read the wiki page 'how to let go?'"
 ];
 
-// let $dialog;
-let question;
+let $raffy;
+let $fourchan;
+let $democracy;
+let imagesArray = [];
+
+
+
 
 $(document).ready(setup);
 //
 //
 function setup() {
+
 $counter = $("#counter");
-body = $("body");
-// perversionButtonPressed();
+$raffy= $("#raffy");
+$fourchan =$("#fourchan");
+$democracy = $("#democracy");
+
+
+}
+
+function imageFlip(){
+  imageArray = [$("#raffy"),$("#fourchan"),$("#democracy")];
+
+  for (let i = 0; i < 15 ; i++) {
+    let x = Math.floor(Math.random() * 1000);
+    let y = Math.floor(Math.random() * 500 + 100);
+    imagesArray.push();
+    }
+  console.log(imagesArray);
+  console.log(imageFlip);
 }
 
 // //a function to deal with what happens when the user clicks this button
 function perversionButtonPressed() {
   // body.css("background-image", 'url("./assets/images/chkpattern.jpg")');
   addDialog();
+  // addImage();
   $("#counter").text(countP++);
-}
+  }
 
+//i dont want to ADD an image, i want an image array already on the page that flips an image when you click the perv button
+//and i want a dialog to accompany a picture flipping
+
+//FLIP 1 image from the array and read off the text with voiceParameters
+//https://www.w3schools.com/howto/howto_css_flip_image.asp
 // function addImage() {
+
+//if (perversionButtonPressed === true) {
+// flip(hover) and image from an array}
+ // $imagesArray = $("#imagesArray");
+
 //   $(".image-container").mouseover(function () {
 //   $(this).attr('src', $(this).data("hover"));
 // }).mouseout(function () {
@@ -70,11 +102,11 @@ function addDialog() {
   // .dialog() method, supplying a number of options to configure it
   $dialog.dialog({
     //from endless dialog
-    buttons: {
-      "ask me again": function() {
-          addDialog();
-      },
-    },
+    // buttons: {
+    //   "ask me again": function() {
+    //       addDialog();
+    //   },
+    // },
     // The 'containment' option lets us specify where the dialog can go on the screen. 'body' means it will be
     // contained within the body tag, and can't be dragged out of it.
     containment: 'body'
