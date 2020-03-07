@@ -7,6 +7,8 @@ let countP = 0;
 let $counter;
 // let countE;
 
+let body;
+
 let dialogBoxes = [
   "eros",
   "i think theres something missing inside me",
@@ -16,54 +18,31 @@ let dialogBoxes = [
   "have you read the wiki page 'how to let go?'"
 ];
 
+// let $dialog;
 let question;
 
 $(document).ready(setup);
 //
 //
 function setup() {
-  console.log( $(".image-container"));
-
-$(document).on('click', addDialog);
-perversionButtonPressed();
-
 $counter = $("#counter");
-
-// https://stackoverflow.com/questions/34767900/jquery-replace-image-on-hover/34768036#34768036
-//this calls the image container class from the HTML file and makes it so that each img src in that class changes (respectively) when the mouse hovers over
-//   $(".image-container").mouseover(function () {
-//   $(this).attr('src', $(this).data("hover"));
-// }).mouseout(function () {
-//   $(this).attr('src', $(this).data("src"));
-// });
-//
-// //these call the HTML id's of my two image-container class img src objects and use the say function to make them say their own things
-//   $("#raffy").mouseenter(function() {
-//    // say() is a function defined below
-//      speakingParameters("In this moment of social crisis, where even the most basic assertion that black lives matter is contested, we are drowning in “the facts” of inequality and injustice. Whether it is a new study on criminal justice disparities or another video of police brutality, demanding empirical evidence of systematic wrongdoing can have a kind of perverse quality—as if subjugated people must petition again and again for admission into the category of “human,” for which empathy is rationed andapplications are routinely denied. Ruha Benjamin");
-//  });
-//  $("#4chan").mouseenter(function() {
-//   // say() is a function defined below
-//     speakingParameters("okay");
-// });
-
+body = $("body");
+// perversionButtonPressed();
 }
 
 // //a function to deal with what happens when the user clicks this button
 function perversionButtonPressed() {
   // body.css("background-image", 'url("./assets/images/chkpattern.jpg")');
-  // addDialog();
-// https://stackoverflow.com/questions/34767900/jquery-replace-image-on-hover/34768036#34768036
+  addDialog();
   $("#counter").text(countP++);
-  console.log(countP);
+}
 
-  //when i added this
+// function addImage() {
 //   $(".image-container").mouseover(function () {
 //   $(this).attr('src', $(this).data("hover"));
 // }).mouseout(function () {
 //   $(this).attr('src', $(this).data("src"));
 // });
-//
 // //these call the HTML id's of my two image-container class img src objects and use the say function to make them say their own things
 //   $("#raffy").mouseenter(function() {
 //    // say() is a function defined below
@@ -73,12 +52,13 @@ function perversionButtonPressed() {
 //   // say() is a function defined below
 //     speakingParameters("okay");
 // });
-}
+// }
 
 function addDialog() {
   // Dynamically create a div and store it in a variable. This is the div
   // we will turn into a dialog box. Set its title at the same time.
   let $dialog = $(`<div></div>`).attr(`title`, `spiral`);
+  $dialog.hide();
   // Choose a random question text from the array
   question = dialogBoxes[Math.floor(randomInRange(0, dialogBoxes.length))];
   // Add a p tag to the dialog div that contains the question text
@@ -107,18 +87,10 @@ function addDialog() {
     left: Math.random() * ($(window).width() - $dialog.parent().width())
   });
 }
-
-
-randomInRange()
-
 // Returns a random number between min and max
 function randomInRange(min, max) {
   return min + (Math.random() * (max - min));
 }
-// function say(text) {
-//   responsiveVoice.speak(text, voice, voiceParameters);
-// }
-
 function speakingParameters(text) {
     let randomPitch = Math.random();
     let randomVolume = Math.random();

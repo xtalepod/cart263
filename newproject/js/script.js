@@ -42,8 +42,8 @@ function setup() {
 
   $trap = $('#container');
   $button = $('button');
-  $pervButton = $('pervButton');
-  $equalButton = $('equalButton');
+  $pervButton = $('#pervButton');
+  $equalButton = $('#equalButton');
   //adapted from my digital tears
   start = $(".start");
   play = $(".play");
