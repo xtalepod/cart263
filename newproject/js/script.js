@@ -104,26 +104,6 @@ function startButtonPressed() {
   start.css("display", "none");
   // sets the background to the vaporwave picture
   body.css("background-image", 'url("./assets/images/chkpattern.jpg")');
-
-// // // https://stackoverflow.com/questions/34767900/jquery-replace-image-on-hover/34768036#34768036
-// //this calls the image container class from the HTML file and makes it so that each img src in that class changes (respectively) when the mouse hovers over
-// // also note to self this stuff should become its own function?
-//   $(".image-container").mouseover(function () {
-//   $(this).attr('src', $(this).data("hover"));
-//   }).mouseout(function () {
-//   $(this).attr('src', $(this).data("src"));
-//   });
-//
-//   //these call the HTML id's of my two image-container class img src objects and use the say function to make them say their own things
-//   $("#raffy").mouseenter(function() {
-//    // say() is a function defined below
-//      speakingParameters("blahblah");
-//   });
-//   $("#4chan").mouseenter(function() {
-//   // say() is a function defined below
-//     speakingParameters("okay");
-//   });
-  // // also note to self this stuff should become its own function? WOULD END HERE
 }
 
 //a function to deal with what happens when the user clicks this button
