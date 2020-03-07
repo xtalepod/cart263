@@ -1,4 +1,4 @@
-class Trap {
+class Squares {
 constructor (x, y, size, color, speed, velocity) {
 
 this.x = x;

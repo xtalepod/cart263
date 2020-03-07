@@ -19,13 +19,13 @@ let voice = 'UK English Male';
 let countP = 0;
 let countE = 0;
 let $counter;
-//the jQuery object for the trapezoid element
-let $trap;
+//the jQuery object for the squaresezoid element
+let $squares;
 let $button;
 let $pervButton;
 let $equalButton;
 //the array for the trapezoids
-let trapazoids = [];
+let squares = [];
 //html elements adapted from my digital tears
 let body;
 let firstForm;
@@ -52,7 +52,7 @@ $(document).ready(setup);
 function setup() {
   // $(document).one('mousedown', playMusic);
 
-  $trap = $('#container');
+  $squares = $('#container');
   $button = $('button');
   $pervButton = $('#pervButton');
   $equalButton = $('#equalButton');
@@ -64,7 +64,7 @@ function setup() {
   body = $("body");
 
   play.hide();
-  $trap.hide();
+  $squares.hide();
   //this is calling the html start div
    start.on('click',function () {
     // speakingParameters() is a function defined below
@@ -74,7 +74,7 @@ function setup() {
   for (let i = 0; i < 5 ; i++) {
     let x = Math.floor(Math.random() * 1000);
     let y = Math.floor(Math.random() * 500 + 100);
-    trapazoids.push(new Trap(x, y, 20, '#f62681', 20, 5));
+    squares.push(new Squares(x, y, 20, '#f62681', 20, 5));
     }
     requestAnimationFrame(animationLoop);
 
@@ -97,7 +97,7 @@ function startButtonPressed() {
   clearInterval(startInterval);
   //show the play div
   play.show();
-  $trap.show();
+  $squares.show();
   //hide the start div
   start.hide();
   // hide the div from the start
@@ -140,14 +140,14 @@ function equalityButtonPressed() {
 // https://stackoverflow.com/questions/34767900/jquery-replace-image-on-hover/34768036#34768036
   $("p").text(++countP);
 }
-//this function makes it so that the trapazoids do everything they're meant to do
+//this function makes it so that the squaresazoids do everything they're meant to do
 function animationLoop() {
-  for (let i = 0; i < trapazoids.length; i ++) {
-    trapazoids[i].update();
-    trapazoids[i].checkBoundaries();
-    trapazoids[i].changeColor();
+  for (let i = 0; i < squares.length; i ++) {
+    squares[i].update();
+    squares[i].checkBoundaries();
+    squares[i].changeColor();
     // $('.scoreClass').text(score);
-    // if (trapazoids[i].x < 500) {
+    // if (squares[i].x < 500) {
     //   score += 1;
       // console.log(score);
     }
@@ -211,10 +211,10 @@ function speakingParameters(text) {
 }
 
 // function say
-function trapActions() {
+function squaresActions() {
 
-  for (let i = 0; i < trapazoids.length; i++) {
-    $trap.hide()
+  for (let i = 0; i < squares.length; i++) {
+    $squares.hide()
       .fadeIn(300)
       .mouseenter(function() {
         $("p").first().text("mouse enter");
