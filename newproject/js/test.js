@@ -3,8 +3,17 @@
 let $raffy;
 let $fourchan;
 let $democracy;
-let imagesArray = [];
-console.log($democracy);
+
+
+
+let $imageID
+let aImagesID = ["#democracy","#4chan", "#raffy", "#equity", "#chiefs","#riot","#stonewall"]
+let aImagesSRC = ['assets/images/democracynow.png', 'assets/images/4chan.png', 'assets/images/raffy.png', 'assets/images/payequity.png', 'assets/images/chiefs.jpg','assets/images/stonewall.jpg'];
+
+
+
+
+
 
 $(document).ready(setup);
 //
@@ -12,24 +21,43 @@ $(document).ready(setup);
 function setup() {
 
 
+
 // $counter = $("#counter");
-$raffy= $("#raffy");
-$fourchan =$("#fourchan");
-$democracy = $("#democracy");
 
- $("#democracy").attr('src','assets/images/democracy.png');
 
-  $('#democracy').on({
-    'click': function() {
-         var src = ($(this).attr('src') === 'assets/images/4chan.png')
-            ? 'assets/images/democracynow.png'
-            : 'assets/images/4chan.png';
-         $(this).attr('src', src);
-    }
-});
+
+//https://stackoverflow.com/questions/554273/changing-the-image-source-using-jquery
+ $("#democracy").attr('src','assets/images/4chan.png');
+
+//   $('#democracy').on({
+//     'click': function() {
+//          var src = ($(this).attr('src') === 'assets/images/4chan.png')
+//             ? 'assets/images/democracynow.png'
+//             : 'assets/images/4chan.png';
+//          $(this).attr('src', src);
+//     }
+// });
 
 }
 
+function perversionButtonPressed() {
+
+// pick an image ID at random here random here
+ // let i = 0; // should be lesser than aImagesID length
+let i = Math.floor(randomInRange(0, aImagesID.length));
+ $imageID = $(aImagesID[i]);
+ console.log($imageID);
+
+ // pick an image SOURCE at random here
+  let j = Math.floor(randomInRange(0, aImagesID.length)); // should be lesser than aImagesSRC length
+  $imageID.attr('src',aImagesSRC[j]);
+
+}
+
+// Returns a random number between min and max
+function randomInRange(min, max) {
+  return min + (Math.random() * (max - min));
+}
 // function imageFlip(){
 //   imageArray = [$("#raffy"),$("#fourchan"),$("#democracy")];
 //

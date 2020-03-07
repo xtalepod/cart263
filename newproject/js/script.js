@@ -107,22 +107,22 @@ function startButtonPressed() {
 
 // // // https://stackoverflow.com/questions/34767900/jquery-replace-image-on-hover/34768036#34768036
 // //this calls the image container class from the HTML file and makes it so that each img src in that class changes (respectively) when the mouse hovers over
-// also note to self this stuff should become its own function?
-  // $(".image-container").mouseover(function () {
-  // $(this).attr('src', $(this).data("hover"));
-  // }).mouseout(function () {
-  // $(this).attr('src', $(this).data("src"));
-  // });
-  //
-  // //these call the HTML id's of my two image-container class img src objects and use the say function to make them say their own things
-  // $("#raffy").mouseenter(function() {
-  //  // say() is a function defined below
-  //    speakingParameters("blahblah");
-  // });
-  // $("#4chan").mouseenter(function() {
-  // // say() is a function defined below
-  //   speakingParameters("okay");
-  // });
+// // also note to self this stuff should become its own function?
+//   $(".image-container").mouseover(function () {
+//   $(this).attr('src', $(this).data("hover"));
+//   }).mouseout(function () {
+//   $(this).attr('src', $(this).data("src"));
+//   });
+//
+//   //these call the HTML id's of my two image-container class img src objects and use the say function to make them say their own things
+//   $("#raffy").mouseenter(function() {
+//    // say() is a function defined below
+//      speakingParameters("blahblah");
+//   });
+//   $("#4chan").mouseenter(function() {
+//   // say() is a function defined below
+//     speakingParameters("okay");
+//   });
   // // also note to self this stuff should become its own function? WOULD END HERE
 }
 
@@ -132,6 +132,27 @@ function perversionButtonPressed() {
 // https://stackoverflow.com/questions/34767900/jquery-replace-image-on-hover/34768036#34768036
   $("p").text(++countP);
   addDialog();
+  // also note to self this stuff should become its own function?
+
+  $democracy = $("#democracy");
+  //https://stackoverflow.com/questions/554273/changing-the-image-source-using-jquery
+  $("#democracy").attr('src','assets/images/democracynow.png');
+
+  var src = ("#democracy".attr('src') === 'assets/images/4chan.png')
+              ? 'assets/images/democracynow.png'
+              : 'assets/images/4chan.png';
+
+  $("#democracy").attr('src', src);
+
+    // //these call the HTML id's of my two image-container class img src objects and use the say function to make them say their own things
+    // $("#raffy").mouseenter(function() {
+    //  // say() is a function defined below
+    //    speakingParameters("blahblah");
+    // });
+    // $("#4chan").mouseenter(function() {
+    // // say() is a function defined below
+    //   speakingParameters("okay");
+    // });
 }
 
 //a function to deal with what happens when the user clicks this button
