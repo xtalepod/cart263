@@ -28,7 +28,7 @@ body {
    display: none;
  }
 
- /* * css properties related to the jQuery UI dialog boxes style */
+ /* css properties related to the jQuery UI dialog boxes style */
  .ui-dialog-titlebar {
    background-color: pink;
    background-image: none;
@@ -55,3 +55,4 @@ body {
  .ui-widget {
    font-family: inherit;
    font-size: 1em;
+ }

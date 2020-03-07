@@ -16,13 +16,6 @@ to match your project! Write JavaScript to do amazing things below!
 
 let voice = 'UK English Male';
 
-// The parameters for the voice in an object
-let voiceParameters = {
-  pitch: 0.6,
-  rate: 0.6,
-  volume: 1
-}
-
 let countP = 0;
 let countE = 0;
 //the jQuery object for the trapezoid element
