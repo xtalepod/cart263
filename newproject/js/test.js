@@ -3,7 +3,8 @@
 
 let voice = 'UK English Male';
 
-let countP;
+let countP = 0;
+let $counter;
 // let countE;
 
 let dialogBoxes = [
@@ -22,9 +23,11 @@ $(document).ready(setup);
 function setup() {
   console.log( $(".image-container"));
 
+$(document).on('click', addDialog);
 perversionButtonPressed();
 
-$(document).on('click', addDialog);
+$counter = $("#counter");
+
 // https://stackoverflow.com/questions/34767900/jquery-replace-image-on-hover/34768036#34768036
 //this calls the image container class from the HTML file and makes it so that each img src in that class changes (respectively) when the mouse hovers over
 //   $(".image-container").mouseover(function () {
@@ -50,7 +53,8 @@ function perversionButtonPressed() {
   // body.css("background-image", 'url("./assets/images/chkpattern.jpg")');
   // addDialog();
 // https://stackoverflow.com/questions/34767900/jquery-replace-image-on-hover/34768036#34768036
-  $("p").text(++countP);
+  $("#counter").text(++countP);
+  console.log(countP);
 
   //when i added this
 //   $(".image-container").mouseover(function () {
