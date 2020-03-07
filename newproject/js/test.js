@@ -1,23 +1,23 @@
 "use strict";
 
 let $raffy;
-let $fourchan;
-let $democracy;
 
 
 
 let $imageID
-let aImagesID = ["#democracy","#4chan", "#raffy", "#equity", "#chiefs","#riot","#stonewall"]
-let aImagesSRC = ['assets/images/democracynow.png', 'assets/images/4chan.png', 'assets/images/raffy.png', 'assets/images/payequity.png', 'assets/images/chiefs.jpg','assets/images/stonewall.jpg'];
+let aImagesID = ["#riot", "#chiefs", "#dom"]
+let aImagesSRC = ['assets/images/riotFerg.jpg', 'assets/images/chiefs.jpg', 'assets/images/dom.jpg'];
 
+let $equalImageID
+let equalImagesID = ["#wetsu","#stonewall", "#equity"]
+let equalImagesSRC = ['assets/images/wetsu.jpg', 'assets/images/stonewall.jpg', 'assets/images/payequity.png'];
 
 
 
 
 
 $(document).ready(setup);
-//
-//
+
 function setup() {
 
 
@@ -27,7 +27,7 @@ function setup() {
 
 
 //https://stackoverflow.com/questions/554273/changing-the-image-source-using-jquery
- $("#democracy").attr('src','assets/images/4chan.png');
+ $("#riot").attr('src','assets/images/riotFerg.jpg');
 
 //   $('#democracy').on({
 //     'click': function() {
@@ -54,6 +54,21 @@ let i = Math.floor(randomInRange(0, aImagesID.length));
 
 }
 
+
+
+function equalityButtonPressed() {
+
+// pick an image ID at random here random here
+ // let i = 0; // should be lesser than aImagesID length
+let i = Math.floor(randomInRange(0, equalImagesID.length));
+$equalImageID = $(equalImagesID[i]);
+ console.log($equalImageID);
+
+ // pick an image SOURCE at random here
+  let j = Math.floor(randomInRange(0, equalImagesID.length)); // should be lesser than aImagesSRC length
+  $equalImageID.attr('src',equalImagesSRC[j]);
+
+}
 // Returns a random number between min and max
 function randomInRange(min, max) {
   return min + (Math.random() * (max - min));
