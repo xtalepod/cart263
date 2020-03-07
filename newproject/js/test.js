@@ -17,6 +17,7 @@ let dialogBoxes = [
 ];
 
 let question;
+
 $(document).ready(setup);
 //
 //
@@ -53,7 +54,7 @@ function perversionButtonPressed() {
   // body.css("background-image", 'url("./assets/images/chkpattern.jpg")');
   // addDialog();
 // https://stackoverflow.com/questions/34767900/jquery-replace-image-on-hover/34768036#34768036
-  $("#counter").text(++countP);
+  $("#counter").text(countP++);
   console.log(countP);
 
   //when i added this
