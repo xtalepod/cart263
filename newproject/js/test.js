@@ -12,14 +12,17 @@ let $equalButton;
 
 //a variable to hold the jQuery imageID, an array to hold the image IDs, an array to hold the image src files
 let $imageID
-let aImagesID = ["#riot", "#chiefs", "#dom"]
-let aImagesSRC = ['assets/images/riotFerg.jpg', 'assets/images/chiefs.jpg', 'assets/images/dom.jpg'];
+// let aImagesID = ["#pic1", "#pic2", "#pic3", "#pic4", "#pic5", ""]
+let numOfImages = 6
+let imagesPath = 'assets/images/';
+let aPervImagesSRC = ['riotFerg.jpg', 'chiefs.jpg', 'dom.jpg', 'payequity.png'];
+let aEqualImagesSRC = ['wetsu.jpg', 'stonewall.jpg', 'payequity.png', 'tom3.png'];
+let aEqualSay = ["wetsuweten","stonewall", "pay equity", "tom hanks rocks"];
 
 //a variable to hold the jQuery imageID, an array to hold the image IDs, an array to hold the image src files
-let $equalImageID
-let aEqualImagesID = ["#wetsu","#stonewall", "#equity"]
-let aEqualImagesSRC = ['assets/images/wetsu.jpg', 'assets/images/stonewall.jpg', 'assets/images/payequity.png'];
-let aEqualSay = ["hello","goodbye", "hihi"];
+
+
+
 $(document).ready(setup);
 
 function setup() {
@@ -30,48 +33,56 @@ $equalButton = $('#equalButton');
 
 //this is a for loop to go through the images in the equality array using the identifications that we created
 //three pictures that three different things just need to have arrays that are in front of each other
-for (let i = 0; i < aEqualImagesID.length; i++){
-  $equalImageID = $(aEqualImagesID[i]);
-  $equalImageID.on({
-  'click': function() {
-    speakingParameters(aEqualSay[i]);
+for (let i = 0; i < numOfImages; i++){
 
-  }
+  $imageID = $("#pic"+ (i+1).toString()); // when i =0 ; i+1 = 1 ; then $imageID = $("#pic1")
+  //so we dont need to use an array like  aImagesID = ["#pic1", "#pic2"...]
+  //just need to change the numOfImages variable so it matches the number of pictures added in the HTML
+  $imageID.on({
+  'click': function() {
+    // console.log($(this).attr('src')) // this is the source of the picture having been clicked
+    for (let j = 0; j < aEqualImagesSRC.length; j++){ // go through all the equal pictures
+      if($(this).attr('src') === (imagesPath+aEqualImagesSRC[j])){ // is it matching the equal picture number j ?
+        speakingParameters(aEqualSay[j]); // if yes then say the equal text number j
+      }
+      // else do nothing
+    }//end for equal images
+    for (let j = 0; j < aPervImagesSRC.length; j++){ // go through all the perv pictures
+      if($(this).attr('src') === (imagesPath+aPervImagesSRC[j])){ // is it matching the perv picture number j ?
+        // speakingParameters(aPervSay[j]); // // if yes then say the perv text number j
+        console.log("you perv!")
+      }
+      //else do nothing
+    }//end for perv images
+
+    }
   });
 
-}
-// imageClicked();
-
-
-
-}
+}//end for imagesID
+}//end setup
 
 function perversionButtonPressed() {
 
-// pick an image ID at random here random here
- // let i = 0; // should be lesser than aImagesID length
-let i = Math.floor(randomInRange(0, aImagesID.length));
- $imageID = $(aImagesID[i]);
- console.log($imageID);
+  let i = Math.floor(randomInRange(0, numOfImages));
+  $imageID = $("#pic"+ (i+1).toString());
+   // console.log($imageID);
 
- // pick an image SOURCE at random here
-  let j = Math.floor(randomInRange(0, aImagesID.length)); // should be lesser than aImagesSRC length
-  $imageID.attr('src',aImagesSRC[j]);
+   // pick an image SOURCE at random here
+    let j = Math.floor(randomInRange(0, aPervImagesSRC.length)); // should be lesser than aImagesSRC length
+      $imageID.attr('src',imagesPath+aPervImagesSRC[j]);
     speakingParameters("but different");
 
 }
 
 function equalityButtonPressed() {
 
-// pick an image ID at random here random here
- // let i = 0; // should be lesser than aImagesID length
-let i = Math.floor(randomInRange(0, aEqualImagesID.length));
-$equalImageID = $(aEqualImagesID[i]);
- console.log($equalImageID);
+let i = Math.floor(randomInRange(0, numOfImages));
+$imageID = $("#pic"+ (i+1).toString());
+ // console.log($imageID);
 
  // pick an image SOURCE at random here
-  let j = Math.floor(randomInRange(0, aEqualImagesID.length)); // should be lesser than aImagesSRC length
-  $equalImageID.attr('src',aEqualImagesSRC[j]);
+  let j = Math.floor(randomInRange(0, aEqualImagesSRC.length)); // should be lesser than aImagesSRC length
+    $imageID.attr('src',imagesPath+aEqualImagesSRC[j]);
   speakingParameters("same same");
 
 }
@@ -80,15 +91,6 @@ function randomInRange(min, max) {
   return min + (Math.random() * (max - min));
 }
 
-
-// function imageClicked() {
-//
-//   if ($equalImageID.click() === true) {
-//     // choosePhrase();
-//     speakingParameters("testing");
-//   }
-//
-// }
 
 // function choosePhrase() {
 //
