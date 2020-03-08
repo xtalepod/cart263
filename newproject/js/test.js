@@ -1,10 +1,11 @@
 "use strict";
 
-let voice = 'UK English Male';
 
-let countP = 0;
-let countE = 0;
-let $counter;
+let aAudioSRC = ['hands.wav', 'excellentraffy.wav', 'verygood.wav'];
+
+
+/////everything below this line is from saturday night//////
+let voice = 'UK English Male';
 
 //a variable to hold each of the buttons
 let $pervButton;
@@ -12,7 +13,7 @@ let $equalButton;
 
 //a variable to hold the jQuery imageID
 let $imageID
-//a vraible that holds the value for how many images to display
+//a varible that holds the value for how many images to display
 let numOfImages = 9;
 //a variable used with both imageSRC arrays to shorten the image source codes through concantination later
 let imagesPath = 'assets/images/';
@@ -115,7 +116,6 @@ function perversionButtonPressed() {
   }
   //  body.css("background-image", 'url("./assets/images/democracynow.png")');
   // // https://stackoverflow.com/questions/34767900/jquery-replace-image-on-hover/34768036#34768036
-  //   $("p").text(++countP);
 }
 
 //W! : It seems clumbsy to go through all the pictures and collect their kinds whereas we could have filled a similar array everytime we attribute a new source
@@ -151,7 +151,6 @@ function equalityButtonPressed() {
    }
   // body.css("background-image", 'url("./assets/images/democracynow.png")');
 // https://stackoverflow.com/questions/34767900/jquery-replace-image-on-hover/34768036#34768036
-  // $("p").text(++countE);
 }
 // Returns a random number between min and max
 function randomInRange(min, max) {

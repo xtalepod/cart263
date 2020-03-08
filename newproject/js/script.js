@@ -34,16 +34,15 @@ let play;
 //internvals adapted from my digital tears
 let startInterval;
 
-let question;
-
-let dialogBoxes = [
-  "eros",
-  "i think theres something missing inside me",
-  "the state of being infatuated or obsessed with another person",
-  "typically experienced involuntarily and characterized by a strong desire for reciprocation",
-  "i am self assured",
-  "have you read the wiki page 'how to let go?'"
-];
+// let question;
+// let dialogBoxes = [
+//   "eros",
+//   "i think theres something missing inside me",
+//   "the state of being infatuated or obsessed with another person",
+//   "typically experienced involuntarily and characterized by a strong desire for reciprocation",
+//   "i am self assured",
+//   "have you read the wiki page 'how to let go?'"
+// ];
 
 
 $(document).ready(setup);
