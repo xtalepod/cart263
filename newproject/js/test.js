@@ -15,7 +15,7 @@ let $imageID
 // let aImagesID = ["#pic1", "#pic2", "#pic3", "#pic4", "#pic5", ""]
 let numOfImages = 9;
 let imagesPath = 'assets/images/';
-let pervKindID = 2;
+let pervKindID = 0;
 let aPervImagesSRC = ['greece.jpg', 'palestine.jpg', 'blacklivesmatter.jpg','2012demo.jpg', 'blockaid.jpg', 'hongkong.jpg'];
 let aPervSay = [
   "greek riot dog",
@@ -86,6 +86,14 @@ function setup() {
   } //end for imagesID
 } //end setup
 
+//checkImageKind function()
+//returns an array of two values:
+// - the first is the kind of the picture (either 0 (perv) or 1 (equal))
+//- and the second is the index of the picture in the corresping image Source array (either aPervImagesSRC or aEqualImagesSRC)
+//e.g. output = [0,3] means the picture found was the fourth in the aPervImageSRC array
+
+// W!: checkImageKind() should have a different name since it is not only checking for the picture king (as it was initially intended to)
+// but also checks the picture index (as it is needed for the audio output)
 
 function checkImageKind($imageID) {
   let output = [0, 0];
@@ -105,26 +113,36 @@ return output;
 }
 
 
+
+
 function perversionButtonPressed() {
 
   let i = Math.floor(randomInRange(0, numOfImages));
   $imageID = $("#pic" + (i + 1).toString());
   // console.log($imageID);
-
   // pick an image SOURCE at random here
   let j = Math.floor(randomInRange(0, aPervImagesSRC.length)); // should be lesser than aImagesSRC length
   $imageID.attr('src', imagesPath + aPervImagesSRC[j]);
   speakingParameters("but different");
 
-let aImageKind = [];
 
-  for (let k = 0; k < numOfImages; k++) {
-    $imageID = $("#pic" + (k + 1).toString());
-    let kind = checkImageKind($imageID); //now kind is an arrays
-    aImageKind.push(kind[0]);
+  let aKind = [];
+  for (let k = 0; k < numOfImages; k++) { //here we go through all the images and check their kind and its index value thanks to the checkImageKind function
+    //whichreturns an array of two values the first being the kind(either 0 or 1) and the second value of the array of the index
+  $imageID = $("#pic" + (k + 1).toString());
+  let kind = checkImageKind($imageID); //kind is an array of two values. the first value is the type (0 or 1 for perv or equal)
+  //and the second is the index of the image in the SRC array (aPervImagesSRC or aEqualImagesSRC)
+  //e.g. if kind = [0,4] it means the image found is the 5th image in the aPervImagesSRC array (because pervKindID = 0 = kind[0])
+  //e.g. if kind = [1, 0] it is the 1st image in the aEqualImagesSRC array (wetsu.jpg) since equalKindID = 1 = kind[0]
+  aKind.push(kind[0]);//appends the image kind (either 0 or 1) to the aKind array
   }
-  console.log(aImageKind);
+  // console.log(aKind);
+if( aKind.reduce((a, b) => a + b) === numOfImages*pervKindID){ // check if sum = 0
+  console.log("all pervs")
 }
+}
+
+//W! : It seems clumbsy to go through all the pictures and collect their kinds whereas we could have filled a similar array everytime we attribute a new source 
 
 function equalityButtonPressed() {
 
@@ -137,6 +155,17 @@ function equalityButtonPressed() {
   $imageID.attr('src', imagesPath + aEqualImagesSRC[j]);
   speakingParameters("this is what democracy looks like");
 
+  let aKind = [];
+    for (let k = 0; k < numOfImages; k++) {
+      $imageID = $("#pic" + (k + 1).toString());
+      let kind = checkImageKind($imageID); //now kind is an arrays
+    aKind.push(kind[0]);//append the array which
+    }
+    // console.log(aKind);
+    //https://stackoverflow.com/questions/1230233/how-to-find-the-sum-of-an-array-of-numbers
+  if( aKind.reduce((a, b) => a + b) === numOfImages*equalKindID){ // checks if sum = 9
+    console.log("all equals")
+  }
 }
 // Returns a random number between min and max
 function randomInRange(min, max) {
