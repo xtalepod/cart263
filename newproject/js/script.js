@@ -197,6 +197,7 @@ function addDialog() {
 function randomInRange(min, max) {
   return min + (Math.random() * (max - min));
 }
+
 function speakingParameters(text) {
     let randomPitch = Math.random();
     let randomVolume = Math.random();
