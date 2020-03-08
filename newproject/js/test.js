@@ -10,13 +10,18 @@ let $counter;
 let $pervButton;
 let $equalButton;
 
-//a variable to hold the jQuery imageID, an array to hold the image IDs, an array to hold the image src files
+//a variable to hold the jQuery imageID
 let $imageID
-// let aImagesID = ["#pic1", "#pic2", "#pic3", "#pic4", "#pic5", ""]
+//a vraible that holds the value for how many images to display
 let numOfImages = 9;
+//a variable used with both imageSRC arrays to shorten the image source codes through concantination later
 let imagesPath = 'assets/images/';
+
+//a variable to hold the value for perv image IDs
 let pervKindID = 0;
-let aPervImagesSRC = ['greece.jpg', 'palestine.jpg', 'blacklivesmatter.jpg','2012demo.jpg', 'blockaid.jpg', 'hongkong.jpg'];
+//an array to hold image src files abbreviated for each image within the perv kind. done those way to keep the code cleaner and relies on concantination later
+let aPervImagesSRC = ['greece.jpg', 'palestine.jpg', 'blacklivesmatter.jpg', '2012demo.jpg', 'blockaid.jpg', 'hongkong.jpg'];
+//an array of strings that are listed so that the values match the imageSRCs
 let aPervSay = [
   "greek riot dog",
   "women at the forefront of palestinian liberation",
@@ -25,8 +30,11 @@ let aPervSay = [
   "reconcilation is dead"
 ];
 
+//a variable to hold the value for equal image IDs
 let equalKindID = 1;
-let aEqualImagesSRC = ['wetsu.jpg', 'stonewall.jpg', 'riotFerg.jpg', '2012.jpg','haiti.jpg', 'kiev.jpg', 'haiti.jpg'];
+//an array to hold image src files, abbreviated for each image within the equal kind. done those way to keep the code cleaner and relies on concantination later
+let aEqualImagesSRC = ['wetsu.jpg', 'stonewall.jpg', 'riotFerg.jpg', '2012.jpg', 'kiev.jpg', 'haiti.jpg'];
+//an array of strings that are listed so that the values match the imageSRCs.
 let aEqualSay = [
   "Freda Huson being forceably removed from her traditional territories by the RCMP on behalf on oil and gas companies",
   "An NYPD officer grabs a youth by the hair as another officer clubs a young man during a confrontation Aug. 31, 197fter a Gay Power march in New York.",
@@ -36,14 +44,13 @@ let aEqualSay = [
 ];
 
 //a variable to hold the jQuery imageID, an array to hold the image IDs, an array to hold the image src files
-
-
-let aImagesKind = [0,0,0,0,0,1,1,1,1];
+let aImagesKind = [0, 0, 0, 0, 0, 1, 1, 1, 1];
 
 
 $(document).ready(setup);
 
-
+// function setup()
+//
 function setup() {
 
   $counter = $("#counter");
@@ -80,7 +87,14 @@ function setup() {
   } //end for imagesID
 } //end setup
 
-
+//function perversionButtonPressed()
+//this function controls what happens when the perversion button is pressed. it uses the random in range function to get random image
+//and then creates a jQuery element for the imageID through concantination and javascripts toString() method
+//then we pick an image SRC from the perv images array at random (following the same procedure)
+//then the aImagesKind array (which is holding the image IDs for pervs and equals) is made equal to pervKindID (0)
+//then an if statement with javascripts reduce() method + ((a, b) => a + b) === numOfImages * pervKindID) equation
+//is used to run through the array allowing us to know if ALL the pictures on the screen currently are from the pervKindID
+//if so say something, else say something else.
 function perversionButtonPressed() {
 
   let i = Math.floor(randomInRange(0, numOfImages));
@@ -89,18 +103,34 @@ function perversionButtonPressed() {
   // pick an image SOURCE at random here
   let j = Math.floor(randomInRange(0, aPervImagesSRC.length)); // should be lesser than aImagesSRC length
   $imageID.attr('src', imagesPath + aPervImagesSRC[j]);
-  speakingParameters("but different");
   aImagesKind[i] = pervKindID;
   console.log(aImagesKind);
-if( aImagesKind.reduce((a, b) => a + b) === numOfImages*pervKindID){ // check if sum = 0
-  console.log("all pervs")
-}
+  //https://stackoverflow.com/questions/1230233/how-to-find-the-sum-of-an-array-of-numbers
+  if (aImagesKind.reduce((a, b) => a + b) === numOfImages * pervKindID) { // check if sum = 9
+  speakingParameters("you're a pervert")
+    console.log("all pervs")
+  }
+  else {
+    speakingParameters("but different");
+  }
+  //  body.css("background-image", 'url("./assets/images/democracynow.png")');
+  // // https://stackoverflow.com/questions/34767900/jquery-replace-image-on-hover/34768036#34768036
+  //   $("p").text(++countP);
 }
 
 //W! : It seems clumbsy to go through all the pictures and collect their kinds whereas we could have filled a similar array everytime we attribute a new source
 
+// function equalityButtonPressed()
+//this function controls what happens when the equality button is pressed. it uses the random in range function to get random image
+//and then creates a jQuery element for the imageID through concantination and javascripts toString() method
+//then we pick an image SRC from the equal images array at random (following the same procedure)
+//then the aImagesKind array (which is holding the image IDs for pervs and equals) is made equal to equalKindID (1)
+//then an if statement with javascripts reduce() method + ((a, b) => a + b) === numOfImages * equalKindID) equation
+//is used to run through the array allowing us to know if ALL the pictures on the screen currently are from the equalKindID
+//if so say something, else say something else.
 function equalityButtonPressed() {
 
+//pick an image at random here
   let i = Math.floor(randomInRange(0, numOfImages));
   $imageID = $("#pic" + (i + 1).toString());
   // console.log($imageID);
@@ -108,13 +138,20 @@ function equalityButtonPressed() {
   // pick an image SOURCE at random here
   let j = Math.floor(randomInRange(0, aEqualImagesSRC.length)); // should be lesser than aImagesSRC length
   $imageID.attr('src', imagesPath + aEqualImagesSRC[j]);
-  speakingParameters("this is what democracy looks like");
-aImagesKind[i] = equalKindID;
-    console.log(aImagesKind);
-    //https://stackoverflow.com/questions/1230233/how-to-find-the-sum-of-an-array-of-numbers
-  if( aImagesKind.reduce((a, b) => a + b) === numOfImages*equalKindID){ // checks if sum = 9
+  // speakingParameters("this is what democracy looks like");
+  aImagesKind[i] = equalKindID;
+  console.log(aImagesKind);
+  //https://stackoverflow.com/questions/1230233/how-to-find-the-sum-of-an-array-of-numbers
+  if (aImagesKind.reduce((a, b) => a + b) === numOfImages * equalKindID) { // checks if sum = 9
     console.log("all equals")
+    speakingParameters("burn the state");
   }
+   else {
+     speakingParameters("same same");
+   }
+  // body.css("background-image", 'url("./assets/images/democracynow.png")');
+// https://stackoverflow.com/questions/34767900/jquery-replace-image-on-hover/34768036#34768036
+  // $("p").text(++countE);
 }
 // Returns a random number between min and max
 function randomInRange(min, max) {
