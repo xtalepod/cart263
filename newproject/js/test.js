@@ -1,24 +1,9 @@
 "use strict";
 
-
+let bodyl
 // let handsAudio = new Audio("assets/sounds/hands.wav");
 let excellentAudio = new Audio("assets/sounds/excellentraffy.wav");
 // let veryAudio = new Audio("assets/sounds/verynice.wav");
-// //
-//
-let $audioID;
-let numOfAudio = 3;
-// let audioPath = 'assets/sounds/';
-let audioKindID; //undefined for now
-// let aAudioSRC = ['hands.wav', 'excellentraffy.wav', 'verynice.wav'];
-// let aAudioSRC = [handsAudio, excellentAudio, veryAudio];
-// let aAudioSRC = [new Audio("assets/sounds/hands.wav"), new Audio("assets/sounds/excellentraffy.wav"), new Audio("assets/sounds/verynice.wav")];
-
-
-
-
-
-
 
 /////everything below this line is from saturday night//////
 let voice = 'UK English Male';
@@ -30,34 +15,34 @@ let voice = 'UK English Male';
 //a variable to hold the jQuery imageID
 let $imageID;
 //a varible that holds the value for how many images to display
-let numOfImages = 9;
+let numOfImages = 11;
 //a variable used with both imageSRC arrays to shorten the image source codes through concantination later
 let imagesPath = 'assets/images/';
 
 //a variable to hold the value for perv image IDs
 let pervKindID = 0;
 //an array to hold image src files abbreviated for each image within the perv kind. done those way to keep the code cleaner and relies on concantination later
-let aPervImagesSRC = ['greece.jpg', 'palestine.jpg', 'blacklivesmatter.jpg', '2012demo.jpg', 'blockaid.jpg', 'hongkong.jpg'];
+let aPervImagesSRC = ['greece.jpg', 'palestine.jpg', 'blacklivesmatter.jpg', '2012demo.jpg', 'blockaid.jpg'];
 //an array of strings that are listed so that the values match the imageSRCs
 let aPervSay = [
-  "greek riot dog",
-  "women at the forefront of palestinian liberation",
-  "black lives matter",
-  "charest woohoo",
-  "reconcilation is dead"
+  "Loukanikos was a street dog called the riot dog because he often joined protestors",
+  "Palestianian women have always been at the forefront of liberation from Israeli Apartheid",
+  "Black lives matter",
+  "Charest woohoo",
+  "Reconcilation is dead"
 ];
 
 //a variable to hold the value for equal image IDs
 let equalKindID = 1;
 //an array to hold image src files, abbreviated for each image within the equal kind. done those way to keep the code cleaner and relies on concantination later
-let aEqualImagesSRC = ['wetsu.jpg', 'stonewall.jpg', 'riotFerg.jpg', '2012.jpg', 'kiev.jpg', 'haiti.jpg'];
+let aEqualImagesSRC = ['wetsu.jpg', 'stonewall.jpg', 'riotFerg.jpg', '2012.jpg', 'haiti.jpg'];
 //an array of strings that are listed so that the values match the imageSRCs.
 let aEqualSay = [
-  "Freda Huson being forceably removed from her traditional territories by the RCMP on behalf on oil and gas companies",
-  "An NYPD officer grabs a youth by the hair as another officer clubs a young man during a confrontation Aug. 31, 197fter a Gay Power march in New York.",
+  "Freda Huson being forceably removed from her traditional territories by the RCMP on behalf on oil and gas companies.",
+  "An NYPD officer grabs a youth by the hair as another officer clubs a young man during a confrontation at Stonewall.",
   "it took less than 90seconds between encountering Micheal Brown for Officer Willson to shoot him six times. Brown was unarmed and had just graduated from high school.",
-  "SPVM fire close range during the 2012 student uprising for free education and the fight against auterity",
-  "haiti"
+  "SPVM shoot close range during the 2012 student uprising against auterity.",
+  "Haiti overthrew French colonizers in the 1800s. The French made the country pay the modern equivalent of 21 billion dollars in reparations. "
 ];
 
 //a variable to hold the jQuery imageID, an array to hold the image IDs, an array to hold the image src files
@@ -69,13 +54,13 @@ $(document).ready(setup);
 // function setup()
 //
 function setup() {
-
-  $(document).on('click', audioButtonPressed);
-
   // $counter = $("#counter");
   // $pervButton = $('#pervButton');
   // $equalButton = $('#equalButton');
 
+
+body = $('body');
+  body.css("background-image", 'url("./assets/images/chkpattern.jpg")')
   ////////everything below here is from saturday////////////////
 
   //this is a for loop to go through the images in the equality array using the identifications that we created
@@ -111,25 +96,7 @@ function setup() {
 
 
 function audioButtonPressed() {
-
-  // excellentAudio = $('#excellentAudio');
   excellentAudio.play();
-  // // pick an image at random here
-  // let n = Math.floor(randomInRange(0, numOfAudio));
-  // $audioID = $('#audioID');
-  // // $audioID = aAudioSRC;
-  // // $audioID = $("#audio" + (n).toString());
-  // console.log($audioID);
-  //
-  // // pick an image SOURCE at random here
-  // let m = Math.floor(randomInRange(0, aAudioSRC.length)); // should be lesser than aImagesSRC length
-  // $audioID.attr(aAudioSRC[m]);
-  // // aImagesKind[i] = equalKindID;
-  // // console.log(aImagesKind);
-  //
-  // $audioID.loop = true;
-  // $audioID.play();
-
 }
 
 ///everything below here is from saturday/////
