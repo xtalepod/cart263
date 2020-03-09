@@ -1,18 +1,34 @@
 "use strict";
 
 
-let aAudioSRC = ['hands.wav', 'excellentraffy.wav', 'verygood.wav'];
+// let handsAudio = new Audio("assets/sounds/hands.wav");
+let excellentAudio = new Audio("assets/sounds/excellentraffy.wav");
+// let veryAudio = new Audio("assets/sounds/verynice.wav");
+// //
+//
+let $audioID;
+let numOfAudio = 3;
+// let audioPath = 'assets/sounds/';
+let audioKindID; //undefined for now
+// let aAudioSRC = ['hands.wav', 'excellentraffy.wav', 'verynice.wav'];
+// let aAudioSRC = [handsAudio, excellentAudio, veryAudio];
+// let aAudioSRC = [new Audio("assets/sounds/hands.wav"), new Audio("assets/sounds/excellentraffy.wav"), new Audio("assets/sounds/verynice.wav")];
+
+
+
+
+
 
 
 /////everything below this line is from saturday night//////
 let voice = 'UK English Male';
 
 //a variable to hold each of the buttons
-let $pervButton;
-let $equalButton;
+// let $pervButton;
+// let $equalButton;
 
 //a variable to hold the jQuery imageID
-let $imageID
+let $imageID;
 //a varible that holds the value for how many images to display
 let numOfImages = 9;
 //a variable used with both imageSRC arrays to shorten the image source codes through concantination later
@@ -54,9 +70,13 @@ $(document).ready(setup);
 //
 function setup() {
 
-  $counter = $("#counter");
-  $pervButton = $('#pervButton');
-  $equalButton = $('#equalButton');
+  $(document).on('click', audioButtonPressed);
+
+  // $counter = $("#counter");
+  // $pervButton = $('#pervButton');
+  // $equalButton = $('#equalButton');
+
+  ////////everything below here is from saturday////////////////
 
   //this is a for loop to go through the images in the equality array using the identifications that we created
   //three pictures that three different things just need to have arrays that are in front of each other
@@ -88,6 +108,32 @@ function setup() {
   } //end for imagesID
 } //end setup
 
+
+
+function audioButtonPressed() {
+
+  // excellentAudio = $('#excellentAudio');
+  excellentAudio.play();
+  // // pick an image at random here
+  // let n = Math.floor(randomInRange(0, numOfAudio));
+  // $audioID = $('#audioID');
+  // // $audioID = aAudioSRC;
+  // // $audioID = $("#audio" + (n).toString());
+  // console.log($audioID);
+  //
+  // // pick an image SOURCE at random here
+  // let m = Math.floor(randomInRange(0, aAudioSRC.length)); // should be lesser than aImagesSRC length
+  // $audioID.attr(aAudioSRC[m]);
+  // // aImagesKind[i] = equalKindID;
+  // // console.log(aImagesKind);
+  //
+  // $audioID.loop = true;
+  // $audioID.play();
+
+}
+
+///everything below here is from saturday/////
+
 //function perversionButtonPressed()
 //this function controls what happens when the perversion button is pressed. it uses the random in range function to get random image
 //and then creates a jQuery element for the imageID through concantination and javascripts toString() method
@@ -108,10 +154,9 @@ function perversionButtonPressed() {
   console.log(aImagesKind);
   //https://stackoverflow.com/questions/1230233/how-to-find-the-sum-of-an-array-of-numbers
   if (aImagesKind.reduce((a, b) => a + b) === numOfImages * pervKindID) { // check if sum = 9
-  speakingParameters("you're a pervert")
+    speakingParameters("you're a pervert")
     console.log("all pervs")
-  }
-  else {
+  } else {
     speakingParameters("but different");
   }
   //  body.css("background-image", 'url("./assets/images/democracynow.png")');
@@ -130,7 +175,7 @@ function perversionButtonPressed() {
 //if so say something, else say something else.
 function equalityButtonPressed() {
 
-//pick an image at random here
+  //pick an image at random here
   let i = Math.floor(randomInRange(0, numOfImages));
   $imageID = $("#pic" + (i + 1).toString());
   // console.log($imageID);
@@ -145,12 +190,11 @@ function equalityButtonPressed() {
   if (aImagesKind.reduce((a, b) => a + b) === numOfImages * equalKindID) { // checks if sum = 9
     console.log("all equals")
     speakingParameters("burn the state");
+  } else {
+    speakingParameters("same same");
   }
-   else {
-     speakingParameters("same same");
-   }
   // body.css("background-image", 'url("./assets/images/democracynow.png")');
-// https://stackoverflow.com/questions/34767900/jquery-replace-image-on-hover/34768036#34768036
+  // https://stackoverflow.com/questions/34767900/jquery-replace-image-on-hover/34768036#34768036
 }
 // Returns a random number between min and max
 function randomInRange(min, max) {
