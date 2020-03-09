@@ -14,13 +14,26 @@ c.fill the play card full of perverted images or equality imagesto hear a secret
 d.if you get sad hit the raffy button.
 
 https://static1.squarespace.com/static/5bbd85f3809d8e6a1a3c5c9e/t/5bdc1e61032be468ca7594b6/1541152364319/2016-Racial-Fictions-Biological-Facts.pdf
+https://www.youtube.com/watch?v=XgD8kEqFg0A
 
 *********************************************************************/
 
 
 // let handsAudio = new Audio("assets/sounds/hands.wav");
-let excellentAudio = new Audio("assets/sounds/excellentraffy.wav");
+// let excellentAudio = new Audio("assets/sounds/excellentraffy.wav");
 // let veryAudio = new Audio("assets/sounds/verynice.wav");
+
+let $audioID;
+let numOfAudio = 3;
+let audioPath = 'assets/sounds/';
+// let audioKindID; //undefined for now
+let aAudioObject = ['hands.wav', 'excellentraffy.wav', 'verynice.wav'];
+// let aAudioSRC = [handsAudio, excellentAudio, veryAudio];
+// let aAudioSRC = [new Audio("assets/sounds/hands.wav"), new Audio("assets/sounds/excellentraffy.wav"), new Audio("assets/sounds/verynice.wav")];
+
+
+
+////everything below from saturday
 
 let voice = 'UK English Male';
 //a variable to hold the jQuery imageID
@@ -99,8 +112,22 @@ function setup() {
 
 function audioButtonPressed() {
 
-   excellentAudio.play();
-  console.log(audioButtonPressed());
+  // excellentAudio.play();
+
+  // // pick an image at random here
+  let n = Math.floor(randomInRange(0, numOfAudio));
+  $audioID = $("#audio" + (n + 1).toString());
+  // console.log($audioID);
+  //
+  // // pick an image SOURCE at random here
+  let m = Math.floor(randomInRange(0, aAudioObject.length)); // should be lesser than aImagesSRC length
+  $audioID.attr('src', audioPath + aAudioObject[m]);
+  // // aImagesKind[i] = equalKindID;
+  // // console.log(aImagesKind);
+  //
+  // $audioID.loop = true;
+  $audioID.play();
+
 
 }
 
@@ -124,7 +151,7 @@ function perversionButtonPressed() {
   console.log(aImagesKind);
   //https://stackoverflow.com/questions/1230233/how-to-find-the-sum-of-an-array-of-numbers
   if (aImagesKind.reduce((a, b) => a + b) === numOfImages * pervKindID) { // check if sum = 9
-    speakingParameters("you're a pervert")
+    speakingParameters("its good to be perverted")
     console.log("all pervs")
   } else {
     speakingParameters("but different");
@@ -156,7 +183,7 @@ function equalityButtonPressed() {
   //https://stackoverflow.com/questions/1230233/how-to-find-the-sum-of-an-array-of-numbers
   if (aImagesKind.reduce((a, b) => a + b) === numOfImages * equalKindID) { // checks if sum = 9
     console.log("all equals")
-    speakingParameters("burn the state");
+    speakingParameters("this is what democracy looks like");
   } else {
     speakingParameters("same same");
   }
