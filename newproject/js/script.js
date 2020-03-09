@@ -1,233 +1,184 @@
 "use strict";
 
+
+
 /********************************************************************
 
-Title of Project
-Author Name
+COPING mechanisms
+by Christale Terris
 
-This is a template. Fill in the title, author, and this description
-to match your project! Write JavaScript to do amazing things below!
+a simple exploration in
+a.to play this game press perversion or equality, these will show you pictures of the world we live in.
+b.click on pictures to learn something about the world we live in.
+c.fill the play card full of perverted images or equality imagesto hear a secret.
+d.if you get sad hit the raffy button.
+
+https://static1.squarespace.com/static/5bbd85f3809d8e6a1a3c5c9e/t/5bdc1e61032be468ca7594b6/1541152364319/2016-Racial-Fictions-Biological-Facts.pdf
 
 *********************************************************************/
 
-//load sound effects
-// let dollySFX = new Audio("assets/sounds/dollyparton.wav");
-// let icqSFX = new Audio("assets/sounds/icq.mp3");
+
+// let handsAudio = new Audio("assets/sounds/hands.wav");
+let excellentAudio = new Audio("assets/sounds/excellentraffy.wav");
+// let veryAudio = new Audio("assets/sounds/verynice.wav");
 
 let voice = 'UK English Male';
+//a variable to hold the jQuery imageID
+let $imageID;
+//a varible that holds the value for how many images to display
+let numOfImages = 11;
+//a variable used with both imageSRC arrays to shorten the image source codes through concantination later
+let imagesPath = 'assets/images/';
 
-let countP = 0;
-let countE = 0;
-let $counter;
-//the jQuery object for the squaresezoid element
-let $squares;
-let $button;
-let $pervButton;
-let $equalButton;
-//the array for the trapezoids
-let squares = [];
-//html elements adapted from my digital tears
-let body;
-let firstForm;
-let start;
-let play;
-//internvals adapted from my digital tears
-let startInterval;
+//a variable to hold the value for perv image IDs
+let pervKindID = 0;
+//an array to hold image src files abbreviated for each image within the perv kind. done those way to keep the code cleaner and relies on concantination later
+let aPervImagesSRC = ['greece.jpg', 'palestine.jpg', 'blacklivesmatter.jpg', '2012demo.jpg', 'blockaid.jpg'];
+//an array of strings that are listed so that the values match the imageSRCs
+let aPervSay = [
+  "Loukanikos was called the riot greek dog because he often joined protestors",
+  "Palestianian women have always been at the forefront of liberation from Israeli Apartheid",
+  "Black lives matter",
+  "Charest woohoo",
+  "Reconcilation is dead"
+];
 
-// let question;
-// let dialogBoxes = [
-//   "eros",
-//   "i think theres something missing inside me",
-//   "the state of being infatuated or obsessed with another person",
-//   "typically experienced involuntarily and characterized by a strong desire for reciprocation",
-//   "i am self assured",
-//   "have you read the wiki page 'how to let go?'"
-// ];
+//a variable to hold the value for equal image IDs
+let equalKindID = 1;
+//an array to hold image src files, abbreviated for each image within the equal kind. done those way to keep the code cleaner and relies on concantination later
+let aEqualImagesSRC = ['wetsu.jpg', 'stonewall.jpg', 'riotFerg.jpg', '2012.jpg', 'haiti.jpg'];
+//an array of strings that are listed so that the values match the imageSRCs.
+let aEqualSay = [
+  "Freda Huson being forceably removed from her traditional territories by the RCMP on behalf on oil and gas companies.",
+  "An NYPD officer grabs a youth by the hair as another officer clubs a young man during a confrontation at Stonewall.",
+  "it took less than 90seconds between encountering Micheal Brown for Officer Willson to shoot him six times. Brown was unarmed and had just graduated from high school.",
+  "SPVM shoot close range during the 2012 student uprising against auterity.",
+  "Haiti overthrew French colonizers in the 1800s. The French made the country pay the modern equivalent of 21 billion dollars in reparations. "
+];
+
+//a variable to hold the jQuery imageID, an array to hold the image IDs, an array to hold the image src files
+let aImagesKind = [0, 0, 0, 0, 0, 1, 1, 1, 1];
 
 
 $(document).ready(setup);
 
-
+// function setup()
+//
 function setup() {
-  // $(document).one('mousedown', playMusic);
 
-  $squares = $('#container');
-  $button = $('button');
-  $pervButton = $('#pervButton');
-  $equalButton = $('#equalButton');
-  $counter = $("#counter");
-  //adapted from my digital tears
-  start = $(".start");
-  play = $(".play");
-  firstForm = $(".firstForm");
-  body = $("body");
+  // $(document).on('click', audioButtonPressed);
+  //this is a for loop to go through the images in the equality array using the identifications that we created
+  //three pictures that three different things just need to have arrays that are in front of each other
+  for (let i = 0; i < numOfImages; i++) {
 
-  play.hide();
-  $squares.hide();
-  //this is calling the html start div
-   start.on('click',function () {
-    // speakingParameters() is a function defined below
-      speakingParameters("In this moment of social crisis, where even the most basic assertion that black lives matter is contested, we are drowning in “the facts” of inequality and injustice. Whether it is a new study on criminal justice disparities or another video of police brutality, demanding empirical evidence of systematic wrongdoing can have a kind of perverse quality—as if subjugated people must petition again and again for admission into the category of “human,” for which empathy is rationed andapplications are routinely denied. Ruha Benjamin");
-  });
-  //
-  for (let i = 0; i < 5 ; i++) {
-    let x = Math.floor(Math.random() * 1000);
-    let y = Math.floor(Math.random() * 500 + 100);
-    squares.push(new Squares(x, y, 20, '#f62681', 20, 5));
-    }
-    requestAnimationFrame(animationLoop);
+    $imageID = $("#pic" + (i + 1).toString()); // when i =0 ; i+1 = 1 ; then $imageID = $("#pic1")
+    //so we dont need to use an array like  aImagesID = ["#pic1", "#pic2"...]
+    //just need to change the numOfImages variable so it matches the number of pictures added in the HTML
+    $imageID.on({
+      'click': function() {
 
-      // interval to make a flashy random color background from my digital tears
-  startInterval = setInterval(backgroundFlash, 100);
+        console.log($(this).attr('src')) // this is the source of the picture having been clicked
+        for (let j = 0; j < aEqualImagesSRC.length; j++) { // go through all the equal pictures
+          if ($(this).attr('src') === (imagesPath + aEqualImagesSRC[j])) { // is it matching the equal picture number j ?
+            speakingParameters(aEqualSay[j]); // if yes then say the equal text number j
+          }
+          // else do nothing
+        } //end for equal images
+        for (let j = 0; j < aPervImagesSRC.length; j++) { // go through all the perv pictures
+          if ($(this).attr('src') === (imagesPath + aPervImagesSRC[j])) { // is it matching the perv picture number j ?
+            speakingParameters(aPervSay[j]); // // if yes then say the perv text number j
+          }
+          //else do nothing
+        } //end for perv images
 
-  }
+      }
+    });
 
+  } //end for imagesID
+} //end setup
 
-// random color background from my digital tears
-// function backgroundFlash() {
-//   let r = Math.random()*255;
-//   let g = Math.random()*0;
-//   let b = Math.random()*199;
-//   body.css("background-color", `rgb(${r},${g},${b})`)
-// }
+function audioButtonPressed() {
 
-function startButtonPressed() {
-  // clear the flashy background interval
-  clearInterval(startInterval);
-  //show the play div
-  play.show();
-  $squares.show();
-  //hide the start div
-  start.hide();
-  // hide the div from the start
-  start.css("display", "none");
-  // sets the background to the vaporwave picture
-  body.css("background-image", 'url("./assets/images/chkpattern.jpg")');
+   excellentAudio.play();
+  console.log(audioButtonPressed());
+
 }
 
-//a function to deal with what happens when the user clicks this button
+//function perversionButtonPressed()
+//this function controls what happens when the perversion button is pressed. it uses the random in range function to get random image
+//and then creates a jQuery element for the imageID through concantination and javascripts toString() method
+//then we pick an image SRC from the perv images array at random (following the same procedure)
+//then the aImagesKind array (which is holding the image IDs for pervs and equals) is made equal to pervKindID (0)
+//then an if statement with javascripts reduce() method + ((a, b) => a + b) === numOfImages * pervKindID) equation
+//is used to run through the array allowing us to know if ALL the pictures on the screen currently are from the pervKindID
+//if so say something, else say something else.
 function perversionButtonPressed() {
-  body.css("background-image", 'url("./assets/images/chkpattern.jpg")');
-// https://stackoverflow.com/questions/34767900/jquery-replace-image-on-hover/34768036#34768036
-  $("p").text(++countP);
-  addDialog();
-  // also note to self this stuff should become its own function?
 
-  $democracy = $("#democracy");
-  //https://stackoverflow.com/questions/554273/changing-the-image-source-using-jquery
-  $("#democracy").attr('src','assets/images/democracynow.png');
-
-  var src = ("#democracy".attr('src') === 'assets/images/4chan.png')
-              ? 'assets/images/democracynow.png'
-              : 'assets/images/4chan.png';
-
-  $("#democracy").attr('src', src);
-
-    // //these call the HTML id's of my two image-container class img src objects and use the say function to make them say their own things
-    // $("#raffy").mouseenter(function() {
-    //  // say() is a function defined below
-    //    speakingParameters("blahblah");
-    // });
-    // $("#4chan").mouseenter(function() {
-    // // say() is a function defined below
-    //   speakingParameters("okay");
-    // });
-}
-
-//a function to deal with what happens when the user clicks this button
-function equalityButtonPressed() {
-  body.css("background-image", 'url("./assets/images/democracynow.png")');
-// https://stackoverflow.com/questions/34767900/jquery-replace-image-on-hover/34768036#34768036
-  $("p").text(++countP);
-}
-//this function makes it so that the squaresazoids do everything they're meant to do
-function animationLoop() {
-  for (let i = 0; i < squares.length; i ++) {
-    squares[i].update();
-    squares[i].checkBoundaries();
-    squares[i].changeColor();
-    // $('.scoreClass').text(score);
-    // if (squares[i].x < 500) {
-    //   score += 1;
-      // console.log(score);
-    }
-      requestAnimationFrame(animationLoop);
+  let i = Math.floor(randomInRange(0, numOfImages));
+  $imageID = $("#pic" + (i + 1).toString());
+  // console.log($imageID);
+  // pick an image SOURCE at random here
+  let j = Math.floor(randomInRange(0, aPervImagesSRC.length)); // should be lesser than aImagesSRC length
+  $imageID.attr('src', imagesPath + aPervImagesSRC[j]);
+  aImagesKind[i] = pervKindID;
+  console.log(aImagesKind);
+  //https://stackoverflow.com/questions/1230233/how-to-find-the-sum-of-an-array-of-numbers
+  if (aImagesKind.reduce((a, b) => a + b) === numOfImages * pervKindID) { // check if sum = 9
+    speakingParameters("you're a pervert")
+    console.log("all pervs")
+  } else {
+    speakingParameters("but different");
   }
-
-// function say(text) {
-//   responsiveVoice.speak(text, voice, voiceParameters);
-// }
-
-
-function addDialog() {
-  // Dynamically create a div and store it in a variable. This is the div
-  // we will turn into a dialog box. Set its title at the same time.
-  let $dialog = $(`<div></div>`).attr(`title`, `spiral`);
-  $dialog.hide();
-  // Choose a random question text from the array
-  question = dialogBoxes[Math.floor(randomInRange(0, dialogBoxes.length))];
-  // Add a p tag to the dialog div that contains the question text
-  $dialog.append(`<p>${question}</p>`);
-  // Finally, add the div to the page
-  $('body').append($dialog);
-
-  // Now we have our div on the page, transform it into a dialog with jQuery UI's
-  // .dialog() method, supplying a number of options to configure it
-  $dialog.dialog({
-    //from endless dialog
-    // buttons: {
-    //   "ask me again": function() {
-    //       addDialog();
-    //   },
-    // },
-    // The 'containment' option lets us specify where the dialog can go on the screen. 'body' means it will be
-    // contained within the body tag, and can't be dragged out of it.
-    containment: 'body'
-  });
-
-  // Finally, use .offset() on the .parent() of the dialog in order to give it a random position on the screen.
-  // Uses .height() and .width() to get the dimensions of elements, including the window.
-  $dialog.parent().offset({
-    top: Math.random() * ($(window).height() - $dialog.parent().height()),
-    left: Math.random() * ($(window).width() - $dialog.parent().width())
-  });
+  console.log(perversionButtonPressed)
 }
-// Returns a random number between min and max
+
+// function equalityButtonPressed()
+//this function controls what happens when the equality button is pressed. it uses the random in range function to get random image
+//and then creates a jQuery element for the imageID through concantination and javascripts toString() method
+//then we pick an image SRC from the equal images array at random (following the same procedure)
+//then the aImagesKind array (which is holding the image IDs for pervs and equals) is made equal to equalKindID (1)
+//then an if statement with javascripts reduce() method + ((a, b) => a + b) === numOfImages * equalKindID) equation
+//is used to run through the array allowing us to know if ALL the pictures on the screen currently are from the equalKindID
+//if so say something, else say something else.
+function equalityButtonPressed() {
+
+  //pick an image at random here
+  let i = Math.floor(randomInRange(0, numOfImages));
+  $imageID = $("#pic" + (i + 1).toString());
+  // console.log($imageID);
+
+  // pick an image SOURCE at random here
+  let j = Math.floor(randomInRange(0, aEqualImagesSRC.length)); // should be lesser than aImagesSRC length
+  $imageID.attr('src', imagesPath + aEqualImagesSRC[j]);
+  // speakingParameters("this is what democracy looks like");
+  aImagesKind[i] = equalKindID;
+  console.log(aImagesKind);
+  //https://stackoverflow.com/questions/1230233/how-to-find-the-sum-of-an-array-of-numbers
+  if (aImagesKind.reduce((a, b) => a + b) === numOfImages * equalKindID) { // checks if sum = 9
+    console.log("all equals")
+    speakingParameters("burn the state");
+  } else {
+    speakingParameters("same same");
+  }
+}
+// function randomInRange();
+// Returns a random number between min and max (from class)
 function randomInRange(min, max) {
   return min + (Math.random() * (max - min));
 }
 
+//// function speakingParameters();
+//adapted from examples in class
+//declares variables with random values that are plugged into Responsive Voices parameters
 function speakingParameters(text) {
-    let randomPitch = Math.random();
-    let randomVolume = Math.random();
-    let randomRate = Math.random();
+  let randomPitch = Math.random();
+  let randomVolume = Math.random();
+  let randomRate = Math.random();
 
-  let voiceParameters  = {
-     pitch: randomPitch,
-     rate: randomRate,
-     volume: 5
-   };
-
+  let voiceParameters = {
+    pitch: randomPitch,
+    rate: randomRate,
+    volume: 5
+  };
   responsiveVoice.speak(text, voice, voiceParameters);
 }
-
-// function say
-function squaresActions() {
-
-  for (let i = 0; i < squares.length; i++) {
-    $squares.hide()
-      .fadeIn(300)
-      .mouseenter(function() {
-        $("p").first().text("mouse enter");
-        // $("p").last().text(++count);
-        speakingParameters("ahhhh");
-      });
-  }
-}
-
-
-//stone wall quote for image
-
-// An NYPD officer grabs a youth by the hair as another officer clubs a young man during a confrontation Aug. 31, 1970, in Greenwich Village after a Gay Power march in New York. The long history of police violence against LGBTQ communities - stretching back to Stonewall and beyond - has many opposing the inclusion of police in Pride events.
-//https://en.wikipedia.org/wiki/Shooting_of_Michael_Brown
-//Brown was unarmed and died on the street.[35][38] Less than 90 seconds passed from the time Wilson encountered Brown to the time of Brown's death.[39][40]
