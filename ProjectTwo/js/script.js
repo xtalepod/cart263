@@ -27,9 +27,9 @@ let $audioID;
 let numOfAudio = 3;
 let audioPath = 'assets/sounds/';
 // let audioKindID; //undefined for now
-let aAudioObject = ['hands.wav', 'excellentraffy.wav', 'verynice.wav'];
-// let aAudioSRC = [handsAudio, excellentAudio, veryAudio];
-// let aAudioSRC = [new Audio("assets/sounds/hands.wav"), new Audio("assets/sounds/excellentraffy.wav"), new Audio("assets/sounds/verynice.wav")];
+let aAudioSRC = ['hands.wav', 'excellentraffy.wav', 'verynice.wav'];
+// let aAudioObject= [handsAudio, excellentAudio, veryAudio];
+// let aAudioObject = [new Audio("assets/sounds/hands.wav"), new Audio("assets/sounds/excellentraffy.wav"), new Audio("assets/sounds/verynice.wav")];
 
 
 
@@ -91,6 +91,7 @@ function setup() {
       'click': function() {
 
         console.log($(this).attr('src')) // this is the source of the picture having been clicked
+        //designed with Qynn's help
         for (let j = 0; j < aEqualImagesSRC.length; j++) { // go through all the equal pictures
           if ($(this).attr('src') === (imagesPath + aEqualImagesSRC[j])) { // is it matching the equal picture number j ?
             speakingParameters(aEqualSay[j]); // if yes then say the equal text number j
@@ -111,21 +112,16 @@ function setup() {
 } //end setup
 
 function audioButtonPressed() {
-
   // excellentAudio.play();
-
   // // pick an image at random here
   let n = Math.floor(randomInRange(0, numOfAudio));
   $audioID = $("#audio" + (n + 1).toString());
   // console.log($audioID);
-  //
   // // pick an image SOURCE at random here
-  let m = Math.floor(randomInRange(0, aAudioObject.length)); // should be lesser than aImagesSRC length
-  $audioID.attr('src', audioPath + aAudioObject[m]);
+  let m = Math.floor(randomInRange(0, aAudioSRC.length)); // should be lesser than aImagesSRC length
+  $audioID.attr('src', audioPath + aAudioSRC[m]);
   // // aImagesKind[i] = equalKindID;
-  // // console.log(aImagesKind);
-  //
-  // $audioID.loop = true;
+  // // console.log(aImagesKind)
   $audioID.play();
 
 
@@ -139,6 +135,7 @@ function audioButtonPressed() {
 //then an if statement with javascripts reduce() method + ((a, b) => a + b) === numOfImages * pervKindID) equation
 //is used to run through the array allowing us to know if ALL the pictures on the screen currently are from the pervKindID
 //if so say something, else say something else.
+//designed with Qynn's help
 function perversionButtonPressed() {
 
   let i = Math.floor(randomInRange(0, numOfImages));
@@ -167,6 +164,7 @@ function perversionButtonPressed() {
 //then an if statement with javascripts reduce() method + ((a, b) => a + b) === numOfImages * equalKindID) equation
 //is used to run through the array allowing us to know if ALL the pictures on the screen currently are from the equalKindID
 //if so say something, else say something else.
+//designed with Qynn's help
 function equalityButtonPressed() {
 
   //pick an image at random here
