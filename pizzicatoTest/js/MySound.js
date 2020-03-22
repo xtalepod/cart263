@@ -1,7 +1,16 @@
 class MySound extends Pizzicato.Sound {
-  constructor(dic, mood) {
-    super(dic);
-    this.mood = mood;
+  constructor(name, mood, duration) {
+    super({
+      source: 'file',
+      options: {
+        path: 'assets/sounds/'+ name +'.wav',
+        loop: true
+      }
+      });
+      this.mood = mood;
+      this.name = name;
+      this.duration = duration;
+
   }
 
   showMood() {
