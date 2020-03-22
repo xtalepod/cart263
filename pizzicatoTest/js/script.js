@@ -10,7 +10,6 @@ to match your project! Write JavaScript to do amazing things below!
 
 *********************************************************************/
 
-
 // The minimum frequency to use when playing a tone
 const BASE_FREQUENCY = 110;
 // An array of all the elements on the page
@@ -19,7 +18,7 @@ let elementsArray = [];
 let currentElement = 0;
 // A string containing the names of elements we want to ignore in our
 // composition (because they're often really huge and boring)
-let ignoreList = "html script link head meta title body"
+// let ignoreList = "html script link head meta title body"
 // The Pizzicato tone (synth) we'll use to play each note
 let tone;
 
@@ -75,7 +74,7 @@ function playElement () {
 
   // Frequency of the note is based on x position
   // Seems to need some base value to sound right
-  let note = x + BASE_FREQUENCY;
+  let note = y + BASE_FREQUENCY;
 
   // Set the properties on the synth
   // Need ms() to translate millis into samples
@@ -98,9 +97,9 @@ function playElement () {
   // Highlight the current element with a CSS class so we see which one it is
   // We're using jQuery UI so we can animate this transition
   // Use the attack and release times to time the animation to the music.
-  $(element).addClass('playing',attack*1000,'swing',function () {
+  $(element).addClass('playing',attack*10,'swing',function () {
     // Remove the class after it has animated on
-    $(this).removeClass('playing',release*1000,'swing',function () {
+    $(this).removeClass('playing',release*10,'swing',function () {
       tone.stop();
       playElement();
     });
@@ -128,3 +127,25 @@ function playElement () {
 //   let delayEffect = new Pizzicato.Effects.Delay();
 //   sineWave.addEffect(delay);
 // }
+
+// //
+//
+// //time for one note to play
+// const NOTE_TEMPO = 200;
+// //time for one beat
+// const DRUM_TEMPO = 300;
+// const ATTACK;
+// const RELEASE;
+//
+// let wordSynth;
+// //my hypothetical sound files
+// let wordOne;
+// let wordTwo;
+// let wordThree;
+// //using class example for now
+// let frequencies = [
+//   220, 246.94, 277.18, 293.66, 329.63, 369.99, 415.30
+// ];
+//
+// let wordOne = new Pizzicato.Sound() {
+// };
