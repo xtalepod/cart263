@@ -1,3 +1,14 @@
 .playing {
   background-color: yellow !important;
 }
+
+
+p {
+  background-color: blue;
+  font-family:monospace;
+  font-size: 30;
+  direction: rtl;
+}
+  #p1 {
+    direction:ltr;
+  }

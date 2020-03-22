@@ -39,7 +39,7 @@ $(document).ready(function() {
   tone.addEffect(dubDelay);
 
   // Select all the elements on the page except the ignoreList
-  let $elements = $('#p1').not(ignoreList);
+  let $elements = $('*').not(ignoreList);
 
   // Select every element on the page and go through each one
   $elements.each(function () {
