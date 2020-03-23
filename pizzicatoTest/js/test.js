@@ -47,48 +47,7 @@ $("#p1").hover(function() {
 
 
 }//endsetup
-// function setup() {
-//
-//   let waveDic = {
-//     source: 'wave',
-//     options: {
-//       type: 'sawtooth',
-//       frequency: 450,
-//       attack: 200,
-//       release: 0
-//     }
-//   };
-//
-//   myNewSound = new MySound(waveDic, "dark");
-//   myNewSound.showMood();
-//   console.log(myNewSound.mood)
-//   myNewSound.release = 1000;
-//   myNewSound.play();
-//   myNewSound.stop();
-//   console.log(myNewSound.release);
-//
-//   // sound2 = new Pizzicato.Sound({
-//   //   source: 'file',
-//   //   options: {
-//   //     path: '../assets/sounds/dollyparton.wav'
-//   //   }
-//   // });
-//
-//   sound3 = new Pz.Sound('../assets/sounds/bark.wav')
-//
-// // sound3.play();
-//
-//   // console.log(sound3.source);
-//   console.log("loADED");
-//
-//       // Sound loaded!
-//
-//
-//   // sound3.play();
-//   // sound2 = new MySound('./assets/sounds/dollyparton.wav', "light")
-//
-//   console.log("played");
-//
+
 //   quadrafuzz = new Pizzicato.Effects.Quadrafuzz({
 //     lowGain: 0.6,
 //     midLowGain: 0.8,
@@ -99,22 +58,3 @@ $("#p1").hover(function() {
 //   // sound2.addEffect(quadrafuzz)
 //   // sound2.play();
 //
-//   //
-//   // sound = new Pizzicato.Sound({
-//   //   source: 'wave',
-//   //   options: {
-//   //     type: 'sawtooth',
-//   //     frequency: 450,
-//   //     attack: 200,
-//   //     release: 0
-//   //   }
-//   // });
-//   //
-//   // $("#p1").hover(function() {
-//   //   sound.play();
-//   //     console.log("hover");
-//   // }, function() {
-//   //   sound.stop();
-//   //   console.log("hi");
-//   // });
-// }
