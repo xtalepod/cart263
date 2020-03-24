@@ -18,3 +18,10 @@ p {
     height: 1000px;
     background-color: pink;
   }
+
+#textDisplayID {
+  width: 100px;
+  height: 20px;
+  background-color: pink;
+  position: absolute;
+}

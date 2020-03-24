@@ -9,45 +9,37 @@ let parameters;
 // let thisSound;
 // let forSound;
 // let letSound;
-// //and their array
-// let aSounds = [];
 
 let numOfWords = 6;
 let aMyString = [
-  "polymorphism",
-  "parameters",
-  "variable",
-  "let",
-  "this",
-  "for"];
-
-//i am making a for loop that goes through the number of words, gives them an x and y location, a text size, and the words
-
-
+  'polymorphism',
+  'parameters',
+  'variable',
+  'let',
+  'this',
+  'for'];
+//a variable to hold the jQuery paragraph ID
+let $pID;
+//a variable that holds the alue for how many paragraphs to display
+let numOfPara = 6;
 
 $(document).ready(setup);
 
 function setup() {
 
-  for (let i = 0; i < aMyString.length; i++) {
-    console.log(aMyString[i]);
+  for (let i = 0; i < numOfWords; i ++) {
+    let x = Math.random() * 250;
+    let y = Math.random() * 250;
+    // // let textSize = 20;
+    let $textDisplay = $("#textDisplayID");
+    // let wordText = Math.floor(randomInRange(0, aMyString.length));
+    // aMyString.push(new Word($textDisplay, x, y, '#ff0000'));
+      $textDisplay.text(aMyString);
+        $('body').append($textDisplay);
+    console.log(aMyString[i] + 'why');
+    // console.log(wordArray.wordText);
   }
 
-//   for (let i = 0; i < numOfWords; i ++) {
-//     let x = Math.random() * 250;
-//     let y = Math.random() * 250;
-//     // let textSize = 20;
-//     // let wordText = Math.floor(randomInRange(0, aTheWords.length));
-//     wordArray.push(new Word("aTheWords", x , y, '#ff0000'));
-//     console.log(wordArray.length);
-//     // console.log(wordArray.wordText);
-//   }
-//
-//
-let $textDisplay = $('<div></div>');
-$textDisplay.addClass('textDisplayClass');
-$textDisplay.text(aMyString);
-$('body').append($textDisplay);
 
 
   // Create the synth
@@ -80,18 +72,18 @@ parameters = new MySound('parameters',"dark", 2000);
 
 // polymorphism.play();
 
-$("#p1").hover(function() {
-      polymorphism.play();
-      sleep(polymorphism.duration).then(() => { //this comes from the sleep function source
-        polymorphism.stop();
-        // parameters.play();
-        synth.play();
-      });
-  }, function() {
-    polymorphism.stop();
-    synth.stop();
-    // console.log(bark.mood);
-  });
+// $("#p1").hover(function() {
+//       polymorphism.play();
+//       sleep(polymorphism.duration).then(() => { //this comes from the sleep function source
+//         polymorphism.stop();
+//         // parameters.play();
+//         synth.play();
+//       });
+//   }, function() {
+//     polymorphism.stop();
+//     synth.stop();
+//     // console.log(bark.mood);
+//   });
 }//endsetup
 
 // https://www.sitepoint.com/delay-sleep-pause-wait/
