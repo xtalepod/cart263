@@ -11,13 +11,17 @@ class Word {
     $(this.element).css("color", this.color);
     $('#container').append(this.element);
     $(this.element).css("position", "absolute");
-    $(this.element).css("left", this.x)
-    $(this.element).css("top", this.y)
-    // console.log(this.x);
+    $(this.element).css("left", this.x);
+    $(this.element).css("top", this.y);
+    console.log(this.x);
   }
 
   //make the word visible on the screen
-  //   appendText() {
-  //     this.wordText.append();
-  //   }
+  onClick() {
+    console.log("hi");
+    //   this.element.click(function() {
+    //   alert("doing a thing");
+    //
+    // });
+  }
 }

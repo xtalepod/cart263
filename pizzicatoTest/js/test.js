@@ -10,7 +10,7 @@ let parameters;
 // let forSound;
 // let letSound;
 
-let numOfWords = 10;
+let numOfWords = 3;
 let aMyString = [
   'polymorphism',
   'parameters',
@@ -29,12 +29,6 @@ function setup() {
     let wordText = aMyString[Math.floor(randomInRange(0, aMyString.length))];
     myWordsArray.push(new Word(wordText, x, y, '#00FF00'));
   }
-
-  // let $textDisplay = $("#textDisplayID");
-  // $textDisplay.text(aMyString);
-  // $('body').append($textDisplay);
-  // console.log(aMyString[i] + 'why');
-  // console.log(wordArray.wordText);
 
   // Create the synth
   synth = new Pizzicato.Sound({
@@ -62,9 +56,7 @@ function setup() {
   // letSound = new MySound('let',"dark", 2000);
   // thisSound = new MySound('this',"dark", 4000);
 
-  // thisSound.play();
-
-  // polymorphism.play();
+  // thisSound.play(); //putting this here this breaks pizzicato
 
   // $("#p1").hover(function() {
   //       polymorphism.play();
