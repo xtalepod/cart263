@@ -13,15 +13,15 @@ p {
     direction:ltr;
   }
 
-  #container {
+  /* #container {
     width: 1000px;
     height: 1000px;
-    background-color: pink;
-  }
+    background-color: transparent;
+  } */
 
-#textDisplayID {
+/* #textDisplayID {
   width: 100px;
   height: 20px;
   background-color: pink;
   position: absolute;
-}
+} */

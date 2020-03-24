@@ -6,6 +6,9 @@ class Word {
     this.x = x;
     this.y = y;
     this.color = color;
+    this.element = $('<div>');
+    $(this.element).text(this.wordText);
+    $('#container').append(this.element);
     console.log(this.x);
   }
 

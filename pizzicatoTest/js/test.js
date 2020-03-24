@@ -10,33 +10,35 @@ let parameters;
 // let forSound;
 // let letSound;
 
-let numOfWords = 6;
+let numOfWords = 3;
 let aMyString = [
   'polymorphism',
   'parameters',
   'variable',
   'let',
-  'this',
-  'for'];
+  'this'];
 //a variable to hold the jQuery paragraph ID
 let $pID;
 //a variable that holds the alue for how many paragraphs to display
-let numOfPara = 6;
+let numOfPara = 10;
+let myWordsArray = [];
+let myWordsB;
 
 $(document).ready(setup);
 
 function setup() {
 
+// myWords = new Word("peanut", 150,300, '#0000000')
+
   for (let i = 0; i < numOfWords; i ++) {
-    let x = Math.random() * 250;
-    let y = Math.random() * 250;
-    // // let textSize = 20;
-    let $textDisplay = $("#textDisplayID");
-    // let wordText = Math.floor(randomInRange(0, aMyString.length));
-    // aMyString.push(new Word($textDisplay, x, y, '#ff0000'));
-      $textDisplay.text(aMyString);
-        $('body').append($textDisplay);
-    console.log(aMyString[i] + 'why');
+    let x = Math.random() * 25;
+    let y = Math.random() * 150;
+    // let $textDisplay = $("#textDisplayID");
+    let wordText = aMyString[Math.floor(randomInRange(0, aMyString[i].length))];
+    myWordsArray.push(new Word(wordText, x, y, '#ffffff'));
+      // $textDisplay.text(aMyString);
+        // $('body').append($textDisplay);
+    // console.log(aMyString[i] + 'why');
     // console.log(wordArray.wordText);
   }
 
