@@ -10,7 +10,7 @@ let parameters;
 // let forSound;
 // let letSound;
 
-let numOfWords = 3;
+let numOfWords = 10;
 let aMyString = [
   'polymorphism',
   'parameters',
@@ -34,8 +34,8 @@ function setup() {
     let x = Math.random() * 25;
     let y = Math.random() * 150;
     // let $textDisplay = $("#textDisplayID");
-    let wordText = aMyString[Math.floor(randomInRange(0, aMyString[i].length))];
-    myWordsArray.push(new Word(wordText, x, y, '#ffffff'));
+    let wordText = aMyString[Math.floor(randomInRange(0, aMyString.length))];
+    myWordsArray.push(new Word(wordText, x, y, '#00FF00'));
       // $textDisplay.text(aMyString);
         // $('body').append($textDisplay);
     // console.log(aMyString[i] + 'why');
