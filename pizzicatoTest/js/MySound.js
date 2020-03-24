@@ -1,3 +1,5 @@
+"use strict";
+
 class MySound extends Pizzicato.Sound {
   constructor(name, mood, duration) {
     super({
