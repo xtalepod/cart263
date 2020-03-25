@@ -10,7 +10,7 @@ let parameters;
 // let forSound;
 // let letSound;
 
-let numOfWords = 3;
+let numOfWords = 5;
 let aMyString = [
   'polymorphism',
   'parameters',
@@ -30,6 +30,12 @@ function setup() {
     myWordsArray.push(new Word(wordText, x, y, '#00FF00'));
   }
 
+for (let j = 0; j < myWordsArray.length; j ++){
+  myWordsArray[j].clickReaction();
+}
+// myWordsArray.clickReaction();
+// console.log(myWordsArray.clickReaction());
+
   // Create the synth
   synth = new Pizzicato.Sound({
     source: 'wave',
@@ -40,7 +46,7 @@ function setup() {
       release: 0.9
     }
   });
-
+// //
   // bark = new Pizzicato.Sound({
   //   source: 'file',
   //   options: {
@@ -68,15 +74,17 @@ function setup() {
   //   }, function() {
   //     polymorphism.stop();
   //     synth.stop();
+  //     // polymorphism.showMood();//console log in the MySound class function pings to here
   //     // console.log(bark.mood);
   //   });
 } //endsetup
 
 // https://www.sitepoint.com/delay-sleep-pause-wait/
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
+// function sleep(ms) {
+//   return new Promise(resolve => setTimeout(resolve, ms));
+// }
+//
+// //from class
 function randomInRange(min, max) {
   return min + (Math.random() * (max - min));
 }

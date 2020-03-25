@@ -17,11 +17,31 @@ class Word {
   }
 
   //make the word visible on the screen
-  onClick() {
-    console.log("hi");
-    //   this.element.click(function() {
-    //   alert("doing a thing");
-    //
-    // });
+  clickReaction() {
+    $(this.element).click(function() {
+      // alert("doing a thing");
+      console.log("hi");
+    })
+
+    $(this.element).hover(function() {
+      polymorphism.play();
+      sleep(polymorphism.duration).then(() => { //this comes from the sleep function source
+        polymorphism.stop();
+        parameters.play();
+        synth.play();
+      });
+    }, function() {
+      polymorphism.stop();
+      synth.stop();
+      // polymorphism.showMood();//console log in the MySound class function pings to here
+      // console.log(bark.mood);
+    });
+
   }
-}
+
+  // // https://www.sitepoint.com/delay-sleep-pause-wait/
+  //  sleep(ms) {
+  //   return new Promise(resolve => setTimeout(resolve, ms));
+  // }
+  //
+} //end of script
