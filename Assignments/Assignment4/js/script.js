@@ -9,7 +9,7 @@ This is a template. Fill in the title, author, and this description
 to match your project! Write JavaScript to do amazing things below!
 
 *********************************************************************/
-nsgjsgh
+
 
 $(document).ready(setup);
 
@@ -26,18 +26,18 @@ function setup() {
     .fail(dataError); //this is a call back to a function we create later
 }
 
+// a function that gets called once all the data is loaded in the set up
 function dataLoaded(data) {
-
-  //variables for all my JSON data sets
+  //declare all variables for all my JSON data sets
   let randomCondiment = getRandomElement(data.condiments);
   let randomCat = getRandomElement(data.cats);
   let randomRoom = getRandomElement(data.rooms);
   let randomIsm = getRandomElement(data.isms);
   let randomFilms = getRandomElement(data.films);
-  // randomCondiment ="s";// forcing the scenario to test if the if statement works
-  // let randomCat = "Eu";
+  // randomCondiment ="s";// forcing the scenario to test if the if statement works !i'm leaving this here because I find it helpful
 
   let verb = "is";
+  //a variable for the indefinate article problem
   let indefinateArticle = "a";
 
   //-1 here is used to get the last letter in a string
