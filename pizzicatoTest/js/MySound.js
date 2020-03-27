@@ -20,7 +20,25 @@ class MySound extends Pizzicato.Sound {
   }
 }
 
+// // https://www.sitepoint.com/delay-sleep-pause-wait/
+// sleep(ms) {
+//  return new Promise(resolve => setTimeout(resolve, ms));
+// }
+
 // setEffectBasedOnMood(){
 //
 //
 // }
+
+
+
+// these are the same thing! leaving for mental note // 
+  // bark = new Pizzicato.Sound({
+  //   source: 'file',
+  //   options: {
+  //     path: 'assets/sounds/bark.wav'
+  //   }
+  //   });
+
+  // bark = new MySound('bark',"dark", 6000);
+  // these are the same thing //
