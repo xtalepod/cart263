@@ -45,12 +45,13 @@ function dataLoaded(data) {
   //   verb = "are";
   // }
 
+//check if the first character of a cat string is E AND the second is U
   if (randomCat.charAt(0) === "E" && randomCat.charAt(1) === "u") {  //check if the first character of the randomCat string is E and the second is U
-    indefinateArticle = "a"; //if yes then use a
+    indefinateArticle = "a"; //if yes then use "a"!
   }
-    // console.log(randomCat.charAt(0));
+  //check if the first character of a cat string is A, I, E, H, or O
     else if (randomCat.charAt(0) === "A" || randomCat.charAt(0) === "I" || randomCat.charAt(0) === "E" || randomCat.charAt(0) === "H" || randomCat.charAt(0) === "O") {//check if the first character is a ,i ,e,h,o
-      indefinateArticle = "an"; //if yes then us an
+      indefinateArticle = "an"; //if yes then use "an"
   }
 
   // let randomDescription = `${randomCondiment} ${verb} like ${indefinateArticle} ${randomCat} in a ${randomRoom}`
