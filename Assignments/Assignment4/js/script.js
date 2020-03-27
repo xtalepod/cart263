@@ -13,7 +13,7 @@ to match your project! Write JavaScript to do amazing things below!
 
 $(document).ready(setup);
 
-
+//this is the setup function! 
 function setup() {
   //this is the path to the file
   //reload the page everytime the user clicks the document
