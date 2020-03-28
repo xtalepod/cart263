@@ -8,12 +8,12 @@ class Word {
     this.color = color;
     this.sound = sound;
     // console.log(this.sound); // undefined
-    this.element = $('<div>');
-    $(this.element).text(this.wordText);
-    $(this.element).css("color", this.color);
-    $('#container').append(this.element);
-    $(this.element).css("position", "absolute");
-    $(this.element).css("left", this.x);
-    $(this.element).css("top", this.y);
+    this.div = $('<div>');
+    $(this.div).text(this.wordText);
+    $(this.div).css("color", this.color);
+    $('#container').append(this.div);
+    $(this.div).css("position", "absolute");
+    $(this.div).css("left", this.x);
+    $(this.div).css("top", this.y);
   }
 } //end of script
