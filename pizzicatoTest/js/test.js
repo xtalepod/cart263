@@ -17,6 +17,7 @@ let aMyString = [
 ];
 
 let myWordsArray = [];
+let aOutputIndex = [];
 
 $(document).ready(setup);
 
@@ -34,7 +35,7 @@ function setup() {
   // });
   //
   // sound1 = new MySound('polymorphism', "dark", 3000);
-  sound1 = new MySound(aMyString[0], "dark", 3000);
+  sound1 = new MySound(aMyString[0], "dark", 3000); //this is only working right now because my string matches my audio file names
   sound2 = new MySound(aMyString[1], "dark", 2000);
   sound3 = new MySound(aMyString[2], "dark", 2000);
   sound4 = new MySound(aMyString[3], "dark", 2000);
@@ -64,19 +65,31 @@ function initWords() {
 
   for (let j = 0; j < myWordsArray.length; j++) {
 
-    $(myWordsArray[j].div).click(function() {
+    $(myWordsArray[j].div).click(function() {//j is the index of the word clicked
+      aOutputIndex.push(j);//.push is appending a value to the end of an array
       console.log("clicked", j);
+      console.log(aOutputIndex);
+
+      for (let k = 0; k < aOutputIndex.length; k++) {
+        let index = aOutputIndex[k];
+       console.log("word num.", index, "is:", myWordsArray[index].wordText);
+        // mySoundsArray[index].play();
+        // sleep(mySoundsArray[index].duration).then(() => { //this comes from the sleep function source
+          // mySoundsArray[index].stop();
+        // });
+      }// end k
 
     });
-    $(myWordsArray[j].div).hover(function() {
-      myWordsArray[j].sound.play();
-      console.log("hover", j);
 
-      // sleep(polymorphism.duration).then(() => { //this comes from the sleep function source
-      //     //   polymorphism.stop();
-      //     // });
-    },
-    function() {
+    $(myWordsArray[j].div).hover(function() {
+        // myWordsArray[j].sound.play();
+        console.log("hover", j);
+
+        // sleep(polymorphism.duration).then(() => { //this comes from the sleep function source
+        //     //   polymorphism.stop();
+        //     // });
+      },
+      function() {
         console.log("stop hover", j);
         // polymorphism.showMood();//console log in the MySound class function pings to here
       });
@@ -84,9 +97,9 @@ function initWords() {
 } //end setup
 
 // // https://www.sitepoint.com/delay-sleep-pause-wait/
-// function sleep(ms) {
-// return new Promise(resolve => setTimeout(resolve, ms));
-// }
+function sleep(ms) {
+return new Promise(resolve => setTimeout(resolve, ms));
+}
 // //
 // //from class
 function randomInRange(min, max) {
