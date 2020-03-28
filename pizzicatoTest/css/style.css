@@ -13,6 +13,23 @@ p {
     direction:ltr;
   }
 
+  #wordArrayButton {
+  /* margin-left: 50; */
+  padding: 20px 100px;
+  text-align: left;
+  font-family: Courier, monospace;
+  font-size: 15px;
+  font-weight: bolder;
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  color: black;
+  border: 3px solid yellow;
+  outline-style: none;
+  background-color: #b3d1ff;
+  ;
+}
+
   /* #container {
     width: 1000px;
     height: 1000px;
