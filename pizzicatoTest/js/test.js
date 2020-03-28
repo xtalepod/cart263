@@ -2,22 +2,22 @@
 
 // let synth;
 //my test sounds
-let sound1, sound2;
+let sound1, sound2, sound3, sound4, sound5;
 
 
 let myWord
-let numOfWords = 2;
-// let aMyString = [
-//   'polymorphism',
-//   'parameters',
-//   'variable',
-//   'let',
-//   'this'
-// ];
+let numOfWords = 5;
 let aMyString = [
   'polymorphism',
   'parameters',
+  'variable',
+  'let',
+  'this'
 ];
+// let aMyString = [
+//   'polymorphism',
+//   'parameters',
+// ];
 
 let myWordsArray = [];
 let mySoundsArray = [];
@@ -39,9 +39,15 @@ function setup() {
   //
   sound1 = new MySound('polymorphism', "dark", 3000);
   sound2 = new MySound('parameters', "dark", 2000);
+  sound3 = new MySound('variable', "dark", 2000);
+  sound4 = new MySound('let', "dark", 2000);
+  sound5 = new MySound('this', "dark", 2000);
 
   mySoundsArray.push(sound1);
   mySoundsArray.push(sound2);
+  mySoundsArray.push(sound3);
+  mySoundsArray.push(sound4);
+  mySoundsArray.push(sound5);
 
   // sound1.play(); //putting this here this breaks pizzicato
 
@@ -58,7 +64,7 @@ function setup() {
 
 function initWords(){
   for (let i = 0; i < numOfWords; i++) {
-    let x = Math.random() * 100;
+    let x = Math.random() * 200;
     let y = Math.random() * 150;
     // let wordText = aMyString[Math.floor(randomInRange(0, aMyString.length))];
     let wordText = aMyString[i];

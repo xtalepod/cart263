@@ -22,6 +22,7 @@ class Word {
   }
 
   clickReaction() {
+    //https://stackoverflow.com/questions/3273350/jquerys-click-pass-parameters-to-user-function
     $(this.element).click({sound: this.sound, test: "test"}, function(e) {
       console.log("CLIked");
       console.log(e.data.test);
@@ -33,12 +34,14 @@ class Word {
       //inspo i has a deatached object https://en.wikipedia.org/wiki/Detached_object
     });
 
-    $(this.element).hover(function() {
-      // this.sound.play();
+    $(this.element).hover({sound: this.sound, test: "test"}, function(e) {
+      console.log("hover");
+      console.log(e.data.test);
+      console.log(e.data.sound);
+      e.data.sound.play();
       // sleep(polymorphism.duration).then(() => { //this comes from the sleep function source
       //   polymorphism.stop();
         // parameters.stop();
-      // synth.play();
       // });
     }, function() {
       // polymorphism.stop();
