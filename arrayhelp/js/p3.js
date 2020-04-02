@@ -19,32 +19,9 @@ let aMyString = [
 let myWordsArray = [];
 let aOutputIndex = [];
 let incr = 0;
-
-//from q test
-// let aFileString = ['first', 'second', 'third', 'fourth'];
-// let aFileNum =['10', '20', '30', '40'];
-// let aFileName = [];
-// let aFileNameOutputIndex = [];
-//end q test
-
 $(document).ready(setup);
 
 function setup() {
-
-  //from qynn getting me to show i understood. i didnt totally understand
-  // for (let i = 0; i < aFileString.length; i++){
-  //   let filename = aFileString[i] + "_" + aFileNum[i].toString() + ".wav";
-  //   aFileName.push(filename);
-  //   console.log(filename);
-  // }
-  //
-  // for (let j = 0; j < 10; j ++){
-  //     let idx = Math.floor(randomInRange(0,aFileString.length));
-  //     console.log(idx);
-  //     console.log(aFileName[idx])
-  //     // aFileNameOutputIndex.push(j);
-  //     // console.log(aFileNameOutputIndex[j]);
-  // }//end of qynn task to show i understand
 
   // Create the synth
   // synth = new Pizzicato.Sound({
@@ -70,9 +47,13 @@ function setup() {
   mySoundsArray.push(sound5);
   // sound1.play(); //putting this here this breaks pizzicato
   initWords();
+
+
 } //endsetup
 
 function initWords() {
+
+
   for (let i = 0; i < aMyString.length; i++) {//instantiate my word objects
     let x = Math.random() * 200;
     let y = Math.random() * 200;
@@ -85,25 +66,18 @@ function initWords() {
 
   for (let j = 0; j < myWordsArray.length; j++) {
     $(myWordsArray[j].div).click(function() {//j is the index of the word clicked
-      aOutputIndex.push(j);//everytime you click, add the corresponding index number
-      // console.log("clicked", j);
-      console.log(aOutputIndex,"j");
+      aOutputIndex.push(j);//.push is appending a value to the end of an array, in this case it is creating an index for
+      console.log("clicked", j);
+      console.log(aOutputIndex);
 
-      let outputString = "";
       for (let k = 0; k < aOutputIndex.length; k++) {
         let index = aOutputIndex[k];
-        outputString += myWordsArray[index].wordText + " ";
-
-       // console.log("word num.", index, "is:", myWordsArray[index].wordText);
-        // mySoundsArray[index].play();
+       console.log("word num.", index, "is:", myWordsArray[index].wordText);
+        mySoundsArray[index].play();
         // sleep(mySoundsArray[index].duration).then(() => { //this comes from the sleep function source
           // mySoundsArray[index].stop();
         // });
       }// end k
-      console.log(outputString);
-      $("#output").text(outputString);
-
-
     });//end j
 
     $(myWordsArray[j].div).hover(function() {
