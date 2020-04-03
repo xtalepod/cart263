@@ -19,32 +19,12 @@ let aMyString = [
 let myWordsArray = [];
 let aOutputIndex = [];
 let incr = 0;
-
-//from q test
-// let aFileString = ['first', 'second', 'third', 'fourth'];
-// let aFileNum =['10', '20', '30', '40'];
-// let aFileName = [];
-// let aFileNameOutputIndex = [];
-//end q test
+let outputString = ""; //an empty string for the text output
+let playSequenceB = true;
 
 $(document).ready(setup);
 
 function setup() {
-
-  //from qynn getting me to show i understood. i didnt totally understand
-  // for (let i = 0; i < aFileString.length; i++){
-  //   let filename = aFileString[i] + "_" + aFileNum[i].toString() + ".wav";
-  //   aFileName.push(filename);
-  //   console.log(filename);
-  // }
-  //
-  // for (let j = 0; j < 10; j ++){
-  //     let idx = Math.floor(randomInRange(0,aFileString.length));
-  //     console.log(idx);
-  //     console.log(aFileName[idx])
-  //     // aFileNameOutputIndex.push(j);
-  //     // console.log(aFileNameOutputIndex[j]);
-  // }//end of qynn task to show i understand
 
   // Create the synth
   // synth = new Pizzicato.Sound({
@@ -57,7 +37,6 @@ function setup() {
   //   }
   // });
   //
-  // sound1 = new MySound('polymorphism', "dark", 3000);
   sound1 = new MySound(aMyString[0], "dark", 3000); //this is only working right now because my string matches my audio file names
   sound2 = new MySound(aMyString[1], "dark", 2000);
   sound3 = new MySound(aMyString[2], "dark", 2000);
@@ -70,62 +49,94 @@ function setup() {
   mySoundsArray.push(sound5);
   // sound1.play(); //putting this here this breaks pizzicato
   initWords();
-} //endsetup
+  // $("#reset").click(clearArray() );
+  $("#reset").click(function() {
+      // if ($("#reset").click() === true) {
+        playSequenceB = false;
+        clearArray();
+        console.log("clicked");
+      // } else {
+      //   playSequenceB = true;
+      // }
+    });
+    // $("#reset").off("click", function(){
+    //   playSequenceB = true;
+    // });
+  } //endsetup
 
-function initWords() {
-  for (let i = 0; i < aMyString.length; i++) {//instantiate my word objects
-    let x = Math.random() * 200;
-    let y = Math.random() * 200;
-    // myWord = new Word(wordText, x, y, '#00FF00', sound3)
-    // console.log(myWord.color);
-    myWordsArray.push(new Word(aMyString[i], x, y, '#00FF00', mySoundsArray[i]));
-    // myWordsArray.push(new Word(wordText, x, y, '#00FF00', sound1));
-    // console.log("i:", i,"word array i:", myWordsArray[i],"string:", aMyString[i],"sound:", mySoundsArray[i]);
-  }//end i
+  function initWords() {
+    for (let i = 0; i < aMyString.length; i++) { //instantiate my word objects
+      let x = Math.random() * 200;
+      let y = Math.random() * 200;
+      myWordsArray.push(new Word(aMyString[i], x, y, '#00FF00', mySoundsArray[i]));
+      // myWordsArray.push(new Word(wordText, x, y, '#00FF00', sound1));
+      // console.log("i:", i,"word array i:", myWordsArray[i],"string:", aMyString[i],"sound:", mySoundsArray[i]);
+    } //end i
 
-  for (let j = 0; j < myWordsArray.length; j++) {
-    $(myWordsArray[j].div).click(function() {//j is the index of the word clicked
-      aOutputIndex.push(j);//everytime you click, add the corresponding index number
-      // console.log("clicked", j);
-      console.log(aOutputIndex,"j");
+    for (let j = 0; j < myWordsArray.length; j++) {
+      $(myWordsArray[j].div).click(function() { //j is the index of the word clicked
+        aOutputIndex.push(j); //everytime you click, add the corresponding index number
+        // console.log("clicked", j);
+        console.log(aOutputIndex, "j");
+        // if (aOutputIndex.length > 4) { //after 5 elements are reached play the sounds in sequence
+        for (let k = 0; k < aOutputIndex.length; k++) { //a for loop to go through each element in the array
+          let index = aOutputIndex[k]; //an index so a numerical value can be assigned to other arrays****
+          outputString += myWordsArray[index].wordText + " "; //each time we move through the loop add the selected word
+        } // end k
+        playSequence();
+        $("#output").text(outputString); //display the selected words
+        // }
+      }); //end j
 
-      let outputString = "";
-      for (let k = 0; k < aOutputIndex.length; k++) {
-        let index = aOutputIndex[k];
-        outputString += myWordsArray[index].wordText + " ";
+      $(myWordsArray[j].div).hover(function() {
+          // myWordsArray[j].sound.play();
+          // console.log("hover", j);
+          // sleep(polymorphism.duration).then(() => { //this comes from the sleep function source
+          //     //   polymorphism.stop();
+          //     // });
+        },
+        function() {
+          // console.log("stop hover", j);
+          // polymorphism.showMood();//console log in the MySound class function pings to here
+        });
+    } //end for
+  } //end init words
 
-       // console.log("word num.", index, "is:", myWordsArray[index].wordText);
-        // mySoundsArray[index].play();
-        // sleep(mySoundsArray[index].duration).then(() => { //this comes from the sleep function source
-          // mySoundsArray[index].stop();
-        // });
-      }// end k
-      console.log(outputString);
-      $("#output").text(outputString);
+  //creating a play sequence function
+  function playSequence() {
 
+    if (playSequenceB === true) {
+      for (let l = 0; l < aOutputIndex.length; l++) {
+        let index = aOutputIndex[l];
+        console.log(aOutputIndex.length, l);
+        // aOutputIndex.push(l); //everytime you click, add the corresponding index number
+        if (l < aOutputIndex.length - 1) { //for all words but the last
+          myWordsArray[index].sound.on('end', function() { //when the sound ends
+            console.log(index, "ended");
+            myWordsArray[aOutputIndex[l + 1]].sound.play(); //play the next sound
+          });
+        }
+        myWordsArray[aOutputIndex[0]].sound.play(); //play the first word, rest will follow
+      }
+    }
+  }
 
-    });//end j
+  function clearArray() {
+    console.log("clearArray");
+    for (let m = 0; m < myWordsArray.length; m++) {
+      myWordsArray[m].sound.on();
+      outputString = "";
+      aOutputIndex.splice(0, aOutputIndex.length);
+    }
+    $("#output").text(outputString);
+    playSequenceB = true;
+  }
 
-    $(myWordsArray[j].div).hover(function() {
-        // myWordsArray[j].sound.play();
-        // console.log("hover", j);
-        // sleep(polymorphism.duration).then(() => { //this comes from the sleep function source
-        //     //   polymorphism.stop();
-        //     // });
-      },
-      function() {
-        // console.log("stop hover", j);
-        // polymorphism.showMood();//console log in the MySound class function pings to here
-      });
-  } //end for
-} //end setup
-
-// // https://www.sitepoint.com/delay-sleep-pause-wait/
-function sleep(ms) {
-return new Promise(resolve => setTimeout(resolve, ms));
-}
-// //
-// //from class
-function randomInRange(min, max) {
-  return min + (Math.random() * (max - min));
-}
+  // $("#reset").click(function(){
+  // for (let m = 0; m < myWordsArray.length; m++){
+  // return aOutputIndex.length = 0;
+  // console.log(aOutputIndex, "button pressed");
+  // //from class
+  function randomInRange(min, max) {
+    return min + (Math.random() * (max - min));
+  }

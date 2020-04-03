@@ -6,7 +6,7 @@ class MySound extends Pizzicato.Sound {
       source: 'file',
       options: {
         path: 'assets/sounds/'+ name +'.wav',
-        loop: true
+        loop: false
       }
       });
       this.mood = mood;
@@ -32,7 +32,7 @@ class MySound extends Pizzicato.Sound {
 
 
 
-// these are the same thing! leaving for mental note // 
+// these are the same thing! leaving for mental note //
   // bark = new Pizzicato.Sound({
   //   source: 'file',
   //   options: {
