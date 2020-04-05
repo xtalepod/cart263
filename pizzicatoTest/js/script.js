@@ -85,21 +85,22 @@ function initWords() {
   } //end i
 
   for (let j = 0; j < myWordsArray.length; j++) {
+
     $(myWordsArray[j].div).click(function() { //j is the index of the word clicked
       aOutputIndex.push(j); //everytime you click, add the corresponding index number
       // console.log("clicked", j);
       // let $darkScore = $('<div></div>');
-      score += 1;
+      // score += 1;
       console.log(aOutputIndex, "j");
-
       // if (aOutputIndex.length > 4) { //after 5 elements are reached play the sounds in sequence
-      for (let k = 0; k < aOutputIndex.length; k++) { //a for loop to go through each element in the array
-        let index = aOutputIndex[k]; //an index so a numerical value can be assigned to other arrays****
-      } // end k
+      // for (let k = 0; k < aOutputIndex.length; k++) { //a for loop to go through each element in the array
+      //   let index = aOutputIndex[k]; //an index so a numerical value can be assigned to other arrays****
+      //   myWordsArray[index].sound.play();
+      //   outputString += myWordsArray[index].wordText + " "; //each time we move through the loop add the selected word
+      //   // $("#output").text(outputString); //display the selected words
+      // } // end k
 
-      myWordsArray[j].sound.play();
-      outputString += myWordsArray[j].wordText + " "; //each time we move through the loop add the selected word
-      $("#output").text(outputString); //display the selected words
+      // $("#output").text(outputString); //display the selected words
       //add the score text to the screen and update it when a word is clicked
       // darkScore += 1;
       // $('body').append($darkScore);
