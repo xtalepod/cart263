@@ -1,239 +1,170 @@
 "use strict";
 
-/********************************************************************
+// let synth;
+//my test sounds
+let sound1, sound2, sound3, sound4, sound5;
+let mySoundsArray = [];
 
-Title of Project
-Author Name
+let myWord
+let numOfWords = 5;
 
-This is a template. Fill in the title, author, and this description
-to match your project! Write JavaScript to do amazing things below!
+let aMyString = [
+  'parameters',
+  'polymorphism',
+  'variable',
+  'let',
+  'this'
+];
 
-*********************************************************************/
-
-
-"use strict";
-
-let bark;
-let synth;
+let myWordsArray = [];
+let aOutputIndex = [];
+let incr = 0;
+let outputString = ""; //an empty string for the text output
+let playSequenceB = true;
+//setting up variables to apply ID to words and track score
+// let darkScore = 0;
+// let lightScore = 0;
+// let darkID = 0;
+// let lightID = 1;
+let score = 0;
+let $score;
 
 $(document).ready(setup);
 
 function setup() {
 
+  $score = $('#score');
+  $score.text(score);
+  // let $darkScore = $('<div></div>');
+  // $darkScore.addClass('darkScoreClass');
+  // $darkScore.text(darkScore);
+  // $('body').append($darkScore);
+
   // Create the synth
-  synth = new Pizzicato.Sound({
-    source: 'wave',
-    options: {
-      type: 'sine',
-      frequency: 220,
-      attack: 0.2,
-      release: 0.9
-    }
+  // synth = new Pizzicato.Sound({
+  //   source: 'wave',
+  //   options: {
+  //     type: 'sine',
+  //     frequency: 220,
+  //     attack: 0.2,
+  //     release: 0.9
+  //   }
+  // });
+  //
+  sound1 = new MySound(aMyString[0], "dark", 3000); //this is only working right now because my string matches my audio file names
+  sound2 = new MySound(aMyString[1], "dark", 2000);
+  sound3 = new MySound(aMyString[2], "dark", 2000);
+  sound4 = new MySound(aMyString[3], "dark", 2000);
+  sound5 = new MySound(aMyString[4], "dark", 2000);
+  mySoundsArray.push(sound1);
+  mySoundsArray.push(sound2);
+  mySoundsArray.push(sound3);
+  mySoundsArray.push(sound4);
+  mySoundsArray.push(sound5);
+  // sound1.play(); //putting this here this breaks pizzicato
+  initWords();
+  // trackScore();
+  $("#reset").click(function() {
+    playSequenceB = false;
+    clearArray();
+    console.log("reset");
   });
+  $("#play").click(function() {
+    playSequence();
+    console.log("play");
+  });
+} //endsetup
 
-// bark = new Pizzicato.Sound({
-//   source: 'file',
-//   options: {
-//     path: 'assets/sounds/bark.wav'
-//   }
-//   });
+function initWords() {
 
-bark = new MySound('bark',"dark", 2000);
+  for (let i = 0; i < aMyString.length; i++) { //instantiate my word objects
+    let x = [200,300,400,500,600];//Math.random() * 200;
+    let y = [30,10,300,500,3];//Math.random() * 200;
+    myWordsArray.push(new Word(aMyString[i], x[i], y[i], '#00FF00', mySoundsArray[i]));
+    // console.log("i:", i,"word array i:", myWordsArray[i],"string:", aMyString[i],"sound:", mySoundsArray[i]);
+  } //end i
 
+  for (let j = 0; j < myWordsArray.length; j++) {
+    $(myWordsArray[j].div).click(function() { //j is the index of the word clicked
+      aOutputIndex.push(j); //everytime you click, add the corresponding index number
+      // console.log("clicked", j);
+      // let $darkScore = $('<div></div>');
+      score += 1;
+      console.log(aOutputIndex, "j");
 
-// https://www.sitepoint.com/delay-sleep-pause-wait/
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+      // if (aOutputIndex.length > 4) { //after 5 elements are reached play the sounds in sequence
+      for (let k = 0; k < aOutputIndex.length; k++) { //a for loop to go through each element in the array
+        let index = aOutputIndex[k]; //an index so a numerical value can be assigned to other arrays****
+      } // end k
+
+      myWordsArray[j].sound.play();
+      outputString += myWordsArray[j].wordText + " "; //each time we move through the loop add the selected word
+      $("#output").text(outputString); //display the selected words
+      //add the score text to the screen and update it when a word is clicked
+      // darkScore += 1;
+      // $('body').append($darkScore);
+      $score.text(score);
+      // score += 1;
+      console.log(score)
+      // }
+
+    }); //end j
+  } //end for
+} //end init words
+
+//creating a play sequence function
+function playSequence() {
+  if (playSequenceB === true) {
+    for (let l = 0; l < aOutputIndex.length; l++) {
+      let index = aOutputIndex[l];
+      console.log(aOutputIndex.length, l);
+      // aOutputIndex.push(l); //everytime you click, add the corresponding index number
+      if (l < aOutputIndex.length - 1) { //for all words but the last
+        myWordsArray[index].sound.on('end', function() { //when the sound ends
+          console.log(index, "ended");
+          myWordsArray[aOutputIndex[l + 1]].sound.play(); //play the next sound
+        });
+      }
+      myWordsArray[aOutputIndex[0]].sound.play(); //play the first word, rest will follow
+    }
+  }
+  // $(myWordsArray[j].div).hover(function() {
+  //     // myWordsArray[j].sound.play();
+  //     // console.log("hover", j);
+  //     // sleep(polymorphism.duration).then(() => { //this comes from the sleep function source
+  //     //     //   polymorphism.stop();
+  //     //     // });
+  //   },
+  //   function() {
+  //     // console.log("stop hover", j);
+  //     // polymorphism.showMood();//console log in the MySound class function pings to here
+  //   });
 }
 
-$("#p1").hover(function() {
-      bark.play();
-      sleep(bark.duration).then(() => {
-        bark.stop();
-        synth.play();
-      });
-  }, function() {
-    bark.stop();
-    synth.stop();
-    console.log(bark.mood);
-  });
+function clearArray() {
+  console.log("clearArray");
+  for (let m = 0; m < myWordsArray.length; m++) {
+    myWordsArray[m].sound.on();
+    outputString = "";
+    aOutputIndex.splice(0, aOutputIndex.length);
+  }
+  $("#output").text(outputString);
+  playSequenceB = true;
+}
 
-
-}//endsetup
-
-//   quadrafuzz = new Pizzicato.Effects.Quadrafuzz({
-//     lowGain: 0.6,
-//     midLowGain: 0.8,
-//     midHighGain: 0.5,
-//     highGain: 0.6,
-//     mix: 1.0
-//   });
-//   // sound2.addEffect(quadrafuzz)
-//   // sound2.play();
-//
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// The minimum frequency to use when playing a tone
-// const BASE_FREQUENCY = 110;
-// // An array of all the elements on the page
-// let elementsArray = [];
-// // The current element we're playing the note of
-// let currentElement = 0;
-// A string containing the names of elements we want to ignore in our
-// composition (because they're often really huge and boring)
-// let ignoreList = "html script link head meta title body"
-// The Pizzicato tone (synth) we'll use to play each note
-// let tone;
-//
-// $(document).ready(function() {
-//   // Create the tone as a wave (defaults to sine)
-//   tone = new Pizzicato.Sound({
-//     source: 'wave',
-//   });
-//   // For fun, create a Dub Delay filter
-//   let dubDelay = new Pizzicato.Effects.DubDelay({
-//       feedback: 0.6,
-//       time: 0.7,
-//       mix: 0.5,
-//       cutoff: 700
-//   });
-//   // ... and attach it to the tone
-//   tone.addEffect(dubDelay);
-//
-//   // Select all the elements on the page except the ignoreList
-//   let $elements = $('*').not(ignoreList);
-//
-//   // Select every element on the page and go through each one
-//   $elements.each(function () {
-//     // Adding it to the array of all the elements on the page
-//     elementsArray.push($(this));
-//   });
-//
-//   // User click calls playElement to play the first element as a note
-//   $(document).on('click',playElement);
-// });
-//
-// // playElement ()
-// //
-// // Converts an HTML element to a muscial note based on primitive
-// // calculations of its size
-// function playElement () {
-//   // Get the element from the array
-//   let element = elementsArray[currentElement];
-//
-//   // Get the basic spatial information of the element with jQuery
-//   let x = element.offset().left;
-//   let y = element.offset().top;
-//   let w = element.width();
-//   let h = element.height();
-//
-//   // Set up the parameters for a synth note
-//
-//   // Attack and delay are based on the width of the element
-//   // The hardcoded numbers here are ugly, but sometimes that's life in
-//   // Pippin's examples.
-//   let attack = w / 5000 + 0.01;
-//   let release = w / 5000 + 0.01;
-//
-//   // Frequency of the note is based on x position
-//   // Seems to need some base value to sound right
-//   let note = y + BASE_FREQUENCY;
-//
-//   // Set the properties on the synth
-//   // Need ms() to translate millis into samples
-//   tone.attack = attack;
-//   tone.release = release;
-//   tone.frequency = note;
-//
-//   // Play the note
-//   tone.play();
-//
-//   // Increase the current element
-//   currentElement++;
-//
-//   // If the current element has reached the end of the elements array
-//   // reset to the beginning
-//   if (currentElement == elementsArray.length) {
-//     currentElement = 0;
-//   }
-//
-//   // Highlight the current element with a CSS class so we see which one it is
-//   // We're using jQuery UI so we can animate this transition
-//   // Use the attack and release times to time the animation to the music.
-//   $(element).addClass('playing',attack*10,'swing',function () {
-//     // Remove the class after it has animated on
-//     $(this).removeClass('playing',release*10,'swing',function () {
-//       tone.stop();
-//       playElement();
-//     });
-//   });
-// };
-
-// let sineWave = new Pizzicato.Sound({
-//   source: 'wave',
-//   options: {
-//     type: 'sawtooth',
-//     volume: 0.5,
-//     frequency: 440
-//   }
-// });
-
-// $(document).ready(setup);
-//
-// function setup() {
-//   // sineWave.delay();
-//   // sineWave.play(delay);
-//
-// }
-//
-// function delay() {
-//   let delayEffect = new Pizzicato.Effects.Delay();
-//   sineWave.addEffect(delay);
-// }
-
-// //
-//
-// //time for one note to play
-// const NOTE_TEMPO = 200;
-// //time for one beat
-// const DRUM_TEMPO = 300;
-// const ATTACK;
-// const RELEASE;
-//
-// let wordSynth;
-// //my hypothetical sound files
-// let wordOne;
-// let wordTwo;
-// let wordThree;
-// //using class example for now
-// let frequencies = [
-//   220, 246.94, 277.18, 293.66, 329.63, 369.99, 415.30
-// ];
-//
-// let wordOne = new Pizzicato.Sound() {
-// };
+function displayScore() {
+  //for the dark score
+  // let $darkScore = $('<div></div>');
+  // $darkScore.addClass('darkScoreClass');
+  // $darkScore.text(darkScore);
+  // $('body').append($darkScore);
+  //for the light score
+  // let $lightScore = $('<div></div>');
+  // $lightScore.addClass('lightScoreClass');
+  // $lightScore.text(lightScore);
+  // $('body').append($lightScore);
+}
+// //from class
+function randomInRange(min, max) {
+  return min + (Math.random() * (max - min));
+}
