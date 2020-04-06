@@ -93,14 +93,14 @@ function initWords() {
       // score += 1;
       console.log(aOutputIndex, "j");
       // if (aOutputIndex.length > 4) { //after 5 elements are reached play the sounds in sequence
-      // for (let k = 0; k < aOutputIndex.length; k++) { //a for loop to go through each element in the array
-      //   let index = aOutputIndex[k]; //an index so a numerical value can be assigned to other arrays****
-      //   myWordsArray[index].sound.play();
-      //   outputString += myWordsArray[index].wordText + " "; //each time we move through the loop add the selected word
-      //   // $("#output").text(outputString); //display the selected words
-      // } // end k
+      for (let k = 0; k < aOutputIndex.length; k++) { //a for loop to go through each element in the array
+        let index = aOutputIndex[k]; //an index so a numerical value can be assigned to other arrays****
+        myWordsArray[index].sound.play();
+        outputString += myWordsArray[index].wordText + " "; //each time we move through the loop add the selected word
+        // $("#output").text(outputString); //display the selected words
+      } // end k
 
-      // $("#output").text(outputString); //display the selected words
+      $("#output").text(outputString); //display the selected words
       //add the score text to the screen and update it when a word is clicked
       // darkScore += 1;
       // $('body').append($darkScore);

@@ -9,11 +9,11 @@ class Word {
     this.sound = sound;
     // console.log(this.sound); // undefined
     this.div = $('<div>');
-    $(this.div).text(this.wordText);
-    $(this.div).css("color", this.color);
+    this.div.text(this.wordText);
+    this.div.css("color", this.color);
     $('#container').append(this.div);
-    $(this.div).css("position", "absolute");
-    $(this.div).css("left", this.x);
-    $(this.div).css("top", this.y);
+    this.div.css("position", "absolute");
+    this.div.css("left", this.x);
+    this.div.css("top", this.y);
   }
 } //end of script
