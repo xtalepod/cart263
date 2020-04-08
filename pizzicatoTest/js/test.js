@@ -1,6 +1,15 @@
 "use strict";
 
 // let synth;
+let synth;
+const ATTACK = 0.1;
+const RELEASE = 0.1;
+//d minor melodic scale rounded down
+let myFrequencies = [293,329,349,391,440,446,554,587];
+
+
+
+
 //my test sounds
 let sound1, sound2, sound3, sound4, sound5;
 let mySoundsArray = [];
@@ -29,10 +38,23 @@ let playSequenceB = true;
 let score = 0;
 let $score;
 
+
+
 $(document).ready(setup);
 
 function setup() {
 
+  synth = new Pizzicato.Sound({
+    source: 'wave',
+    options: {
+      type: 'triangle',
+      frequency: 220,
+      volume: 0.1
+      // attack: ATTACK,
+      // release: RELEASE
+    }
+  });
+console.log(synth, "synth");
   $score = $('#score');
   $score.text(score);
   // let $darkScore = $('<div></div>');
@@ -67,6 +89,7 @@ function setup() {
   $("#reset").click(function() {
     playSequenceB = false;
     clearArray();
+    playSynth();
     console.log("reset");
   });
   $("#play").click(function() {
@@ -74,6 +97,14 @@ function setup() {
     console.log("play");
   });
 } //endsetup
+
+//adapted from music-box week 7
+function playSynth() {
+  let frequency = Math.floor(randomInRange(220, myFrequencies.length));
+  synth.frequency = frequency;
+  synth.play();
+  console.log(synth);
+}
 
 function initWords() {
 
@@ -87,7 +118,6 @@ function initWords() {
   for (let j = 0; j < myWordsArray.length; j++) {
 
     myWordsArray[j].div.click(function() { //j is the index of the word clicked
-      // stopPropogation();
       aOutputIndex.push(j); //everytime you click, add the corresponding index number
       // console.log("clicked", j);
       // let $darkScore = $('<div></div>');

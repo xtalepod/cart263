@@ -18,7 +18,7 @@ let aMyString = [
 
 let myWordsArray = [];
 let aOutputIndex = [];
-let incr = 0;
+// let incr = 0;
 let outputString = ""; //an empty string for the text output
 let playSequenceB = true;
 //setting up variables to apply ID to words and track score
@@ -86,7 +86,8 @@ function initWords() {
 
   for (let j = 0; j < myWordsArray.length; j++) {
 
-    $(myWordsArray[j].div).click(function() { //j is the index of the word clicked
+    myWordsArray[j].div.click(function() { //j is the index of the word clicked
+      // stopPropogation();
       aOutputIndex.push(j); //everytime you click, add the corresponding index number
       // console.log("clicked", j);
       // let $darkScore = $('<div></div>');
@@ -100,7 +101,7 @@ function initWords() {
         // $("#output").text(outputString); //display the selected words
       } // end k
 
-      $("#output").text(outputString); //display the selected words
+      // $("#output").text(outputString); //display the selected words
       //add the score text to the screen and update it when a word is clicked
       // darkScore += 1;
       // $('body').append($darkScore);
