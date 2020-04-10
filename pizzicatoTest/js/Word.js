@@ -17,3 +17,6 @@ class Word {
     this.div.css("top", this.y);
   }
 } //end of script
+
+
+//should add a font and font size

@@ -1,40 +1,69 @@
-.playing {
-  background-color: yellow !important;
+body {
+  background-color: transparent;
 }
 
 
 p {
-  background-color: beige;
-  font-family:monospace;
+  background-color: pink;
+  font-family: Courier, monospace;
+  font-weight: bold;
   font-size: 30;
   direction: rtl;
 }
-  #p1 {
+  /* #p1 {
     direction:ltr;
-  }
+  } */
 
-  #wordArrayButton {
+  #reset {
   /* margin-left: 50; */
-  padding: 20px 100px;
+  /* padding: 20px 100px; */
   text-align: left;
   font-family: Courier, monospace;
   font-size: 15px;
   font-weight: bolder;
-  position: absolute;
+  /* position: absolute; */
   top: 40px;
   right: 40px;
-  color: black;
-  border: 3px solid yellow;
+  color: #00FF00;
+  border: 3px solid #00FF00;
   outline-style: none;
-  background-color: #b3d1ff;
+  background-color: black;
   ;
 }
+/* 
+#output {
+  text-align: left;
+  font-family: Courier, monospace;
+  font-size: 15px;
+  font-weight: bolder;
 
-  /* #container {
-    width: 1000px;
+} */
+
+
+#play {
+/* margin-left: 50; */
+/* padding: 20px 100px; */
+text-align: left;
+font-family: Courier, monospace;
+font-size: 15px;
+font-weight: bolder;
+/* position: absolute; */
+top: 40px;
+right: 40px;
+color: #00FF00;
+border: 3px solid #00FF00;
+outline-style: none;
+background-color: black;
+;
+}
+  #container {
+    font-family: Courier, monospace;
+    font-size: 15px;
+    font-weight: bolder;
+    /* width: 1000px;
     height: 1000px;
-    background-color: transparent;
-  } */
+    background-color: black; */
+  }
 
 /* #textDisplayID {
   width: 100px;
