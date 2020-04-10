@@ -30,7 +30,7 @@ p {
   background-color: black;
   ;
 }
-/* 
+/*
 #output {
   text-align: left;
   font-family: Courier, monospace;
@@ -61,6 +61,15 @@ background-color: black;
     font-size: 15px;
     font-weight: bolder;
     /* width: 1000px;
+    height: 1000px;
+    background-color: black; */
+  }
+
+  #openScene {
+    font-family: Courier, monospace;
+    font-size: 15px;
+    font-weight: bolder;
+    width: 1000px;
     height: 1000px;
     background-color: black; */
   }

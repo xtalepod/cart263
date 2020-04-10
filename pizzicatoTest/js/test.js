@@ -11,6 +11,10 @@ let myFrequencies = [293, 329, 349, 391, 440, 446, 554, 587];
 let sound1, sound2, sound3, sound4, sound5;
 let mySoundsArray = [];
 
+let bees = "bees";
+let sound6;
+
+
 let aMyString = [
   'parameters',
   'polymorphism',
@@ -21,7 +25,6 @@ let aMyString = [
 
 let myWordsArray = [];
 let aOutputIndex = [];
-// let incr = 0;
 let outputString = ""; //an empty string for the text output
 let playSequenceB = true;
 //setting up variables to apply ID to words and track score
@@ -29,11 +32,16 @@ let playSequenceB = true;
 // let lightScore = 0;
 // let darkID = 0;
 // let lightID = 1;
-let score = 0;
-let $score;
+// let score = 0;
+// let $score;
+let $playButton;
+let $resetButton;
+let $openScene;
 
 $(document).ready(setup);
 
+
+//
 function setup() {
 
   synth = new Pizzicato.Sound({
@@ -47,6 +55,7 @@ function setup() {
     }
   });
 
+  // sound1.play(); //putting this here this breaks pizzicato
   sound1 = new MySound(aMyString[0], "dark", 3000); //this is only working right now because my string matches my audio file names
   sound2 = new MySound(aMyString[1], "dark", 2000);
   sound3 = new MySound(aMyString[2], "dark", 2000);
@@ -57,18 +66,41 @@ function setup() {
   mySoundsArray.push(sound3);
   mySoundsArray.push(sound4);
   mySoundsArray.push(sound5);
-  // sound1.play(); //putting this here this breaks pizzicato
 
+  sound6 = new MySound(bees, "dark", 1000);
+  console.log(sound6);
+
+  $playButton = $("#play");
+  $playButton.hide();
+  $resetButton = $("#reset");
+  $resetButton.hide();
+  $openScene = $("#openScene");
+
+  openingScene();
   // secondScene();
 } //endsetup
 
+
+function openingScene() {
+
+  $openScene.click(function() {
+    sound6.play();
+    console.log(sound6, "click");
+  });
+
+console.log($openScene, "open");
+}
+
 function secondScene() {
-    $("#play").click(function() {
+
+  $playButton.show();
+  $resetButton.show();
+    $playButton.click(function() {
       playSequence();
       playSynth();
     });
 
-    $("#reset").click(function() {
+    $resetButton.click(function() {
       playSequenceB = false;
       clearArray();
       synth.stop();
