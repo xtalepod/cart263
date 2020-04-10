@@ -11,10 +11,10 @@ class Word {
     this.div = $('<div>');
     this.div.text(this.wordText);
     this.div.css("color", this.color);
-    $('#container').append(this.div);
     this.div.css("position", "absolute");
     this.div.css("left", this.x);
     this.div.css("top", this.y);
+    $('#wordDiv').append(this.div);
   }
 } //end of script
 

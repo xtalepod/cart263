@@ -1,10 +1,12 @@
 body {
   background-color: transparent;
+  width: 1000px; */
+  height: 1000px;
 }
 
 
 p {
-  background-color: pink;
+  background-color: inherit;
   font-family: Courier, monospace;
   font-weight: bold;
   font-size: 30;
@@ -21,7 +23,6 @@ p {
   font-family: Courier, monospace;
   font-size: 15px;
   font-weight: bolder;
-  /* position: absolute; */
   top: 40px;
   right: 40px;
   color: #00FF00;
@@ -30,49 +31,58 @@ p {
   background-color: black;
   ;
 }
-/*
-#output {
-  text-align: left;
-  font-family: Courier, monospace;
-  font-size: 15px;
-  font-weight: bolder;
-
-} */
-
 
 #play {
-/* margin-left: 50; */
-/* padding: 20px 100px; */
 text-align: left;
 font-family: Courier, monospace;
 font-size: 15px;
 font-weight: bolder;
-/* position: absolute; */
 top: 40px;
 right: 40px;
 color: #00FF00;
 border: 3px solid #00FF00;
 outline-style: none;
 background-color: black;
-;
 }
-  #container {
-    font-family: Courier, monospace;
-    font-size: 15px;
-    font-weight: bolder;
-    /* width: 1000px;
-    height: 1000px;
-    background-color: black; */
-  }
 
-  #openScene {
+.bigDiv{
+  background-color: inherit;
+  width: 1000px;
+  height: 1000px;
+
+}
+
+
+ #openScene {
+  font-family: Courier, monospace;
+  font-size: 15px;
+  font-weight: bolder;
+  width: 1000px;
+  height: 1000px;
+  background-color: yellow; */
+
+  /* background-color: yellow; */
+ }
+
+  #wordDiv {
     font-family: Courier, monospace;
     font-size: 15px;
     font-weight: bolder;
     width: 1000px;
     height: 1000px;
-    background-color: black; */
+    background-color: inherit;
   }
+
+
+  #output {
+    text-align: left;
+    font-family: Courier, monospace;
+    font-size: 15px;
+    font-weight: bolder;
+    background-color: blue;
+
+  }
+
 
 /* #textDisplayID {
   width: 100px;

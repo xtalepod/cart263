@@ -36,7 +36,9 @@ let playSequenceB = true;
 // let $score;
 let $playButton;
 let $resetButton;
+
 let $openScene;
+let $wordDiv;
 
 $(document).ready(setup);
 
@@ -74,24 +76,30 @@ function setup() {
   $playButton.hide();
   $resetButton = $("#reset");
   $resetButton.hide();
+
   $openScene = $("#openScene");
+  $wordDiv = $("#wordDiv");
+  $wordDiv.hide();
 
   openingScene();
-  // secondScene();
+
 } //endsetup
 
 
 function openingScene() {
 
-  $openScene.click(function() {
+  $openScene.one("click", function() {//only do this one time
     sound6.play();
-    console.log(sound6, "click");
-  });
-
-console.log($openScene, "open");
+    setTimeout("secondScene()", 1000);//wait this long and then take us to the secondScene
+    });
+      console.log($openScene, "open");
+  // });
 }
 
 function secondScene() {
+
+  $wordDiv.fadeIn(10000); //function(){
+  $wordDiv.css("background-color", '#000000');
 
   $playButton.show();
   $resetButton.show();
@@ -107,8 +115,7 @@ function secondScene() {
       // exec_setTimeout()
     });
     initWords();
-
-};
+}
 
 //'adapted' from music-box week 7
 function playSynth() {
@@ -120,9 +127,11 @@ function playSynth() {
 
 
 function initWords() {
+
+  let x = [200, 300, 400, 500, 600]; //Math.random() * 200;
+  let y = [30, 10, 300, 500, 3]; //Math.random() * 200;
+
   for (let i = 0; i < aMyString.length; i++) { //instantiate my word objects
-    let x = [200, 300, 400, 500, 600]; //Math.random() * 200;
-    let y = [30, 10, 300, 500, 3]; //Math.random() * 200;
     myWordsArray.push(new Word(aMyString[i], x[i], y[i], '#00FF00', mySoundsArray[i]));
     // console.log("i:", i,"word array i:", myWordsArray[i],"string:", aMyString[i],"sound:", mySoundsArray[i]);
   } //end i
