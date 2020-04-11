@@ -9,7 +9,7 @@ let myFrequencies = [293, 329, 349, 391, 440, 446, 554, 587];
 
 let pingPongDelay;
 //my test sounds
-let sound1, sound2, sound3, sound4, sound5;
+// let aSound = [sound1, sound2, sound3, sound4, sound5];
 let mySoundsArray = [];
 
 let bees = "bees";
@@ -45,7 +45,7 @@ let $resetButton;
 let pic1;
 let pic2;
 
-let neutralString = [
+let aNeutralString = [
   'this',
   'that',
   'the',
@@ -72,7 +72,7 @@ let neutralString = [
   'mine'
 ];
 
-let darkString =[
+let aDarkString =[
   'discourse',
   'fundamental',
   'portrait',
@@ -86,7 +86,7 @@ let darkString =[
   'essence'
 ];
 
-let lightString =[
+let aLightString =[
   'whole',
   'part',
   'desire',
@@ -121,17 +121,6 @@ function setup() {
   });
 
   // sound1.play(); //putting this here this breaks pizzicato
-  sound1 = new MySound(aMyString[0]); //this is only working right now because my string matches my audio file names
-  // sound2 = new MySound(aMyString[1]);
-  sound3 = new MySound(aMyString[2]);
-  sound4 = new MySound(aMyString[3]);
-  sound5 = new MySound(aMyString[4]);
-  mySoundsArray.push(sound1);
-  // mySoundsArray.push(sound2);
-  mySoundsArray.push(new MySound(aMyString[1]));
-  mySoundsArray.push(sound3);
-  mySoundsArray.push(sound4);
-  mySoundsArray.push(sound5);
 
   sound6 = new MySound(bees, "dark", 1000);
   console.log(sound6);
@@ -177,7 +166,10 @@ function playScene() {
       synth.stop();
     });
 
-    initWords();
+    initWords(aMyString, "dark");
+    // initWords(aDarkString, "dark");
+    // initWords(aLightString, "light");
+    // initWords(aNeutralString, "neutral");
 }
 
 //'adapted' from music-box week 7
@@ -190,18 +182,37 @@ function playSynth() {
 }
 
 
-function initWords() {
+function initWords(aString, mood) {
 
-  let x = [200, 300, 400, 500, 600]; //Math.random() * 200;
-  let y = [30, 10, 300, 500, 3]; //Math.random() * 200;
+  // let x = [200, 300, 400, 500, 600]; //Math.random() * 200;
+  // let y = [30, 10, 300, 500, 3]; //Math.random() * 200;
+let paddingTop = 25;
+let paddingBottom = 25;
+let paddingLeft = 25;
+let boxHeight = 300;
+let lineHeight = 20;
+let columnWidth = 100;
 
-  for (let i = 0; i < aMyString.length; i++) { //instantiate my word objects
-    myWordsArray.push(new Word(aMyString[i], x[i], y[i], '#00FF00', mySoundsArray[i]));
+let x = paddingLeft;
+let y = paddingTop;
+
+  for (let i = 0; i < aString.length; i++) { //instantiate my word objects
+    mySoundsArray.push(new MySound(aString[i]))
+    myWordsArray.push(new Word(i, aString[i], x, y, '#00FF00', mySoundsArray[i], mood));
+    y += lineHeight;
+    if(y > boxHeight-paddingBottom){
+      y = paddingTop;
+      x = paddingLeft + columnWidth;
+    }
     // console.log("i:", i,"word array i:", myWordsArray[i],"string:", aMyString[i],"sound:", mySoundsArray[i]);
   } //end i
 
   for (let j = 0; j < myWordsArray.length; j++) {
       myWordsArray[j].div.click(function() { //j is the index of the word clicked
+$("#W"+ j.toString() ).hide();
+      console.log(this);
+      console.log(this.getAttribute(name));
+
       aOutputIndex.push(j); //everytime you click, add the corresponding index number
       console.log(aOutputIndex, "j");
       // if (aOutputIndex.length > 4) { //after 5 elements are reached play the sounds in sequence
