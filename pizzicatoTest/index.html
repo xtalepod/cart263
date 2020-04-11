@@ -35,16 +35,24 @@
 
   <!-- a div container for my word class -->
 <!-- <div id="openScene"> -->
-<div class ="bigDiv">
+
+<div class ="bigDiv" style="position: relative">
+  <button id="reset">reset</button>
+  <button id="play">play</button>
   <div id="openScene">
     <div id="wordDiv">
-      <button id="reset">reset</button>
-      <button id="play">play</button>
-      <p id="output"></p>
+      <img id="pic1" src="assets/images/pic1.png" width="300" height ="400">
+      <img id="pic2" src="assets/images/pic2.png" width="300" height ="400">
+        <div id="neutralDiv">neutral</div>
+        <div id="darkDiv">dark</div>
+        <div id="lightDiv">light</div>
     </div>
   </div>
-
 </div>
+
+  <div id="scrollbox" style="height:600px;width:600px;overflow:auto;padding:10px;">
+      <p id="output"></p>
+  </div>
 
 
 <!-- <p id="score">0</p>  -->

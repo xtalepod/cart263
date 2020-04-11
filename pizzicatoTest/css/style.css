@@ -1,7 +1,7 @@
 body {
-  background-color: transparent;
-  width: 1000px; */
-  height: 1000px;
+  background-color: black;
+  width: 1000px;
+  height: 800px;
 }
 
 
@@ -12,9 +12,21 @@ p {
   font-size: 30;
   direction: rtl;
 }
-  /* #p1 {
-    direction:ltr;
-  } */
+
+
+#scrollbox {
+padding: 20px 100px;
+text-align: right;
+font-size: 20px;
+font-weight: bold;
+position: absolute;
+top: 40px;
+right: 50px;
+color: black;
+border: 5px solid #ff6699;
+outline-color: rgb(255, 130, 255);
+background-color: transparent;
+}
 
   #reset {
   /* margin-left: 50; */
@@ -48,7 +60,8 @@ background-color: black;
 .bigDiv{
   background-color: inherit;
   width: 1000px;
-  height: 1000px;
+  height: 800px;
+  position:relative;
 
 }
 
@@ -58,10 +71,8 @@ background-color: black;
   font-size: 15px;
   font-weight: bolder;
   width: 1000px;
-  height: 1000px;
+  height: 800px;
   background-color: yellow; */
-
-  /* background-color: yellow; */
  }
 
   #wordDiv {
@@ -69,10 +80,39 @@ background-color: black;
     font-size: 15px;
     font-weight: bolder;
     width: 1000px;
-    height: 1000px;
+    height: 800px;
     background-color: inherit;
+    position: absolute;
   }
 
+  #neutralDiv{
+    background-color: green;
+    height:300px;
+    width:250px;
+    position: absolute;
+    bottom: 50px;
+    left: 10px;
+  }
+
+  #darkDiv{
+    background-color: orange;
+    height:300px;
+    width:250px;
+    position:absolute;
+    left:250px;
+    bottom: 50px;
+    /* right: 50px; */
+    margin-bottom: auto;
+  }
+
+  #lightDiv{
+    background-color: purple;
+    height:300px;
+    width:250px;
+    position:absolute;
+    left:500px;
+    bottom:50px;
+  }
 
   #output {
     text-align: left;
@@ -80,13 +120,4 @@ background-color: black;
     font-size: 15px;
     font-weight: bolder;
     background-color: blue;
-
   }
-
-
-/* #textDisplayID {
-  width: 100px;
-  height: 20px;
-  background-color: pink;
-  position: absolute;
-} */

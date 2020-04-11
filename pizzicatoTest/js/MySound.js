@@ -1,7 +1,7 @@
 "use strict";
 
 class MySound extends Pizzicato.Sound {
-  constructor(name, mood, duration) {
+  constructor(name, duration) {
     super({
       source: 'file',
       options: {
@@ -9,7 +9,6 @@ class MySound extends Pizzicato.Sound {
         loop: false
       }
       });
-      this.mood = mood;
       this.name = name;
       this.duration = duration;
 

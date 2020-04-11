@@ -7,6 +7,7 @@ const RELEASE = 0.1;
 //d minor melodic scale rounded down
 let myFrequencies = [293, 329, 349, 391, 440, 446, 554, 587];
 
+let pingPongDelay;
 //my test sounds
 let sound1, sound2, sound3, sound4, sound5;
 let mySoundsArray = [];
@@ -34,17 +35,79 @@ let playSequenceB = true;
 // let lightID = 1;
 // let score = 0;
 // let $score;
+
+//delcaring variables for all of my jQuery objects
+let $openScene;
+let $wordDiv;
 let $playButton;
 let $resetButton;
 
-let $openScene;
-let $wordDiv;
+let pic1;
+let pic2;
+
+let neutralString = [
+  'this',
+  'that',
+  'the',
+  'but',
+  'be',
+  'been',
+  'i',
+  'it',
+  'is',
+  'in',
+  'and',
+  'are',
+  'am',
+  'a',
+  'an',
+  'will',
+  'with',
+  'like',
+  'very',
+  'none',
+  'from',
+  'you',
+  'my',
+  'mine'
+];
+
+let darkString =[
+  'discourse',
+  'fundamental',
+  'portrait',
+  'structural',
+  'confront',
+  'outburst',
+  'language',
+  'body',
+  'gesture',
+  'fragments',
+  'essence'
+];
+
+let lightString =[
+  'whole',
+  'part',
+  'desire',
+  'glued',
+  'mask',
+  'shape',
+  'space',
+  'gives'
+];
+
 
 $(document).ready(setup);
 
-
-//
 function setup() {
+
+  pingPongDelay = new Pizzicato.Effects.PingPongDelay({
+      feedback: 0.5,
+      time: 0.2,
+      mix: 0.68
+  });
+
 
   synth = new Pizzicato.Sound({
     source: 'wave',
@@ -58,13 +121,14 @@ function setup() {
   });
 
   // sound1.play(); //putting this here this breaks pizzicato
-  sound1 = new MySound(aMyString[0], "dark", 3000); //this is only working right now because my string matches my audio file names
-  sound2 = new MySound(aMyString[1], "dark", 2000);
-  sound3 = new MySound(aMyString[2], "dark", 2000);
-  sound4 = new MySound(aMyString[3], "dark", 2000);
-  sound5 = new MySound(aMyString[4], "dark", 2000);
+  sound1 = new MySound(aMyString[0]); //this is only working right now because my string matches my audio file names
+  // sound2 = new MySound(aMyString[1]);
+  sound3 = new MySound(aMyString[2]);
+  sound4 = new MySound(aMyString[3]);
+  sound5 = new MySound(aMyString[4]);
   mySoundsArray.push(sound1);
-  mySoundsArray.push(sound2);
+  // mySoundsArray.push(sound2);
+  mySoundsArray.push(new MySound(aMyString[1]));
   mySoundsArray.push(sound3);
   mySoundsArray.push(sound4);
   mySoundsArray.push(sound5);
@@ -72,48 +136,47 @@ function setup() {
   sound6 = new MySound(bees, "dark", 1000);
   console.log(sound6);
 
+  $openScene = $("#openScene");
+  $wordDiv = $("#wordDiv");
+  $wordDiv.hide();//this makes the fade in smooth
   $playButton = $("#play");
   $playButton.hide();
   $resetButton = $("#reset");
   $resetButton.hide();
 
-  $openScene = $("#openScene");
-  $wordDiv = $("#wordDiv");
-  $wordDiv.hide();
-
-  openingScene();
+  // openingScene();
+  playScene();
 
 } //endsetup
 
-
+//this is the first function the user has to engage with. it helps to give a mood/transition and help set the next scene
 function openingScene() {
 
   $openScene.one("click", function() {//only do this one time
     sound6.play();
-    setTimeout("secondScene()", 1000);//wait this long and then take us to the secondScene
+    setTimeout("playScene()", 1000);//wait this long and then take us to the secondScene
     });
       console.log($openScene, "open");
-  // });
 }
 
-function secondScene() {
+function playScene() {
 
-  $wordDiv.fadeIn(10000); //function(){
+  $wordDiv.fadeIn(1000);
   $wordDiv.css("background-color", '#000000');
 
   $playButton.show();
   $resetButton.show();
     $playButton.click(function() {
       playSequence();
-      playSynth();
+      // playSynth();
     });
 
     $resetButton.click(function() {
       playSequenceB = false;
       clearArray();
       synth.stop();
-      // exec_setTimeout()
     });
+
     initWords();
 }
 
@@ -121,6 +184,7 @@ function secondScene() {
 function playSynth() {
   let frequency = Math.floor(randomInRange(220, myFrequencies.length));
   synth.frequency = frequency;
+  // synth.addEffect
   synth.play();
   console.log(synth);
 }
@@ -161,16 +225,19 @@ function playSequence() {
       if (l < aOutputIndex.length - 1) { //for all words but the last
         myWordsArray[index].sound.on('end', function() { //when the sound ends
           console.log(index, "ended");
+          // myWordsArray[aOutputIndex[l + 1]].sound.addEffect(pingPongDelay); //play the next sound
           myWordsArray[aOutputIndex[l + 1]].sound.play(); //play the next sound
         });
       }
+      // myWordsArray[aOutputIndex[0]].sound.addEffect(pingPongDelay); //play the first word, rest will follow
       myWordsArray[aOutputIndex[0]].sound.play(); //play the first word, rest will follow
+      // console.log(pingPongDelay, "ping");
     }
   }
 }
 
 
-//this function clears the output array and put the playSequenceB back to true, its executed when the reset button is pressed
+//this function clears the output array and puts the playSequenceB back to true, its executed when the reset button is pressed
 function clearArray() {
   console.log("clearArray");
   for (let m = 0; m < myWordsArray.length; m++) {

@@ -1,12 +1,13 @@
 "use strict";
 
 class Word {
-  constructor(wordText, x, y, color, sound) {
+  constructor(wordText, x, y, color, sound, mood) {
     this.wordText = wordText;
     this.x = x;
     this.y = y;
     this.color = color;
     this.sound = sound;
+    this.mood = mood;
     // console.log(this.sound); // undefined
     this.div = $('<div>');
     this.div.text(this.wordText);
