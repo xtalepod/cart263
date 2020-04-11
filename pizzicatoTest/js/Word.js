@@ -9,10 +9,6 @@ class Word {
     this.sound = sound;
     this.mood = mood;
     this.effect = null;
-  //   this.effect = this.getEffect(this.mood);
-  //   if(this.effect != null){
-  //     this.sound.addEffect(this.effect);
-  //   }
 }
 
 //this function exists because the ID created within the pushWord() function where the words are initialized
@@ -26,9 +22,13 @@ class Word {
     this.div.css("position", "absolute");
     this.div.css("left", this.x);
     this.div.css("top", this.y);
-    $('#' + this.mood + 'Div').append(this.div);
+    $('#' + this.mood + 'Div').append(this.div);//append the word to the proper div
   }
 
+
+//getEffect() function
+//set the effect based on the score. the score id number is set as a global variable "moodScore" in the script
+//the dark and light scores are set as -1 and 1 in the updateMoodScore() function
   getEffect(score) {
     //takes a mood as an input
     let effect;
@@ -41,6 +41,7 @@ class Word {
     }//end if
     return effect;
   }//end method
+
 
   changeEffect(score) {
     // console.log("old effect", this.effect);

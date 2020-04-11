@@ -183,11 +183,13 @@ function playScene() {
 
   initWordsClick();
 
-  console.log(myWordsArray);
-  console.log(mySoundsArray);
+  // console.log(myWordsArray);
+  // console.log(mySoundsArray);
 }
 
-//'adapted' from music-box week 7
+//playSynth() function
+//this function is 'adapted' from music-box week 7 and is a WIP
+//will hopefully help with effects for playSquence
 function playSynth() {
   let frequency = Math.floor(randomInRange(220, myFrequencies.length));
   synth.frequency = frequency;
@@ -196,7 +198,9 @@ function playSynth() {
   console.log(synth);
 }
 
-//this function initializes my words and puts them in the proper location, is initializes my sounds
+//pushWords() function
+//this function uses a for loop to initialize the word and sound objects
+//it inadvertantly became a css hack for positioning the word objects on the screen
 function pushWords(aString, mood) {
 
   let paddingTop = 25;
@@ -221,8 +225,12 @@ function pushWords(aString, mood) {
   } //end i
 }// end pushWords
 
-function initWordsClick(){
 
+//initWordsClick() function
+//this function does a lot of important things related to word objects! it uses different events: createWordDiv(j),
+//on click, play the right sound, hide the word div, push index of the word to the aOutputIndex[], add to the
+//previously empty outputString variable, add text to the screen, and updateMoodScore
+function initWordsClick(){
   for (let j = 0; j < myWordsArray.length; j++) {
     myWordsArray[j].createWordDiv(j);
     myWordsArray[j].div.click(function() { //j is the index of the word clicked
@@ -238,11 +246,13 @@ function initWordsClick(){
       //5 . update the mood Score based on the word mood
       updateMoodScore(myWordsArray[j].mood);
       console.log("moodScore", moodScore);
-
   }); //end click j
   } //end for
 } //end initWordsClick
 
+//applyEffect() function
+//this function creates a new index from aOutputIndex[k] and changes the effect of a word based on the score
+//it passes score as a parameter and is determined in the getEffect() method in the Word class
 function applyEffect(score){
    // apply effect to all words from Output
   for (let k = 0; k < aOutputIndex.length; k++) {
@@ -251,6 +261,10 @@ function applyEffect(score){
     }
 }
 
+
+//updateMoodScore() function
+//this function updates the score based on whether the mood is light or dark
+//it passes mood as a parameter
 function updateMoodScore(mood){
   //takes a mood as an input
   if (mood === "dark") {
@@ -259,10 +273,12 @@ function updateMoodScore(mood){
   else if (mood === "light") {
       moodScore += 1;
   }
-
 }
 
-//creating a play sequence function that is executed when the play button is pressed
+//playSquence() function
+//this function assesses a true false boolean that if true runs through a for loop and instatiates a new index
+//for the aOutputIndex[l] which is used to track which sound to play in order of word clicked first to last.
+// it uses the Pizzicato end event to play the next sound after the previous one ends
 function playSequence() {
 
   if (playSequenceEnabled) {
@@ -270,7 +286,6 @@ function playSequence() {
       let index = aOutputIndex[l];
       // console.log(aOutputIndex.length, l);
       if (l < aOutputIndex.length - 1) { //for all words but the last
-
         myWordsArray[index].sound.on('end', function() { //when the sound ends
           console.log(index, "ended");
           myWordsArray[aOutputIndex[l + 1]].sound.play(); //play the next sound
@@ -282,22 +297,26 @@ function playSequence() {
   }
 }
 
-//this function clears the output array and puts the playSequenceEnabled back to true, its executed when the reset button is pressed
+//clearOutput() function
+//this function clears all of the aOutputIndex data using the JavaScript splice event. to help stop previously
+//playing sounds from loading after the reset button has been pressed the Pizzicator pause event is used and
+//seems to make the transition smoother. the outputString is set back to empty, the wordDivs are made visible again,
+//and the mood is passed back through changeEffect()
 function clearOutput(mood) {
   console.log("clearOutput");
-
   for (let m = 0; m < myWordsArray.length; m++) {
     myWordsArray[m].sound.pause();
     outputString = "";
     aOutputIndex.splice(0, aOutputIndex.length);
     $("#W" + m.toString()).show();//show the words again
-    myWordsArray[m].changeEffect(mood);
+    myWordsArray[m].changeEffect(mood);//goes back to null?
   }//end of m
   $("#output").text(outputString);
-
 }
 
-// //from class
+//randomInRange() function
+//this function is an early example used in class that gives us a basic equation for setting random values that
+//can be reused throughout the code
 function randomInRange(min, max) {
   return min + (Math.random() * (max - min));
 }
