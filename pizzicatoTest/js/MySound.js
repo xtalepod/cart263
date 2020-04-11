@@ -1,7 +1,7 @@
 "use strict";
 
 class MySound extends Pizzicato.Sound {
-  constructor(name, duration) {
+  constructor(name, volume) {
     super({
       source: 'file',
       options: {
@@ -10,34 +10,39 @@ class MySound extends Pizzicato.Sound {
       }
       });
       this.name = name;
-      this.duration = duration;
+      this.volume = volume;
 
-  }
-
-  showMood() {
-    console.log(this.mood);
   }
 }
+
+//   getEffect(mood){
+//
+//     //takes a mood as an input
+//     if (mood === "dark") {
+//       return darkEffect;
+//       // myWordsArray[j].sound.addEffect(darkEffect);//affectMood();
+//       console.log(mood, "the mood")
+//     }
+//       else if (mood === "light") {
+//       return lightEffect
+//       }
+//       else {
+//         return 0;
+//       }
+//       // else if (myWordsArray[j].mood === "neutral") {
+//       //   score = 0;
+//       // }
+//
+//   }
+//
+//   changeMood(mood) {
+//   //   //needs to take an input which is the new mood
+//   //   //first you need to this.mood.removeAffect
+//   //   console.log(this.mood);
+//   // }
+// }
 
 // // https://www.sitepoint.com/delay-sleep-pause-wait/
 // sleep(ms) {
 //  return new Promise(resolve => setTimeout(resolve, ms));
 // }
-
-// setEffectBasedOnMood(){
-//
-//
-// }
-
-
-
-// these are the same thing! leaving for mental note //
-  // bark = new Pizzicato.Sound({
-  //   source: 'file',
-  //   options: {
-  //     path: 'assets/sounds/bark.wav'
-  //   }
-  //   });
-
-  // bark = new MySound('bark',"dark", 6000);
-  // these are the same thing //

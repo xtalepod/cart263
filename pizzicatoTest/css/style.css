@@ -57,6 +57,7 @@ outline-style: none;
 background-color: black;
 }
 
+
 .bigDiv{
   background-color: inherit;
   width: 1000px;
@@ -84,6 +85,13 @@ background-color: black;
     background-color: inherit;
     position: absolute;
   }
+
+  /* let paddingTop = 25;
+  let paddingBottom = 25;
+  let paddingLeft = 25;
+  let boxHeight = 300;
+  let lineHeight = 20;
+  let columnWidth = 100; */
 
   #neutralDiv{
     background-color: green;

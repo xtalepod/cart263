@@ -12,10 +12,10 @@ this.element = $('<div>');
 $(this.element).css("width",this.size);
 $(this.element).css("height",this.size);
 $(this.element).css("background", this.color);
-$('#container').append(this.element);
 $(this.element).css("position","absolute");
 $(this.element).css("left",this.x)
 $(this.element).css("top",this.y)
+$('#container').append(this.element);
 
 }
 
