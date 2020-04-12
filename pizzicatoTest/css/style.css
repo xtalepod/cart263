@@ -9,7 +9,7 @@ p {
   background-color: inherit;
   font-family: Courier, monospace;
   font-weight: bold;
-  font-size: 30;
+  font-size: 40;
   direction: rtl;
 }
 
@@ -20,11 +20,13 @@ text-align: right;
 font-size: 20px;
 font-weight: bold;
 position: absolute;
+width: 500px;
+height: 500px;
 top: 40px;
-right: 50px;
+right: 150px;
 color: black;
 border: 5px solid #ff6699;
-outline-color: rgb(255, 130, 255);
+/* outline-color: rgb(255, 130, 255); */
 background-color: transparent;
 }
 
@@ -35,13 +37,13 @@ background-color: transparent;
   font-family: Courier, monospace;
   font-size: 15px;
   font-weight: bolder;
-  top: 40px;
-  right: 40px;
   color: #00FF00;
   border: 3px solid #00FF00;
   outline-style: none;
   background-color: black;
-  ;
+  top: 40px;
+  left: 800px;
+  position:absolute;
 }
 
 #play {
@@ -55,11 +57,14 @@ color: #00FF00;
 border: 3px solid #00FF00;
 outline-style: none;
 background-color: black;
+top: 60px;
+left: 880px;
+position:absolute;
 }
 
 
 .bigDiv{
-  background-color: inherit;
+  /* background-color: inherit; */
   width: 1000px;
   height: 800px;
   position:relative;
@@ -73,10 +78,22 @@ background-color: black;
   font-weight: bolder;
   width: 1000px;
   height: 800px;
-  background-color: yellow; */
+  background-color: inherit;
  }
 
-  #wordDiv {
+#pic1{
+  top: 30px;
+  left: 140px;
+  position: absolute;
+
+}
+
+#pic2{
+  top: 30px;
+  left: 460px;
+  position: absolute;
+}
+  /* #wordsDiv {
     font-family: Courier, monospace;
     font-size: 15px;
     font-weight: bolder;
@@ -84,42 +101,37 @@ background-color: black;
     height: 800px;
     background-color: inherit;
     position: absolute;
-  }
-
-  /* let paddingTop = 25;
-  let paddingBottom = 25;
-  let paddingLeft = 25;
-  let boxHeight = 300;
-  let lineHeight = 20;
-  let columnWidth = 100; */
+  } */
 
   #neutralDiv{
-    background-color: green;
+    background-color: inherit;
     height:300px;
     width:250px;
     position: absolute;
     bottom: 50px;
     left: 10px;
+    border: 1px solid yellow;
   }
 
   #darkDiv{
-    background-color: orange;
+    background-color: inherit;
     height:300px;
     width:250px;
     position:absolute;
-    left:250px;
+    left:260px;
     bottom: 50px;
-    /* right: 50px; */
     margin-bottom: auto;
+    border: 1px solid yellow;
   }
 
   #lightDiv{
-    background-color: purple;
+    background-color: inherit;
     height:300px;
     width:250px;
     position:absolute;
-    left:500px;
+    left:510px;
     bottom:50px;
+    border: 1px solid yellow;
   }
 
   #output {

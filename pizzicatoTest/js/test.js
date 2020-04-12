@@ -277,12 +277,13 @@ function hoverOver(mood) {
     } else if (aWordsArray[r].mood === "light") {
       aWordsArray[r].div.hover(function() {
         aWordsArray[r].sound.play();
+        $('body').css("background-color", "#ffffff");
         $pic2.css({
           'filter': 'hue-rotate(250deg)'
         });
       }, function() {
           aWordsArray[r].sound.stop();
-          console.log("stop hover", r);
+            $('body').css("background-color", "#000000");
           $pic2.css({
             'filter': 'hue-rotate(0deg)'
           });
