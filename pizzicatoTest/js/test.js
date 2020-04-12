@@ -13,7 +13,7 @@ let darkEffect;
 let lightEffect;
 
 //my test sounds
-let mySoundsArray = [];
+let aSoundsArray = [];
 
 //my opening scene sound, currently is still a test sound
 let bees = "bees";
@@ -27,7 +27,7 @@ let sound6;
   'let',
   'this'
 // ];
-let myWordsArray = [];
+let aWordsArray = [];
 
 let aOutputIndex = [];
 let outputString = ""; //an empty string for the text output
@@ -102,6 +102,8 @@ let moodScore = 0;
 
 $(document).ready(setup);
 
+//setup() function
+//this function has a lot going on...
 function setup() {
 
   darkEffect = new Pizzicato.Effects.Delay({
@@ -138,19 +140,15 @@ function setup() {
   $resetButton = $("#reset");
   $resetButton.hide();
 
-  // openingScene();
-  playScene();
-
-} //endsetup
-
-//this is the first function the user has to engage with. it helps to give a mood/transition and help set the next scene
-function openingScene() {
   $openScene.one("click", function() { //only do this one time
     sound6.play();
     setTimeout("playScene()", 1000); //wait this long and then take us to the secondScene
   });
   console.log($openScene, "open");
-}
+
+  // playScene();
+
+} //endsetup
 
 function playScene() {
 
@@ -176,27 +174,22 @@ function playScene() {
 
   });
 
-  // initWords(aMyString, "dark");
   pushWords(aDarkString, "dark");
   pushWords(aLightString, "light");
   // pushWords(aNeutralString, "neutral");
-
   initWordsClick();
-
-  // console.log(myWordsArray);
-  // console.log(mySoundsArray);
-}
+}//end playScene();
 
 //playSynth() function
 //this function is 'adapted' from music-box week 7 and is a WIP
-//will hopefully help with effects for playSquence
+//will hopefully help with effects for playSequence
 function playSynth() {
   let frequency = Math.floor(randomInRange(220, myFrequencies.length));
   synth.frequency = frequency;
   // synth.addEffect
   synth.play();
   console.log(synth);
-}
+}//end playSynth();
 
 //pushWords() function
 //this function uses a for loop to initialize the word and sound objects
@@ -213,17 +206,16 @@ function pushWords(aString, mood) {
   let y = paddingTop;
 
   for (let i = 0; i < aString.length; i++) { //instantiate my word objects
-    mySoundsArray.push(new MySound(aString[i], 4));
-    let lastSoundPushed =  mySoundsArray[mySoundsArray.length-1];
-    myWordsArray.push(new Word(aString[i], x, y, '#00FF00', lastSoundPushed, mood));
+    aSoundsArray.push(new MySound(aString[i], 4));
+    let lastSoundPushed =  aSoundsArray[aSoundsArray.length-1];
+    aWordsArray.push(new Word(aString[i], x, y, '#00FF00', lastSoundPushed, mood));
       y += lineHeight;
         if (y > boxHeight - paddingBottom) {
           y = paddingTop;
           x = paddingLeft + columnWidth;
         }
-    // console.log("i:", i,"word array i:", myWordsArray[i],"string:", aMyString[i],"sound:", mySoundsArray[i]);
   } //end i
-}// end pushWords
+}// end pushWords();
 
 
 //initWordsClick() function
@@ -231,24 +223,24 @@ function pushWords(aString, mood) {
 //on click, play the right sound, hide the word div, push index of the word to the aOutputIndex[], add to the
 //previously empty outputString variable, add text to the screen, and updateMoodScore
 function initWordsClick(){
-  for (let j = 0; j < myWordsArray.length; j++) {
-    myWordsArray[j].createWordDiv(j);
-    myWordsArray[j].div.click(function() { //j is the index of the word clicked
+  for (let j = 0; j < aWordsArray.length; j++) {
+    aWordsArray[j].createWordDiv(j);
+    aWordsArray[j].div.click(function() { //j is the index of the word clicked
       // 1. play the sound associated with the word
-      myWordsArray[j].sound.play();
+      aWordsArray[j].sound.play();
       // 2. hide the word from the bag
       $("#W" + j.toString()).hide();//
       // 3. add the index of the word clicked to the Output Index Array
       aOutputIndex.push(j); //everytime you click, add the corresponding index number
       //4. adding the word to the Output String
-      outputString += myWordsArray[j].wordText + " "; //each time we move through the loop add the selected word
+      outputString += aWordsArray[j].wordText + " "; //each time we move through the loop add the selected word
       $("#output").text(outputString); //display the selected words
       //5 . update the mood Score based on the word mood
-      updateMoodScore(myWordsArray[j].mood);
+      updateMoodScore(aWordsArray[j].mood);
       console.log("moodScore", moodScore);
   }); //end click j
   } //end for
-} //end initWordsClick
+} //end initWordsClick();
 
 //applyEffect() function
 //this function creates a new index from aOutputIndex[k] and changes the effect of a word based on the score
@@ -257,9 +249,9 @@ function applyEffect(score){
    // apply effect to all words from Output
   for (let k = 0; k < aOutputIndex.length; k++) {
     let index = aOutputIndex[k];
-      myWordsArray[index].changeEffect(score);
+      aWordsArray[index].changeEffect(score);
     }
-}
+}//end applyEffect();
 
 
 //updateMoodScore() function
@@ -273,11 +265,11 @@ function updateMoodScore(mood){
   else if (mood === "light") {
       moodScore += 1;
   }
-}
+}//end updateMoodScore();
 
-//playSquence() function
-//this function assesses a true false boolean that if true runs through a for loop and instatiates a new index
-//for the aOutputIndex[l] which is used to track which sound to play in order of word clicked first to last.
+//playSequence() function
+//this function assesses a true false boolean that if true runs through a for loop and instatiates an index
+//for the aOutputIndex[l]  and is used to track which sound to play in order of word clicked first to last.
 // it uses the Pizzicato end event to play the next sound after the previous one ends
 function playSequence() {
 
@@ -286,16 +278,15 @@ function playSequence() {
       let index = aOutputIndex[l];
       // console.log(aOutputIndex.length, l);
       if (l < aOutputIndex.length - 1) { //for all words but the last
-        myWordsArray[index].sound.on('end', function() { //when the sound ends
+        aWordsArray[index].sound.on('end', function() { //when the sound ends
           console.log(index, "ended");
-          myWordsArray[aOutputIndex[l + 1]].sound.play(); //play the next sound
+          aWordsArray[aOutputIndex[l + 1]].sound.play(); //play the next sound
         });
       }
-      // myWordsArray[aOutputIndex[0]].sound.addEffect(darkEffect; //play the first word, rest will follow
-      myWordsArray[aOutputIndex[0]].sound.play(); //play the first word, rest will follow
+      aWordsArray[aOutputIndex[0]].sound.play(); //play the first word, rest will follow
     }
   }
-}
+}//end playSequence(); play
 
 //clearOutput() function
 //this function clears all of the aOutputIndex data using the JavaScript splice event. to help stop previously
@@ -304,12 +295,12 @@ function playSequence() {
 //and the mood is passed back through changeEffect()
 function clearOutput(mood) {
   console.log("clearOutput");
-  for (let m = 0; m < myWordsArray.length; m++) {
-    myWordsArray[m].sound.pause();
+  for (let m = 0; m < aWordsArray.length; m++) {
+    aWordsArray[m].sound.pause();
     outputString = "";
     aOutputIndex.splice(0, aOutputIndex.length);
     $("#W" + m.toString()).show();//show the words again
-    myWordsArray[m].changeEffect(mood);//goes back to null?
+    aWordsArray[m].changeEffect(mood);//goes back to null?
   }//end of m
   $("#output").text(outputString);
 }
@@ -323,8 +314,8 @@ function randomInRange(min, max) {
 
 
 //related to palying the sounds but so far am not using it anymore
-// $(myWordsArray[j].div).hover(function() {
-//     // myWordsArray[j].sound.play();
+// $(aWordsArray[j].div).hover(function() {
+//     // aWordsArray[j].sound.play();
 //     // console.log("hover", j);
 //     // sleep(polymorphism.duration).then(() => { //this comes from the sleep function source
 //     //     //   polymorphism.stop();
