@@ -21,11 +21,11 @@ let sound6;
 
 
 // let aMyString = [
-  'parameters',
-  'polymorphism',
-  'variable',
-  'let',
-  'this'
+'parameters',
+'polymorphism',
+'variable',
+'let',
+'this'
 // ];
 let aWordsArray = [];
 
@@ -40,8 +40,8 @@ let $wordDiv;
 let $playButton;
 let $resetButton;
 //declaring variables for my pics
-let pic1;
-let pic2;
+let $pic1;
+let $pic2;
 //creating string array for the different word divs
 let aNeutralString = ["kick", "snare", "hihat"];
 let aDarkString = ["polymorphism", "variable", "parameters"];
@@ -129,9 +129,9 @@ function setup() {
     }
   });
 
-//the sound that pays at the opening scene
+  //the sound that pays at the opening scene
   sound6 = new MySound(bees, "dark", 1000, 4);
-//creating my jQuery objects and hiding them at first
+  //creating my jQuery objects and hiding them at first
   $openScene = $("#openScene");
   $wordDiv = $("#wordDiv");
   $wordDiv.hide(); //this makes the fade in smooth
@@ -139,14 +139,16 @@ function setup() {
   $playButton.hide();
   $resetButton = $("#reset");
   $resetButton.hide();
+  $pic1 = $("#pic1");
+  $pic2 = $("#pic2");
+  //
+  // $openScene.one("click", function() { //only do this one time
+  //   sound6.play();
+  //   setTimeout("playScene()", 1000); //wait this long and then take us to the secondScene
+  // });
+  // console.log($openScene, "open");
 
-  $openScene.one("click", function() { //only do this one time
-    sound6.play();
-    setTimeout("playScene()", 1000); //wait this long and then take us to the secondScene
-  });
-  console.log($openScene, "open");
-
-  // playScene();
+  playScene();
 
 } //endsetup
 
@@ -163,7 +165,7 @@ function playScene() {
     playSequence();
   });
 
-//the reset button and its click functions
+  //the reset button and its click functions
   $resetButton.click(function() {
     // if the OutputIndex array is cleared while the playSequence function is
     // still enabled, some sounds that don't exist anymore will get triggered
@@ -176,9 +178,13 @@ function playScene() {
 
   pushWords(aDarkString, "dark");
   pushWords(aLightString, "light");
-  // pushWords(aNeutralString, "neutral");
+  pushWords(aNeutralString, "neutral");
+
+  initWordDivs();
   initWordsClick();
-}//end playScene();
+  hoverOver();
+
+} //end playScene();
 
 //playSynth() function
 //this function is 'adapted' from music-box week 7 and is a WIP
@@ -189,7 +195,7 @@ function playSynth() {
   // synth.addEffect
   synth.play();
   console.log(synth);
-}//end playSynth();
+} //end playSynth();
 
 //pushWords() function
 //this function uses a for loop to initialize the word and sound objects
@@ -207,29 +213,35 @@ function pushWords(aString, mood) {
 
   for (let i = 0; i < aString.length; i++) { //instantiate my word objects
     aSoundsArray.push(new MySound(aString[i], 4));
-    let lastSoundPushed =  aSoundsArray[aSoundsArray.length-1];
+    let lastSoundPushed = aSoundsArray[aSoundsArray.length - 1];
     aWordsArray.push(new Word(aString[i], x, y, '#00FF00', lastSoundPushed, mood));
-      y += lineHeight;
-        if (y > boxHeight - paddingBottom) {
-          y = paddingTop;
-          x = paddingLeft + columnWidth;
-        }
+    y += lineHeight;
+    if (y > boxHeight - paddingBottom) {
+      y = paddingTop;
+      x = paddingLeft + columnWidth;
+    }
   } //end i
-}// end pushWords();
+} // end pushWords();
 
+//initWordDivs() function
+//a for loop to create the word divs once so that they can be easily accessed and more modular
+function initWordDivs() {
+  for (let t = 0; t < aWordsArray.length; t++) {
+    aWordsArray[t].createWordDiv(t);
+  }
+}
 
 //initWordsClick() function
 //this function does a lot of important things related to word objects! it uses different events: createWordDiv(j),
 //on click, play the right sound, hide the word div, push index of the word to the aOutputIndex[], add to the
 //previously empty outputString variable, add text to the screen, and updateMoodScore
-function initWordsClick(){
+function initWordsClick() {
   for (let j = 0; j < aWordsArray.length; j++) {
-    aWordsArray[j].createWordDiv(j);
     aWordsArray[j].div.click(function() { //j is the index of the word clicked
       // 1. play the sound associated with the word
       aWordsArray[j].sound.play();
       // 2. hide the word from the bag
-      $("#W" + j.toString()).hide();//
+      $("#W" + j.toString()).hide(); //
       // 3. add the index of the word clicked to the Output Index Array
       aOutputIndex.push(j); //everytime you click, add the corresponding index number
       //4. adding the word to the Output String
@@ -238,34 +250,72 @@ function initWordsClick(){
       //5 . update the mood Score based on the word mood
       updateMoodScore(aWordsArray[j].mood);
       console.log("moodScore", moodScore);
-  }); //end click j
+    }); //end click j
   } //end for
 } //end initWordsClick();
+
+//hoverOver() function
+function hoverOver(mood) {
+
+  for (let r = 0; r < aWordsArray.length; r++) {
+
+    if (aWordsArray[r].mood === "dark") {
+      aWordsArray[r].div.hover(function() {
+        aWordsArray[r].sound.play();
+        //https://stackoverflow.com/questions/16781486/jquery-how-to-adjust-css-filter-blur
+        $pic1.css({
+          'filter': 'hue-rotate(250deg)'
+        });
+      }, function() {
+        aWordsArray[r].sound.stop();
+        console.log("stop hover", r);
+        $pic1.css({
+          'filter': 'hue-rotate(0deg)'
+        });
+      });
+
+    } else if (aWordsArray[r].mood === "light") {
+      aWordsArray[r].div.hover(function() {
+        aWordsArray[r].sound.play();
+        $pic2.css({
+          'filter': 'hue-rotate(250deg)'
+        });
+      }, function() {
+          aWordsArray[r].sound.stop();
+          console.log("stop hover", r);
+          $pic2.css({
+            'filter': 'hue-rotate(0deg)'
+          });
+        });
+    } //end if
+    //end hover
+  } //end for loop
+} //end of hover over
+
+
 
 //applyEffect() function
 //this function creates a new index from aOutputIndex[k] and changes the effect of a word based on the score
 //it passes score as a parameter and is determined in the getEffect() method in the Word class
-function applyEffect(score){
-   // apply effect to all words from Output
+function applyEffect(score) {
+  // apply effect to all words from Output
   for (let k = 0; k < aOutputIndex.length; k++) {
     let index = aOutputIndex[k];
-      aWordsArray[index].changeEffect(score);
-    }
-}//end applyEffect();
-
+    aWordsArray[index].changeEffect(score);
+  }
+} //end applyEffect();
 
 //updateMoodScore() function
 //this function updates the score based on whether the mood is light or dark
 //it passes mood as a parameter
-function updateMoodScore(mood){
+function updateMoodScore(mood) {
   //takes a mood as an input
   if (mood === "dark") {
     moodScore -= 1;
+  } else if (mood === "light") {
+    moodScore += 1;
   }
-  else if (mood === "light") {
-      moodScore += 1;
-  }
-}//end updateMoodScore();
+} //end updateMoodScore();
 
 //playSequence() function
 //this function assesses a true false boolean that if true runs through a for loop and instatiates an index
@@ -286,7 +336,7 @@ function playSequence() {
       aWordsArray[aOutputIndex[0]].sound.play(); //play the first word, rest will follow
     }
   }
-}//end playSequence(); play
+} //end playSequence();
 
 //clearOutput() function
 //this function clears all of the aOutputIndex data using the JavaScript splice event. to help stop previously
@@ -299,9 +349,9 @@ function clearOutput(mood) {
     aWordsArray[m].sound.pause();
     outputString = "";
     aOutputIndex.splice(0, aOutputIndex.length);
-    $("#W" + m.toString()).show();//show the words again
-    aWordsArray[m].changeEffect(mood);//goes back to null?
-  }//end of m
+    $("#W" + m.toString()).show(); //show the words again
+    aWordsArray[m].changeEffect(mood); //goes back to null?
+  } //end of m
   $("#output").text(outputString);
 }
 
@@ -311,17 +361,3 @@ function clearOutput(mood) {
 function randomInRange(min, max) {
   return min + (Math.random() * (max - min));
 }
-
-
-//related to palying the sounds but so far am not using it anymore
-// $(aWordsArray[j].div).hover(function() {
-//     // aWordsArray[j].sound.play();
-//     // console.log("hover", j);
-//     // sleep(polymorphism.duration).then(() => { //this comes from the sleep function source
-//     //     //   polymorphism.stop();
-//     //     // });
-//   },
-//   function() {
-//     // console.log("stop hover", j);
-//     // polymorphism.showMood();//console log in the MySound class function pings to here
-//   });

@@ -32,7 +32,7 @@ class Word {
   getEffect(score) {
     //takes a mood as an input
     let effect;
-    if (score <0 ) { //dark
+    if (score < 0 ) { //dark
       effect = darkEffect;
     } else if (score > 0) { //light
       effect = lightEffect;
@@ -56,5 +56,21 @@ class Word {
     // console.log("new mood:", this.effect);
   }
 
+// hoverOver(){
+  //related to palying the sounds but so far am not using it anymore
+  // $(aWordsArray[j].div).hover(function() {
+  //     // aWordsArray[j].sound.play();
+  //     // console.log("hover", j);
+  //     // sleep(polymorphism.duration).then(() => { //this comes from the sleep function source
+  //     //     //   polymorphism.stop();
+  //     //     // });
+  //   },
+  //   function() {
+  //     // console.log("stop hover", j);
+  //     // polymorphism.showMood();//console log in the MySound class function pings to here
+  //   });
+// }
+
+
+
 } //end of script
-//should add a font and font size
