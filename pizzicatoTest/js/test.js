@@ -2,32 +2,41 @@
 
 // my test synth and its;
 let synth;
-const ATTACK = 0.1;
+const ATTACK = 0.5;
 const RELEASE = 0.1;
-
 //d minor melodic scale rounded down
-let myFrequencies = [293, 329, 349, 391, 440, 446, 554, 587];
+// let myFrequencies = [293, 329, 349, 391, 440, 446, 554, 587];
+
+//building chords
+//https://www.youtube.com/watch?v=YSKAt3pmYBs
+const NOTE_TEMPO = 500;
+let frequency;
+let oscillator;
+
+let synth1;
+let aSynth1Freq = [196, 311.13];
+let aChord1 = [];
+
+let synth2;
+let aSynth2Freq = [249.94, 392.00];
+// let aSynth2 = [];
+let synth3;
+let aSynth3Freq = [293.66, 466.16];
+// let aSynth3 = [];
+let synthString = ['synth1', 'synth2', 'synth3'];
+let aSynths = [];
 
 //two variables for my Pizzicato effects
 let darkEffect;
 let lightEffect;
 
-//my test sounds
-let aSoundsArray = [];
 
 //my opening scene sound, currently is still a test sound
 let bees = "bees";
 let sound6;
 
-
-// let aMyString = [
-'parameters',
-'polymorphism',
-'variable',
-'let',
-'this'
-// ];
 let aWordsArray = [];
+let aSoundsArray = [];
 
 let aOutputIndex = [];
 let outputString = ""; //an empty string for the text output
@@ -118,19 +127,25 @@ function setup() {
     volume: 0.9
   });
 
-  synth = new Pizzicato.Sound({
-    source: 'wave',
-    options: {
-      type: 'triangle',
-      frequency: 220,
-      volume: 0.1,
-      attack: ATTACK,
-      release: RELEASE
-    }
-  });
-
-  //the sound that pays at the opening scene
-  sound6 = new MySound(bees, "dark", 1000, 4);
+//my synth objects, i should push they frequencies into a for loop
+// synth = new MySound(synth, false, 'wave', 'triangle', 220, ATTACK, RELEASE);
+// synth1 = new MySound(synth1, true, 'wave', 'triangle', frequency, ATTACK, RELEASE);
+for (let i = 0; i < aChord1.length; i++){
+  let frequency = aSynth1Freq[Math.floor(Math.random() * aSynth1Freq.length)];
+  synth1 = new MySound('synth1', false, 'wave', 'triangle', frequency, ATTACK, RELEASE);
+  console.log(aChord1[i]);
+  // synth1.push();
+  // synth1.push(new MySound('synth1', false, 'wave', 'triangle', frequency, ATTACK, RELEASE));
+}
+synth2 = new MySound(synth2, false, 'wave', 'triangle', frequency, ATTACK, RELEASE);
+synth3 = new MySound(synth3, false, 'wave', 'triangle', frequency, ATTACK, RELEASE);
+// console.log(synth1, "synth1");
+//
+//
+//   console.log(aSynth1);
+//
+//   //the sound that pays at the opening scene
+  sound6 = new MySound(bees, false, 'file');
   //creating my jQuery objects and hiding them at first
   $openScene = $("#openScene");
   $wordDiv = $("#wordDiv");
@@ -141,15 +156,14 @@ function setup() {
   $resetButton.hide();
   $pic1 = $("#pic1");
   $pic2 = $("#pic2");
-  //
-  // $openScene.one("click", function() { //only do this one time
-  //   sound6.play();
-  //   setTimeout("playScene()", 1000); //wait this long and then take us to the secondScene
-  // });
-  // console.log($openScene, "open");
-
+//   //
+//
+//   // $openScene.one("click", function() { //only do this one time
+//   //   // oscillateNote();
+//   //   setTimeout("playScene()", 1000); //wait this long and then take us to the secondScene
+//   // });
   playScene();
-
+//
 } //endsetup
 
 function playScene() {
@@ -163,6 +177,7 @@ function playScene() {
   $playButton.click(function() {
     applyEffect(moodScore);
     playSequence();
+    // oscillateNote();
   });
 
   //the reset button and its click functions
@@ -170,7 +185,10 @@ function playScene() {
     // if the OutputIndex array is cleared while the playSequence function is
     // still enabled, some sounds that don't exist anymore will get triggered
     playSequenceEnabled = false;
+    // $resetButton = false;
+    clearSynth();
     clearOutput();
+    // clearInterval(oscillateNote);
     moodScore = 0;
     playSequenceEnabled = true; // re-enable the play sequence
 
@@ -190,13 +208,23 @@ function playScene() {
 //this function is 'adapted' from music-box week 7 and is a WIP
 //will hopefully help with effects for playSequence
 function playSynth() {
-  let frequency = Math.floor(randomInRange(220, myFrequencies.length));
-  synth.frequency = frequency;
-  // synth.addEffect
-  synth.play();
-  console.log(synth);
+  // let frequency = aSynth1Freq[Math.floor(Math.random() * aSynth1Freq.length)];
+  // synth1.frequency = frequency;
+  synth1.play();
+  console.log(synth1.frequency, "playSynth");
 } //end playSynth();
 
+function clearSynth() {
+  clearInterval(oscillator);
+  console.log(clearInterval);
+} //end stopSynth();
+
+
+//oscillateNote() function
+//this function creates a simple oscillator that can be reused elsewhere
+function oscillateNote(){
+  oscillator = setInterval('playSynth()', NOTE_TEMPO);
+}
 //pushWords() function
 //this function uses a for loop to initialize the word and sound objects
 //it inadvertantly became a css hack for positioning the word objects on the screen
@@ -211,8 +239,9 @@ function pushWords(aString, mood) {
   let x = paddingLeft;
   let y = paddingTop;
 
+
   for (let i = 0; i < aString.length; i++) { //instantiate my word objects
-    aSoundsArray.push(new MySound(aString[i], 4));
+    aSoundsArray.push(new MySound(aString[i], false, 'file'));
     let lastSoundPushed = aSoundsArray[aSoundsArray.length - 1];
     aWordsArray.push(new Word(aString[i], x, y, '#00FF00', lastSoundPushed, mood));
     y += lineHeight;
@@ -282,12 +311,12 @@ function hoverOver(mood) {
           'filter': 'hue-rotate(250deg)'
         });
       }, function() {
-          aWordsArray[r].sound.stop();
-            $('body').css("background-color", "#000000");
-          $pic2.css({
-            'filter': 'hue-rotate(0deg)'
-          });
+        aWordsArray[r].sound.stop();
+        $('body').css("background-color", "#000000");
+        $pic2.css({
+          'filter': 'hue-rotate(0deg)'
         });
+      });
     } //end if
     //end hover
   } //end for loop
@@ -333,10 +362,12 @@ function playSequence() {
           console.log(index, "ended");
           aWordsArray[aOutputIndex[l + 1]].sound.play(); //play the next sound
         });
-      }
-      aWordsArray[aOutputIndex[0]].sound.play(); //play the first word, rest will follow
-    }
-  }
+        oscillateNote();
+      }//end if
+        aWordsArray[aOutputIndex[0]].sound.play(); //play the first word, rest will follow
+      // clearSynth();
+    }//end for
+  }//end if
 } //end playSequence();
 
 //clearOutput() function
@@ -352,6 +383,7 @@ function clearOutput(mood) {
     aOutputIndex.splice(0, aOutputIndex.length);
     $("#W" + m.toString()).show(); //show the words again
     aWordsArray[m].changeEffect(mood); //goes back to null?
+    clearInterval(oscillateNote);
   } //end of m
   $("#output").text(outputString);
 }
