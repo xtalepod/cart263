@@ -1,7 +1,10 @@
 "use strict";
 
+//my opening scene sound, currently is still a test sound
+let bees = "bees";
+let sound6;
 // my test synth and its;
-let synth;
+// let synth;
 const ATTACK = 0.5;
 const RELEASE = 0.1;
 //d minor melodic scale rounded down
@@ -13,27 +16,18 @@ const NOTE_TEMPO = 500;
 let frequency;
 let oscillator;
 
-let synth1;
 let aSynth1Freq = [196, 311.13];
-let aChord1 = [];
-
-let synth2;
 let aSynth2Freq = [249.94, 392.00];
-// let aSynth2 = [];
-let synth3;
 let aSynth3Freq = [293.66, 466.16];
-// let aSynth3 = [];
-let synthString = ['synth1', 'synth2', 'synth3'];
-let aSynths = [];
 
+let aSynthString = ['synth1', 'synth2', 'synth3'];
+let aSynths = [];
+let aChord1OutputIndex = [];
+let aFrequencies = [aSynth1Freq, aSynth2Freq, aSynth3Freq];
+console.log(aFrequencies);
 //two variables for my Pizzicato effects
 let darkEffect;
 let lightEffect;
-
-
-//my opening scene sound, currently is still a test sound
-let bees = "bees";
-let sound6;
 
 let aWordsArray = [];
 let aSoundsArray = [];
@@ -127,22 +121,23 @@ function setup() {
     volume: 0.9
   });
 
-//my synth objects, i should push they frequencies into a for loop
-// synth = new MySound(synth, false, 'wave', 'triangle', 220, ATTACK, RELEASE);
-// synth1 = new MySound(synth1, true, 'wave', 'triangle', frequency, ATTACK, RELEASE);
-for (let i = 0; i < aChord1.length; i++){
-  let frequency = aSynth1Freq[Math.floor(Math.random() * aSynth1Freq.length)];
-  synth1 = new MySound('synth1', false, 'wave', 'triangle', frequency, ATTACK, RELEASE);
-  console.log(aChord1[i]);
-  // synth1.push();
-  // synth1.push(new MySound('synth1', false, 'wave', 'triangle', frequency, ATTACK, RELEASE));
-}
-synth2 = new MySound(synth2, false, 'wave', 'triangle', frequency, ATTACK, RELEASE);
-synth3 = new MySound(synth3, false, 'wave', 'triangle', frequency, ATTACK, RELEASE);
-// console.log(synth1, "synth1");
-//
-//
-//   console.log(aSynth1);
+// function pushSynths(){
+for (let i = 0; i < aSynthString.length; i ++){
+  let frequencies = aFrequencies[Math.floor(Math.random() * aFrequencies.length)]
+  frequency = frequencies;
+  aSynths.frequency = frequency
+  aSynths.push(new MySound(aSynthString[i], false, 'wave', 'triangle', frequency, ATTACK, RELEASE));
+  aChord1OutputIndex.push(i);
+  // console.log(aSynthString[i]);
+  console.log(aSynths[i]);
+  console.log(aSynths.frequency, "freq");
+}//end of for loop
+// }//end of push pushSynths
+
+// for (let i = 0; i < aSynth1Freq.length; i++){
+//   aChord1OutputIndex.push(i);
+// }
+
 //
 //   //the sound that pays at the opening scene
   sound6 = new MySound(bees, false, 'file');

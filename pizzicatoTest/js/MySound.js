@@ -17,40 +17,30 @@ class MySound extends Pizzicato.Sound {
     this.name = name;
   }
 
+//i dont think i need these anymore but savnig them so i dont have to retype in case
   //trying desperately to create synth that play like chords
+  //my synth objects, i should push they frequencies into a for loop
+  // synth = new MySound(synth, false, 'wave', 'triangle', 220, ATTACK, RELEASE);
+  // synth1 = new MySound('synth1', true, 'wave', 'triangle', frequency, ATTACK, RELEASE);
+  // synth2 = new MySound('synth2', false, 'wave', 'triangle', frequency, ATTACK, RELEASE);
+  // synth3 = new MySound('synth3', false, 'wave', 'triangle', frequency, ATTACK, RELEASE);
+  // console.log(synth1, "synth1");
 
-
-    // for (let t = 0; t < synth2Freq.length; t ++) {
-    //   aSynth2.push(new MySound(synth2, false, 'wave', 'triangle', synth2Freq[t], ATTACK, RELEASE));
-    //   }
-
-  // for (let i = 0; i < synthString.length; i++) {
-  //   let frequency = [199.3, 299.13];
-  //   aSynths.push(new MySound(synthString[i], false, 'wave', 'triangle', frequency, ATTACK, RELEASE));
-  // }
-  //
+  ////this doesnt work because it creates a synth for every freq index
   // for (let i = 0; i < synth1Freq.length; i++){
-  //   let frequency = synth1Freq.length;
+  //   let frequency = synth1Freq[Math.floor(Math.random() * synth1Freq)];
   //   synth1.push(new MySound('synth1', false, 'wave', 'triangle', frequency, ATTACK, RELEASE));
   // }
-  //
-  // for (let i = 0; i <aSynths.length; i++){
-  // }
-  //
-
-  //instatiate my synths with their frequency ranges
-  //synth 1
+  //this doesn't work because its doing the same thing...
     // for (let s = 0; s < synth1Freq.length; s++) {
     //   aSynth1.push(new MySound(synth1, false, 'wave', 'triangle', 440, ATTACK, RELEASE));
     //   }
-  //synth 2
-  //   for (let t = 0; t < synth2Freq.length; t ++) {
-  //     aSynth2.push(new MySound(synth2, false, 'wave', 'triangle', synth2Freq[t], ATTACK, RELEASE));
-  //     }
-  // //synth 3
-  //     for (let u = 0; u < synth3Freq.length; u++) {
-  //       aSynth3.push(new MySound(synth3, false, 'wave', 'triangle', synth3Freq[u], ATTACK, RELEASE));
-  //     }
+//this is more useful than the previous because it gives us an output index that is the same as the frequencies for synth1
+ // for (let i = 0; i < aSynth1Freq.length; i++){
+        //aChord1OutputIndex.push(i);
+    //   console.log(aChord1OutputIndex[i]);
+    //   console.log(synth1, 'name:', synth1.name);
+    // }
 
 // oscillateNote(){
 //   setInterval(playSynth, 2000);
