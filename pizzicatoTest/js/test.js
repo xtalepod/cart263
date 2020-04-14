@@ -5,7 +5,7 @@ let bees = "bees";
 let sound6;
 // my test synth and its;
 // let synth;
-const ATTACK = 0.5;
+const ATTACK = 0.2;
 const RELEASE = 0.1;
 //d minor melodic scale rounded down
 // let myFrequencies = [293, 329, 349, 391, 440, 446, 554, 587];
@@ -13,18 +13,18 @@ const RELEASE = 0.1;
 //building chords
 //https://www.youtube.com/watch?v=YSKAt3pmYBs
 const NOTE_TEMPO = 500;
-let frequency;
 let oscillator;
 
-let aSynth1Freq = [196, 311.13];
-let aSynth2Freq = [249.94, 392.00];
-let aSynth3Freq = [293.66, 466.16];
-
+let aSynth1Freq = [196, 311];
+let aSynth2Freq = [249, 392];
+let aSynth3Freq = [293, 466];
 let aSynthString = ['synth1', 'synth2', 'synth3'];
-let aSynths = [];
+let aSynths = [];//for my synth objects
 let aChord1OutputIndex = [];
 let aFrequencies = [aSynth1Freq, aSynth2Freq, aSynth3Freq];
-console.log(aFrequencies);
+let frequency;
+// console.log(aFrequencies);
+
 //two variables for my Pizzicato effects
 let darkEffect;
 let lightEffect;
@@ -51,55 +51,56 @@ let aDarkString = ["polymorphism", "variable", "parameters"];
 let aLightString = ["this", "let", "for"];
 
 // let aNeutralString = [
-//   'this',
-//   'that',
-//   'the',
-//   'but',
-//   'be',
-//   'been',
-//   'i',
-//   'it',
-//   'is',
-//   'in',
-//   'and',
-//   'are',
-//   'am',
-//   'a',
-//   'an',
-//   'will',
-//   'with',
-//   'like',
-//   'very',
-//   'none',
-//   'from',
-//   'you',
-//   'my',
-//   'mine'
+  'this',
+  'that',
+  'the',
+  'but',
+  'be',
+  'been',
+  'i',
+  'it',
+  'is',
+  'in',
+  'and',
+  'are',
+  'am',
+  'a',
+  'an',
+  'will',
+  'with',
+  'like',
+  'very',
+  'none',
+  'from',
+  'you',
+  'my',
+  'mine'
 // ];
 // let aDarkString = [
-//   'discourse',
-//   'fundamental',
-//   'portrait',
-//   'structural',
-//   'confront',
-//   'outburst',
-//   'language',
-//   'body',
-//   'gesture',
-//   'fragments',
-//   'essence'
+  'discourse',
+  'fundamental',
+  'portrait',
+  'structural',
+  'confront',
+  'outburst',
+  'language',
+  'body',
+  'gesture',
+  'fragments',
+  'essence'
 // ];
 // let aLightString = [
-//   'whole',
-//   'part',
-//   'desire',
-//   'glued',
-//   'mask',
-//   'shape',
-//   'space',
-//   'gives'
+  'whole',
+  'part',
+  'desire',
+  'glued',
+  'mask',
+  'shape',
+  'space',
+  'gives'
 // ];
-//an variable to the moodScore
+
+// an variable to the moodScore
 let moodScore = 0;
 
 
@@ -109,38 +110,26 @@ $(document).ready(setup);
 //this function has a lot going on...
 function setup() {
 
+// console.log(frequency);
+  for (let i = 0; i < aSynthString.length; i ++){
+    aSynths.push(new MySound(aSynthString[i], false, 'wave', 'triangle', ATTACK, RELEASE, frequency));
+    // aChord1OutputIndex.push(i);
+    console.log(aSynths[0].frequency);
+    // console.log(aSynths[i].frequency, "freq");
+  }
+  //   //the sound that pays at the opening scene
+  sound6 = new MySound(bees, false, 'file');
   darkEffect = new Pizzicato.Effects.Delay({
     feedback: 0.3,
     time: 0.2,
     mix: 0.6,
     volume: 0.3
   });
-
   lightEffect = new Pizzicato.Effects.Distortion({
     gain: 0.8,
     volume: 0.9
   });
 
-// function pushSynths(){
-for (let i = 0; i < aSynthString.length; i ++){
-  let frequencies = aFrequencies[Math.floor(Math.random() * aFrequencies.length)]
-  frequency = frequencies;
-  aSynths.frequency = frequency
-  aSynths.push(new MySound(aSynthString[i], false, 'wave', 'triangle', frequency, ATTACK, RELEASE));
-  aChord1OutputIndex.push(i);
-  // console.log(aSynthString[i]);
-  console.log(aSynths[i]);
-  console.log(aSynths.frequency, "freq");
-}//end of for loop
-// }//end of push pushSynths
-
-// for (let i = 0; i < aSynth1Freq.length; i++){
-//   aChord1OutputIndex.push(i);
-// }
-
-//
-//   //the sound that pays at the opening scene
-  sound6 = new MySound(bees, false, 'file');
   //creating my jQuery objects and hiding them at first
   $openScene = $("#openScene");
   $wordDiv = $("#wordDiv");
@@ -171,8 +160,9 @@ function playScene() {
   //the play button and its click functions
   $playButton.click(function() {
     applyEffect(moodScore);
-    playSequence();
-    // oscillateNote();
+    // playSequence();
+    // playSynth1();
+    oscillateNote();
   });
 
   //the reset button and its click functions
@@ -202,11 +192,35 @@ function playScene() {
 //playSynth() function
 //this function is 'adapted' from music-box week 7 and is a WIP
 //will hopefully help with effects for playSequence
-function playSynth() {
-  // let frequency = aSynth1Freq[Math.floor(Math.random() * aSynth1Freq.length)];
-  // synth1.frequency = frequency;
-  synth1.play();
-  console.log(synth1.frequency, "playSynth");
+
+// function setFrequencies() {
+//
+//   for (let i = 0; i < aSynth[0]; i ++)
+//   // let
+// }
+function playSynths() {
+
+if (aSynths[0]){
+  let frequency = aSynth1Freq[Math.floor(Math.random() * aSynth1Freq.length)];
+  aSynths[0].frequency = frequency;
+  aSynths[0].play();
+  console.log(aSynths[0].frequency, "playSynth");
+}
+
+if (aSynths[1]){
+  let frequency = aSynth2Freq[Math.floor(Math.random() * aSynth2Freq.length)];
+  aSynths[1].frequency = frequency;
+  aSynths[1].play();
+  console.log(aSynths[1].frequency, "playSynth");
+}
+
+if (aSynths[2]){
+  let frequency = aSynth3Freq[Math.floor(Math.random() * aSynth3Freq.length)];
+  aSynths[2].frequency = frequency;
+  aSynths[2].play();
+  console.log(aSynths[2].frequency, "playSynth");
+}
+
 } //end playSynth();
 
 function clearSynth() {
@@ -218,8 +232,9 @@ function clearSynth() {
 //oscillateNote() function
 //this function creates a simple oscillator that can be reused elsewhere
 function oscillateNote(){
-  oscillator = setInterval('playSynth()', NOTE_TEMPO);
+  oscillator = setInterval('playSynths()', NOTE_TEMPO);
 }
+
 //pushWords() function
 //this function uses a for loop to initialize the word and sound objects
 //it inadvertantly became a css hack for positioning the word objects on the screen

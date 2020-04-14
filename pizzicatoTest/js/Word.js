@@ -55,43 +55,4 @@ class Word {
     }
     // console.log("new mood:", this.effect);
   }
-
-//   hoverOver(mood) {
-//
-//     for (let r = 0; r < aWordsArray.length; r++) {
-//
-//       if (aWordsArray[r].mood === "dark") {
-//         aWordsArray[r].div.hover(function() {
-//           aWordsArray[r].sound.play();
-//           //https://stackoverflow.com/questions/16781486/jquery-how-to-adjust-css-filter-blur
-//           $pic1.css({
-//             'filter': 'hue-rotate(250deg)'
-//           });
-//         }, function() {
-//           aWordsArray[r].sound.stop();
-//           console.log("stop hover", r);
-//           $pic1.css({
-//             'filter': 'hue-rotate(0deg)'
-//           });
-//         });
-//
-//       } else if (aWordsArray[r].mood === "light") {
-//         aWordsArray[r].div.hover(function() {
-//           aWordsArray[r].sound.play();
-//           $('body').css("background-color", "#ffffff");
-//           $pic2.css({
-//             'filter': 'hue-rotate(250deg)'
-//           });
-//         }, function() {
-//           aWordsArray[r].sound.stop();
-//           $('body').css("background-color", "#000000");
-//           $pic2.css({
-//             'filter': 'hue-rotate(0deg)'
-//           });
-//         });
-//       } //end if
-//       //end hover
-//     } //end for loop
-//   } //end of hover over
-//
 } //end of script

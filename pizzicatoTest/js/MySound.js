@@ -42,6 +42,24 @@ class MySound extends Pizzicato.Sound {
     //   console.log(synth1, 'name:', synth1.name);
     // }
 
+
+///i thought this was working but it actually isnt. the frequencies arent passing properly
+
+// function pushSynths(){
+// for (let i = 0; i < aSynthString.length; i ++){
+//   // let frequencies = aFrequencies[Math.floor(Math.random() * aFrequencies.length)]
+//   // let frequencies = aFrequencies[i].length
+//   // frequency = frequencies;
+//   frequency = aFrequencies[Math.floor(Math.random() * aFrequencies.length)];
+//   aSynths.frequency = frequency;
+//   aSynths.push(new MySound(aSynthString[i], false, 'wave', 'triangle', ATTACK, RELEASE, frequency));
+//   aChord1OutputIndex.push(i);
+//   // console.log(aChord1OutputIndex);
+//   // console.log(aSynthString[i]);
+//   console.log(aSynths[i].name);
+//   console.log(aSynths[i].frequency, "freq");
+// }//end of for loop
+// }//end of push pushSynths
 // oscillateNote(){
 //   setInterval(playSynth, 2000);
 // }
