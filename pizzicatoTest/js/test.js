@@ -21,7 +21,7 @@ let aSynth3Freq = [293, 466];
 let aSynthString = ['synth1', 'synth2', 'synth3'];
 let aSynths = [];//for my synth objects
 let aChord1OutputIndex = [];
-let aFrequencies = [aSynth1Freq, aSynth2Freq, aSynth3Freq];
+// let aFrequencies = [aSynth1Freq, aSynth2Freq, aSynth3Freq];
 let frequency;
 // console.log(aFrequencies);
 
@@ -45,12 +45,9 @@ let $resetButton;
 //declaring variables for my pics
 let $pic1;
 let $pic2;
-//creating string array for the different word divs
-let aNeutralString = ["kick", "snare", "hihat"];
-let aDarkString = ["polymorphism", "variable", "parameters"];
-let aLightString = ["this", "let", "for"];
 
-// let aNeutralString = [
+//creating string array for the different word divs and corresponding audio file names
+let aNeutralString = [
   'this',
   'that',
   'the',
@@ -75,8 +72,8 @@ let aLightString = ["this", "let", "for"];
   'you',
   'my',
   'mine'
-// ];
-// let aDarkString = [
+];
+let aDarkString = [
   'discourse',
   'fundamental',
   'portrait',
@@ -88,8 +85,8 @@ let aLightString = ["this", "let", "for"];
   'gesture',
   'fragments',
   'essence'
-// ];
-// let aLightString = [
+];
+let aLightString = [
   'whole',
   'part',
   'desire',
@@ -98,7 +95,7 @@ let aLightString = ["this", "let", "for"];
   'shape',
   'space',
   'gives'
-// ];
+];
 
 // an variable to the moodScore
 let moodScore = 0;
@@ -110,14 +107,13 @@ $(document).ready(setup);
 //this function has a lot going on...
 function setup() {
 
-// console.log(frequency);
+  //instatiate my synth objects
   for (let i = 0; i < aSynthString.length; i ++){
     aSynths.push(new MySound(aSynthString[i], false, 'wave', 'triangle', ATTACK, RELEASE, frequency));
     // aChord1OutputIndex.push(i);
-    console.log(aSynths[0].frequency);
-    // console.log(aSynths[i].frequency, "freq");
   }
-  //   //the sound that pays at the opening scene
+
+//the sound that pays at the opening scene
   sound6 = new MySound(bees, false, 'file');
   darkEffect = new Pizzicato.Effects.Delay({
     feedback: 0.3,
@@ -160,15 +156,12 @@ function playScene() {
   //the play button and its click functions
   $playButton.click(function() {
     applyEffect(moodScore);
-    // playSequence();
-    // playSynth1();
-    oscillateNote();
+    playSequence();
+    // oscillateNote();
   });
 
   //the reset button and its click functions
   $resetButton.click(function() {
-    // if the OutputIndex array is cleared while the playSequence function is
-    // still enabled, some sounds that don't exist anymore will get triggered
     playSequenceEnabled = false;
     // $resetButton = false;
     clearSynth();
@@ -189,15 +182,11 @@ function playScene() {
 
 } //end playScene();
 
-//playSynth() function
-//this function is 'adapted' from music-box week 7 and is a WIP
-//will hopefully help with effects for playSequence
 
-// function setFrequencies() {
-//
-//   for (let i = 0; i < aSynth[0]; i ++)
-//   // let
-// }
+//playSynths() function
+//'adapted' from music-box week 7
+//this function lets each synth take specific frequencies within a range and builds chords. it was not possible for me to instatiate
+//the different frequencies within the constructor and this is the cleanist way i could figure out to do it!
 function playSynths() {
 
 if (aSynths[0]){
@@ -372,7 +361,7 @@ function playSequence() {
           console.log(index, "ended");
           aWordsArray[aOutputIndex[l + 1]].sound.play(); //play the next sound
         });
-        oscillateNote();
+        // oscillateNote();
       }//end if
         aWordsArray[aOutputIndex[0]].sound.play(); //play the first word, rest will follow
       // clearSynth();
