@@ -28,6 +28,7 @@ let frequency;
 //two variables for my Pizzicato effects
 let darkEffect;
 let lightEffect;
+let neutralEffect;
 
 let aWordsArray = [];
 let aSoundsArray = [];
@@ -115,16 +116,25 @@ function setup() {
 
 //the sound that pays at the opening scene
   sound6 = new MySound(bees, false, 'file');
-  darkEffect = new Pizzicato.Effects.Delay({
+
+  darkEffect = new Pizzicato.Effects.PingPongDelay({
     feedback: 0.3,
     time: 0.2,
     mix: 0.6,
     volume: 0.3
   });
-  lightEffect = new Pizzicato.Effects.Distortion({
-    gain: 0.8,
-    volume: 0.9
+  
+  lightEffect = new Pizzicato.Effects.Reverb({
+    time:2.0,
+    decay: 2.95,
+    reverse: false,
+    mix:0.98,
+    volume: 0.60
   });
+
+  neutralEffect = new Pizzicato.Effects.StereoPanner ({
+    pan: 0.0 // -1 to 1
+  })
 
   //creating my jQuery objects and hiding them at first
   $openScene = $("#openScene");
@@ -320,8 +330,6 @@ function hoverOver(mood) {
     //end hover
   } //end for loop
 } //end of hover over
-
-
 
 //applyEffect() function
 //this function creates a new index from aOutputIndex[k] and changes the effect of a word based on the score

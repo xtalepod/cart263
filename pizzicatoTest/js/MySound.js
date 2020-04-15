@@ -7,7 +7,7 @@ class MySound extends Pizzicato.Sound {
       options: {
         path: 'assets/sounds/' + name + '.wav',
         loop: loop,
-        volume: 8,
+        volume: 1,
         type: type, //of wavelength
         attack: attack,
         release: release,
