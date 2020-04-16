@@ -50,6 +50,7 @@ class Word {
     }
     //update new effect
     this.effect = this.getEffect(score);
+
     if (this.effect != null) {
       this.sound.addEffect(this.effect);
     }

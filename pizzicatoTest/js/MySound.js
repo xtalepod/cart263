@@ -42,6 +42,28 @@ class MySound extends Pizzicato.Sound {
     //   console.log(synth1, 'name:', synth1.name);
     // }
 
+    //
+    // for ()
+    // if (aSynths[0]){
+    //   let frequency = aSynth1Freq[Math.floor(Math.random() * aSynth1Freq.length)];
+    //
+    //   console.log(aSynths[0].frequency, "playSynth");
+    // }
+    //
+    // if (aSynths[1]){
+    //   let frequency = aSynth2Freq[Math.floor(Math.random() * aSynth2Freq.length)];
+    //   aSynths[1].frequency = frequency;
+    //   aSynths[1].play();
+    //   console.log(aSynths[1].frequency, "playSynth");
+    // }
+    //
+    // if (aSynths[2]){
+    //   let frequency = aSynth3Freq[Math.floor(Math.random() * aSynth3Freq.length)];
+    //   aSynths[2].frequency = frequency;
+    //   aSynths[2].play();
+    //   console.log(aSynths[2].frequency, "playSynth");
+    // }
+
 
 ///i thought this was working but it actually isnt. the frequencies arent passing properly
 

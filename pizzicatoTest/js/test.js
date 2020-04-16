@@ -12,17 +12,20 @@ const RELEASE = 0.1;
 
 //building chords
 //https://www.youtube.com/watch?v=YSKAt3pmYBs
-const NOTE_TEMPO = 500;
-let oscillator;
+const CHORD_DURATION = 500; //ms
+let chordInterval; // setInterval()
 
-let aSynth1Freq = [196, 311];
-let aSynth2Freq = [249, 392];
-let aSynth3Freq = [293, 466];
-let aSynthString = ['synth1', 'synth2', 'synth3'];
-let aSynths = [];//for my synth objects
+let aSynth1Freq = [196, 311, 311, 123];
+let aSynth2Freq = [249, 392, 392, 123];
+let aSynth3Freq = [293, 466, 466, 123];
+let synthFreqIndex = 0;
+let synth1, synth2, synth3;
+let synthPlayEnabled = false;
+
+
 let aChord1OutputIndex = [];
 // let aFrequencies = [aSynth1Freq, aSynth2Freq, aSynth3Freq];
-let frequency;
+
 // console.log(aFrequencies);
 
 //two variables for my Pizzicato effects
@@ -109,10 +112,14 @@ $(document).ready(setup);
 function setup() {
 
   //instatiate my synth objects
-  for (let i = 0; i < aSynthString.length; i ++){
-    aSynths.push(new MySound(aSynthString[i], false, 'wave', 'triangle', ATTACK, RELEASE, frequency));
-    // aChord1OutputIndex.push(i);
-  }
+  synth1 = new MySound('synth1', true, 'wave', 'triangle', ATTACK, RELEASE, aSynth1Freq[synthFreqIndex] );
+  synth2 = new MySound('synth2', false, 'wave', 'triangle', ATTACK, RELEASE, aSynth2Freq[synthFreqIndex]);
+  synth3 = new MySound('synth3', false, 'wave', 'triangle', ATTACK, RELEASE, aSynth3Freq[synthFreqIndex]);
+
+  // for (let i = 0; i < aSynthString.length; i ++){
+  //   aSynths.push(new MySound(aSynthString[i], false, 'wave', 'triangle', ATTACK, RELEASE));
+  //   // aChord1OutputIndex.push(i);
+  // }
 
 //the sound that pays at the opening scene
   sound6 = new MySound(bees, false, 'file');
@@ -123,7 +130,7 @@ function setup() {
     mix: 0.6,
     volume: 0.3
   });
-  
+
   lightEffect = new Pizzicato.Effects.Reverb({
     time:2.0,
     decay: 2.95,
@@ -167,7 +174,9 @@ function playScene() {
   $playButton.click(function() {
     applyEffect(moodScore);
     playSequence();
-    // oscillateNote();
+    if(synthPlayEnabled){
+        activateChordInterval();
+    }
   });
 
   //the reset button and its click functions
@@ -175,8 +184,9 @@ function playScene() {
     playSequenceEnabled = false;
     // $resetButton = false;
     clearSynth();
+    clearSequence();
     clearOutput();
-    // clearInterval(oscillateNote);
+
     moodScore = 0;
     playSequenceEnabled = true; // re-enable the play sequence
 
@@ -192,47 +202,41 @@ function playScene() {
 
 } //end playScene();
 
+function activateChordInterval(){
+  chordInterval = setInterval('changeChord()', CHORD_DURATION);
+}
 
 //playSynths() function
 //'adapted' from music-box week 7
 //this function lets each synth take specific frequencies within a range and builds chords. it was not possible for me to instatiate
 //the different frequencies within the constructor and this is the cleanist way i could figure out to do it!
-function playSynths() {
+function changeChord() {
 
-if (aSynths[0]){
-  let frequency = aSynth1Freq[Math.floor(Math.random() * aSynth1Freq.length)];
-  aSynths[0].frequency = frequency;
-  aSynths[0].play();
-  console.log(aSynths[0].frequency, "playSynth");
+synthFreqIndex++;
+if(synthFreqIndex === aSynth1Freq.length){ //make sure freq. arrays have the same lengths
+    synthFreqIndex = 0;
 }
 
-if (aSynths[1]){
-  let frequency = aSynth2Freq[Math.floor(Math.random() * aSynth2Freq.length)];
-  aSynths[1].frequency = frequency;
-  aSynths[1].play();
-  console.log(aSynths[1].frequency, "playSynth");
-}
-
-if (aSynths[2]){
-  let frequency = aSynth3Freq[Math.floor(Math.random() * aSynth3Freq.length)];
-  aSynths[2].frequency = frequency;
-  aSynths[2].play();
-  console.log(aSynths[2].frequency, "playSynth");
-}
-
-} //end playSynth();
+synth1.frequency = aSynth1Freq[synthFreqIndex];
+synth2.frequency = aSynth2Freq[synthFreqIndex];
+synth3.frequency = aSynth3Freq[synthFreqIndex];
+synth1.play();
+synth2.play();
+synth3.play();
+} //end changeChord();
 
 function clearSynth() {
-  clearInterval(oscillator);
+  clearInterval(chordInterval);
+  synth1.stop();
+  synth2.stop();
+  synth3.stop();
+  synthFreqIndex = 0;
+  // synthPlayEnabled = false;
   console.log(clearInterval);
 } //end stopSynth();
 
 
-//oscillateNote() function
-//this function creates a simple oscillator that can be reused elsewhere
-function oscillateNote(){
-  oscillator = setInterval('playSynths()', NOTE_TEMPO);
-}
+
 
 //pushWords() function
 //this function uses a for loop to initialize the word and sound objects
@@ -266,6 +270,7 @@ function pushWords(aString, mood) {
 function initWordDivs() {
   for (let t = 0; t < aWordsArray.length; t++) {
     aWordsArray[t].createWordDiv(t);
+    //console.log(aWordsArray[t]);
   }
 }
 
@@ -282,6 +287,7 @@ function initWordsClick() {
       $("#W" + j.toString()).hide(); //
       // 3. add the index of the word clicked to the Output Index Array
       aOutputIndex.push(j); //everytime you click, add the corresponding index number
+      synthPlayEnabled = true;
       //4. adding the word to the Output String
       outputString += aWordsArray[j].wordText + " "; //each time we move through the loop add the selected word
       $("#output").text(outputString); //display the selected words
@@ -361,22 +367,43 @@ function updateMoodScore(mood) {
 function playSequence() {
 
   if (playSequenceEnabled) {
-    for (let l = 0; l < aOutputIndex.length; l++) {
-      let index = aOutputIndex[l];
+    console.log("LENTGTH", aOutputIndex.length);
+    for (let i = 0; i < aOutputIndex.length; i++) {
+      let index = aOutputIndex[i];
       // console.log(aOutputIndex.length, l);
-      if (l < aOutputIndex.length - 1) { //for all words but the last
+      if (i < aOutputIndex.length - 1) { //for all words but the last
         aWordsArray[index].sound.on('end', function() { //when the sound ends
           console.log(index, "ended");
-          aWordsArray[aOutputIndex[l + 1]].sound.play(); //play the next sound
+          aWordsArray[aOutputIndex[i + 1]].sound.play(); //play the next sound
         });
-        // oscillateNote();
+
+      }else{ // i === aOutputIndex.length -1 ; that's the last
+
+          aWordsArray[index].sound.on('end', function() { //when the LAST sound has ended
+              console.log("LAST ENDED");
+              clearSynth();
+              console.log("LENTGTH", aOutputIndex.length);
+              clearSequence();
+          });
       }//end if
+
+      // initiate the cascade effect
         aWordsArray[aOutputIndex[0]].sound.play(); //play the first word, rest will follow
-      // clearSynth();
+
     }//end for
   }//end if
 } //end playSequence();
 
+function clearSequence(){
+  for (let w = 0; w < aWordsArray.length; w++) {
+
+    aWordsArray[w].sound.on('end', function() { //when the sound ends
+        console.log("cleared", w);
+        return true;
+        // do nothing
+      });
+    }//end for
+}
 //clearOutput() function
 //this function clears all of the aOutputIndex data using the JavaScript splice event. to help stop previously
 //playing sounds from loading after the reset button has been pressed the Pizzicator pause event is used and
@@ -390,7 +417,7 @@ function clearOutput(mood) {
     aOutputIndex.splice(0, aOutputIndex.length);
     $("#W" + m.toString()).show(); //show the words again
     aWordsArray[m].changeEffect(mood); //goes back to null?
-    clearInterval(oscillateNote);
+    playSequenceEnabled = false;
   } //end of m
   $("#output").text(outputString);
 }
