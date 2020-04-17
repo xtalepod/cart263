@@ -207,7 +207,7 @@ function pushWords(aString, mood) {
     aSounds.push(new Sound(aString[i], false, 'file'));
     let lastSoundPushed = aSounds[aSounds.length - 1];
     aWords.push(new Word(aString[i], x, y, '#00FF00', lastSoundPushed, mood));
-    aNextWordIndex.push(-1);
+    aNextWordIndex.push(-1);//creates an index with the name number of elements as aWords al with an initial value of -1
     y += lineHeight;
     if (y > boxHeight - paddingBottom) {
       y = paddingTop;
@@ -226,6 +226,7 @@ function initWordDivs() {
 }
 
 //initWordsClick() function
+//designed with Qynn
 //this function does a lot of important things related to word objects! it uses different events: createWordDiv(j),
 //on click, play the right sound, hide the word div, push index of the word to the aOutputIndex[], add to the
 //previously empty outputString variable, add text to the screen, and updateMoodScore
@@ -237,11 +238,12 @@ function initWordsClick() {
       // 2. hide the word from the bag
       $("#W" + j.toString()).hide(); //
       // 3. Update Next Word Index Array (W! before pushing j)
-      aNextWordIndex[j] = -2; // indicates this is the last of the sentence
+      aNextWordIndex[j] = -2; //an 'arbitrarily' chosen value (because it was positive it would interfer with the words and -1 is already being used) that indicates this is the last of the sentence
       if(aOutputIndex.length > 0){//if there is something inside this array i want the last index
         let previousLastWordIndex = aOutputIndex[aOutputIndex.length-1]; //grabbing the last index in the aOutputIndex
         aNextWordIndex[previousLastWordIndex] = j;
         console.log("the next word", aNextWordIndex);
+        console.log("the previous last word",previousLastWordIndex)
       }
        // 4. add the index of the word clicked to the Output Index Array
       aOutputIndex.push(j); //everytime you click, add the corresponding index number
@@ -260,6 +262,8 @@ function initWordsClick() {
 
 //initPlayNextWord() function
 //designed with Qynn
+//this function goes through all the words that have been clicked and plays them one after the other using Pizzicato on end function.
+//if [aNextWordIndex] is greater than 0, the next word will be player. this index was necessary because
 function initPlayNextWord(){
   for (let i = 0; i < aWords.length; i++) {
       aWords[i].sound.on('end', function() { //when the sound ends
@@ -267,29 +271,21 @@ function initPlayNextWord(){
               aWords[aNextWordIndex[i]].sound.play(); //play the next sound
               console.log(i, "ended >> playing ", aNextWordIndex[i]);
           }
-          else if(aNextWordIndex[i] === -2){ //last word of the playSequence
-              clearSynth();
-              console.log("got -2");
-          }
-          // else if === -1 // do nothing
+          else if(aNextWordIndex[i] === -2){ //if you get the last word of the playSequence
+              clearSynth();//clear the synths
+              console.log("next for ", i, "is -2; stop the synths");
+            }
+            else if(aNextWordIndex[i] === -1){ // any word not in the output
+                  console.log("next for ", i, "is -1, do nothing");
+            }
       });
     }// end for
 }
-
-function playWordSequence() {
-    // initiate the cascade effect
-  if(aOutputIndex.length > 0){
-      aWords[aOutputIndex[0]].sound.play(); //play the first word, rest will follow
-      console.log("playing", aOutputIndex[0]);
-  }
-} //end playSequence();
-
 
 //hoverOver() function
 function hoverOver() {
 
   for (let r = 0; r < aWords.length; r++) {
-
     if (aWords[r].mood === "dark") {
       aWords[r].div.hover(function() {
         aWords[r].sound.play();
@@ -304,10 +300,9 @@ function hoverOver() {
           'filter': 'hue-rotate(0deg)'
         });
       });
-
     }
     if (aWords[r].mood === "light") {
-      aWords[r].div.hover(function() {
+        aWords[r].div.hover(function() {
         aWords[r].sound.play();
         $('body').css("background-color", "#ffffff");
         $pic2.css({
@@ -321,8 +316,8 @@ function hoverOver() {
         });
       });
     } //end if
-     if (aWords[r].mood === "neutral") {
-      aWords[r].div.hover(function() {
+    if (aWords[r].mood === "neutral") {
+        aWords[r].div.hover(function() {
         aWords[r].sound.play();
         $('body').css("background-color", "#ffffff");
         $pic2.css({
@@ -341,6 +336,18 @@ function hoverOver() {
 } //end of hover over
 
 
+//playWordSequence() function
+//this function assesses a true false boolean that if true runs through a for loop and instatiates an index
+//for the aOutputIndex[l]  and is used to track which sound to play in order of word clicked first to last.
+// it uses the Pizzicato end event to play the next sound after the previous one ends
+function playWordSequence() {
+    // initiate the cascade effect
+  if(aOutputIndex.length > 0){
+      aWords[aOutputIndex[0]].sound.play(); //play the first word, rest will follow
+      console.log("playing", aOutputIndex[0]);
+  }
+} //end playSequence();
+
 //updateMoodScore() function
 //this function updates the score based on whether the mood is light or dark
 //it passes mood as a parameter
@@ -352,11 +359,6 @@ function updateMoodScore(mood) {
     moodScore += 1;
   }
 } //end updateMoodScore();
-
-//playSequence() function
-//this function assesses a true false boolean that if true runs through a for loop and instatiates an index
-//for the aOutputIndex[l]  and is used to track which sound to play in order of word clicked first to last.
-// it uses the Pizzicato end event to play the next sound after the previous one ends
 
 
 //clearOutput() function
@@ -380,7 +382,6 @@ function clearOutput(mood) {
     moodScore = 0;
 }
 
-
 //applyEffect() function
 //this function creates a new index from aOutputIndex[k] and changes the effect of a word based on the score
 //it passes score as a parameter and is determined in the getEffect() method in the Word class
@@ -392,35 +393,36 @@ function applyEffect(score) {
   }
 } //end applyEffect();
 
+//activateChordInterval() function
+//a simple reuseabnle function that activates the chord interval changes and gives a value to the chordInterval variable so that it can be used in the clearSynth function
 function activateChordInterval(){
   chordInterval = setInterval('changeChord()', CHORD_DURATION);
 }
 
-//playSynths() function
+//changeChord() function
 //'adapted' from music-box week 7
 //this function lets each synth take specific frequencies within a range and builds chords. it was not possible for me to instatiate
 //the different frequencies within the constructor and this is the cleanist way i could figure out to do it!
 function changeChord() {
-
-synthFreqIndex++;
-if(synthFreqIndex === aSynth1Freq.length){ //make sure freq. arrays have the same lengths
+  synthFreqIndex++;
+  if(synthFreqIndex === aSynth1Freq.length){ //make sure freq. arrays have the same lengths
     synthFreqIndex = 0;
-}
-synth1.frequency = aSynth1Freq[synthFreqIndex];
-synth2.frequency = aSynth2Freq[synthFreqIndex];
-synth3.frequency = aSynth3Freq[synthFreqIndex];
-
-// playSynth();
-
+  }
+  synth1.frequency = aSynth1Freq[synthFreqIndex];
+  synth2.frequency = aSynth2Freq[synthFreqIndex];
+  synth3.frequency = aSynth3Freq[synthFreqIndex];
 } //end changeChord();
 
+//playSynth() function
+//a simple reuseable function for playing the synths
 function playSynth(){
-
   synth1.play();
   synth2.play();
   synth3.play();
 }
 
+//clearSynth() function
+//a simple function that clears the setInterval values, manually stops the synths, and sets the synthFreqIndex back to 0
 function clearSynth() {
   clearInterval(chordInterval);
   synth1.stop();
@@ -429,10 +431,3 @@ function clearSynth() {
   synthFreqIndex = 0;
   //console.log(clearInterval);
 } //end stopSynth();
-
-//randomInRange() function
-//this function is an early example used in class that gives us a basic equation for setting random values that
-//can be reused throughout the code
-function randomInRange(min, max) {
-  return min + (Math.random() * (max - min));
-}

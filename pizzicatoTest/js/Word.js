@@ -48,9 +48,7 @@ class Word {
     if (this.effect != null) {
       this.sound.removeEffect(this.effect);
     }
-    //update new effect
-    this.effect = this.getEffect(score);
-
+    this.effect = this.getEffect(score); //update new effect
     if (this.effect != null) {
       this.sound.addEffect(this.effect);
     }
