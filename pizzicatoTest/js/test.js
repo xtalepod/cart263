@@ -30,6 +30,7 @@ let aSounds = []; // Sound.js objects
 let outputString = ""; //an empty string for the text output
 let aOutputIndex = []; // aWords indexes
 let aNextWordIndex = []; //aWords indexes
+let lastWordCode = -2;
 
 //delcaring variables for all of my jQuery objects
 let $openScene;
@@ -164,7 +165,6 @@ function playScene() {
   $playButton.click(function() {
     applyEffect(moodScore);
     playWordSequence();
-
     if(aOutputIndex.length>0){
         playSynth();
         console.log("Play Synths");
@@ -181,12 +181,10 @@ function playScene() {
   pushWords(aNeutralString, "neutral");
   pushWords(aDarkString, "dark");
   pushWords(aLightString, "light");
-
   initWordDivs();
   initWordsClick();
   initPlayNextWord();
   hoverOver();
-
 } //end playScene();
 
 
@@ -238,20 +236,19 @@ function initWordsClick() {
       aWords[j].sound.play();
       // 2. hide the word from the bag
       $("#W" + j.toString()).hide(); //
-
-      // 3. Update Next Word Index Array
+      // 3. Update Next Word Index Array (W! before pushing j)
       aNextWordIndex[j] = -2; // indicates this is the last of the sentence
-      if(aOutputIndex.length > 0){
-        let lastWordIndex = aOutputIndex[aOutputIndex.length-1];
-        aNextWordIndex[lastWordIndex] = j;
+      if(aOutputIndex.length > 0){//if there is something inside this array i want the last index
+        let previousLastWordIndex = aOutputIndex[aOutputIndex.length-1]; //grabbing the last index in the aOutputIndex
+        aNextWordIndex[previousLastWordIndex] = j;
+        console.log("the next word", aNextWordIndex);
       }
        // 4. add the index of the word clicked to the Output Index Array
       aOutputIndex.push(j); //everytime you click, add the corresponding index number
-
+      // j is nos the last Word Index
       //5. adding the word to the Output String
       outputString += aWords[j].wordText + " "; //each time we move through the loop add the selected word
       $("#output").text(outputString); //display the selected words
-
       //6 . update the mood Score based on the word mood
       updateMoodScore(aWords[j].mood);
       console.log("moodScore", moodScore);
@@ -266,17 +263,15 @@ function initWordsClick() {
 function initPlayNextWord(){
   for (let i = 0; i < aWords.length; i++) {
       aWords[i].sound.on('end', function() { //when the sound ends
-          if (aNextWordIndex[i] >= 0 ){
+          if (aNextWordIndex[i] >= 0 ){// positive indexes point to next word to be played. without this line of code the program would break...
               aWords[aNextWordIndex[i]].sound.play(); //play the next sound
               console.log(i, "ended >> playing ", aNextWordIndex[i]);
           }
-          else if(aNextWordIndex[i] < -1){ //last word of the playSequence
+          else if(aNextWordIndex[i] === -2){ //last word of the playSequence
               clearSynth();
               console.log("got -2");
           }
-          else{
-              //console.log("no next word (-1)")
-            }
+          // else if === -1 // do nothing
       });
     }// end for
 }
@@ -310,7 +305,23 @@ function hoverOver() {
         });
       });
 
-    } else if (aWords[r].mood === "light") {
+    }
+    if (aWords[r].mood === "light") {
+      aWords[r].div.hover(function() {
+        aWords[r].sound.play();
+        $('body').css("background-color", "#ffffff");
+        $pic2.css({
+          'filter': 'hue-rotate(250deg)'
+        });
+      }, function() {
+        aWords[r].sound.stop();
+        $('body').css("background-color", "#000000");
+        $pic2.css({
+          'filter': 'hue-rotate(0deg)'
+        });
+      });
+    } //end if
+     if (aWords[r].mood === "neutral") {
       aWords[r].div.hover(function() {
         aWords[r].sound.play();
         $('body').css("background-color", "#ffffff");
@@ -358,7 +369,7 @@ function clearOutput(mood) {
   for (let m = 0; m < aWords.length; m++) {
     // aWords[m].sound.pause();
     aWords[m].sound.stop();
-    aNextWordIndex[m] = -1;
+    aNextWordIndex[m] = -1;//this is resetting all aNextWordIndex to -1
     outputString = "";
     aOutputIndex.splice(0, aOutputIndex.length);
     $("#W" + m.toString()).show(); //show the words again
