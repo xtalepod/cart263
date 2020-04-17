@@ -1,6 +1,6 @@
 "use strict";
 
-class MySound extends Pizzicato.Sound {
+class Sound extends Pizzicato.Sound {
   constructor(name, loop, source, type, attack, release, frequency) {
     super({
       source: source,
