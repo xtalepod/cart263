@@ -11,6 +11,7 @@ let sound6;
 const CHORD_DURATION = 500; //ms
 const ATTACK = 0.2;
 const RELEASE = 0.1;
+const NUM_OF_CHORDS = 6;
 let chordInterval;
 //Fm5, CM5, GM5, Am5, Em5
 let aDarkFreq1 = [349.32, 523.25, 783.99, 880.00, 1318.51, 880.00];
@@ -102,8 +103,8 @@ let aLightString = [
 let moodScore = 0;
 //the background colour starts at 127,127,127
 let rgbValue = 127;//starting in the middle of the color scale
-let rgbDarkStep = Math.floor(127/aDarkString.length);//determine the deincrement for colour value change
-let rgbLightStep = Math.floor(128/aLightString.length); //determine the increment for colour value change
+const RGB_DARK_STEP = Math.floor(127/aDarkString.length);//determine the deincrement for colour value change
+const RGB_LIGHT_STEP = Math.floor(128/aLightString.length); //determine the increment for colour value change
 
 
 $(document).ready(setup);
@@ -169,8 +170,12 @@ function playScene() {
     applyEffect(moodScore);
     playWordSequence();
     if(aOutputIndex.length>0){
+      console.log(synth1.frequency);
+        changeChord();
         playSynth();
         console.log("Play Synths");
+        console.log(synth1.frequency);
+
         activateChordInterval();
     }
   });
@@ -240,7 +245,7 @@ function initWordsClick() {
       // 1. play the sound associated with the word
       aWords[j].sound.play();
       // 2. hide the word from the bag
-      $("#W" + j.toString()).hide(); //
+      $("#W" + j.toString()).hide(); //https://www.w3schools.com/jsref/jsref_tostring_number.asp
       // 3. Update Next Word Index Array (W! before pushing j)
       aWords[j].nextWordId = -2; //an 'arbitrarily' chosen value (because it was positive it would interfer with the words and -1 is already being used) that indicates this is the last of the sentence
       if(aOutputIndex.length > 0){//if there is something inside this array i want the last index
@@ -344,22 +349,22 @@ function updateMoodScore(mood) {
   //takes a mood as an input
   if (mood === "dark") {
     moodScore -= 1;
-    rgbValue -= rgbDarkStep;//change the background colour by going down a step
+    rgbValue -= RGB_DARK_STEP;//change the background colour by going down a step
    }
    else if (mood === "light") {
     moodScore += 1;
-    rgbValue += rgbLightStep;//change the background colour by going up a step
+    rgbValue += RGB_LIGHT_STEP;//change the background colour by going up a step
     }
   }
 
 //changeBackground() function
-//this function sets the background colour and allows for modularity.
+//designed with Qynn
+//this function sets the background colour and allows for modularity by using the rbgValue
   function changeBackground() {
     //https://stackoverflow.com/questions/2173229/how-do-i-write-a-rgb-color-value-in-javascript
-    //https://www.w3schools.com/jsref/jsref_tostring_number.asp
-    let v = (rgbValue).toString();//v is short for value, toString() allows us to convert a number to a string
-    console.log("rgb value:", v);
-    let colour = "rgb(" + v + "," + v +  "," + v + ")";//
+    let val = (rgbValue).toString();//the intial point
+    // console.log("rgb value:", v);
+    let colour = "rgb(" + val/2 + "," + val/2 +  "," + val + ")";
     $('body').css('background-color', colour);
 }
 
@@ -397,7 +402,7 @@ function applyEffect(score) {
 
 // # # # # # # # # # # # # # # # # # # # #
 // # # # # # # # # SYNTHS # # # # # # # #
-// # # # # # # # # # # # # # # # # # # #
+// # # # # # # # # # # # # # # # # # # # #
 
 //activateChordInterval() function
 //a simple reuseabnle function that activates the chord interval changes and gives a value to the chordInterval variable so that it can be used in the clearSynth function
@@ -410,24 +415,23 @@ function activateChordInterval(){
 //this function lets each synth take specific frequencies within a range and builds chords. it was not possible for me to instatiate
 //the different frequencies within the constructor and this is the cleanist way i could figure out to do it!
 function changeChord() {
-  // synthFreqIndex++;
-
-  if (synthFreqIndex === aLightFreq1.length){ //make sure freq. arrays have the same lengths
-    synthFreqIndex = 0;
-  }
-
-  if (moodScore -= 1) {
-    synthFreqIndex++;
+  if (moodScore < 0) { //dark
     synth1.frequency = aDarkFreq1[synthFreqIndex];
     synth2.frequency = aDarkFreq2[synthFreqIndex];
     synth3.frequency = aDarkFreq3[synthFreqIndex];
-    console.log(moodScore);
   }
-  else if (moodScore += 1) {
-    synthFreqIndex++;
+  else if (moodScore > 0) { //light
     synth1.frequency = aLightFreq1[synthFreqIndex];
     synth2.frequency = aLightFreq2[synthFreqIndex];
     synth3.frequency = aLightFreq3[synthFreqIndex];
+  }
+  else{ // neutral
+    // TBD
+  }
+ // increment chord index
+  synthFreqIndex++;
+  if (synthFreqIndex === NUM_OF_CHORDS){ //make sure freq. arrays have the same lengths
+    synthFreqIndex = 0;
   }
 } //end changeChord();
 
