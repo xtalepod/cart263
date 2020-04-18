@@ -13,8 +13,8 @@
 
   <!-- Add your required libraries here either as local files or CDN-hosted files -->
   <!-- Uncomment next two lines to include jQuery UI -->
-  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <!-- <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"> -->
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> -->
 
   <!-- Library script(s) -->
   <!-- Add your required libraries here either as local files or CDN-hosted files -->
@@ -24,6 +24,7 @@
   <!-- My script(s) -->
   <!-- Library script(s) -->
   <script src="js/Sound.js"></script>
+  <script src="js/Synth.js"></script>
   <script src="js/Word.js"></script>
   <!-- <script src="js/script.js"></script> -->
   <script src="js/test.js"></script>
@@ -31,56 +32,22 @@
 
 <body>
 
-  <!-- a div container for my word class -->
 <!-- <div id="openScene"> -->
-
-<div class ="bigDiv" style="position: relative">
+<div class ="bigDiv">
+<button id="play">play</button>
   <button id="reset">reset</button>
-  <button id="play">play</button>
   <div id="openScene">
-    <!-- <div id="wordsDiv"> -->
       <img id="pic1" src="assets/images/pic1.png" width="300" height ="400">
       <img id="pic2" src="assets/images/pic2.png" width="300" height ="400">
-        <div id="neutralDiv">neutral</div>
-        <div id="darkDiv">dark</div>
-        <div id="lightDiv">light</div>
-    <!-- </div> -->
+        <div id="neutralDiv"></div>
+        <div id="darkDiv"></div>
+        <div id="lightDiv"></div>
   </div>
 </div>
 
   <div id="scrollbox">
       <p id="output"></p>
   </div>
-
-
-<!-- <p id="score">0</p>  -->
-  <!-- <p id="output"></p> -->
-  <!-- <h1>here we are</h1>
-  <p id="p1">wordswordswords</p>
-  <p id="p2">birdsbirdsbirds</p>
-  <p id="p3">deathdeathdeath</p>
-  <p id="p4">handshandshands</p>
-  <p id="p5">lightlightlight</p>
-
-  <!-- i feel as though i'm sinking
-deep breath beneath the surface
-i am a universe
-i am a dream
-darling we are doomed to deliver
- -->
-
-
-  <!-- ascene handles all the setup tat is required for 3d. it contains every entity in our scene -->
-  <!-- <a-scene>
-    <a-entity
-      text="value: Hello, A-Frame!; color: #BBB"
-      position="-0.9 0.2 -3"
-      scale="1.5 1.5 1.5"></a-entity>
-      <a-box color="red" position="0 2 -5" rotation="0 45 45" scale="2 2 2"></a-box> -->
-  <!-- <a-box color="red"></a-box> -->
-  <!-- <a-entity id="box" geometry="primitive: box" material="color: red"></a-entity> -->
-  <!-- </a-scene> -->
-
 </body>
 
 </html>

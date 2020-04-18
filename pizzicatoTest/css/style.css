@@ -1,48 +1,48 @@
 body {
-  background-color: black;
+  background-color: #7f7f7f;
   width: 1000px;
   height: 800px;
 }
 
-
-p {
-  background-color: inherit;
-  font-family: Courier, monospace;
-  font-weight: bold;
-  font-size: 40;
-  direction: rtl;
-}
-
+/* p { */
+  /* background-color: inherit; */
+  /* font-family: Courier, monospace; */
+  /* font-weight: bold; */
+  /* font-size: 60; */
+  /* direction: rtl; */
+/* } */
 
 #scrollbox {
-padding: 20px 100px;
-text-align: right;
-font-size: 20px;
-font-weight: bold;
+padding: 10px 30px;
 position: absolute;
-width: 50px;
-height: 50px;
+width: 750px;
+height: 300px;
 top: 40px;
 right: 150px;
 color: black;
-border: 5px solid #ff6699;
-/* outline-color: rgb(255, 130, 255); */
+border: 5px solid #000000;
 background-color: transparent;
+text-align: rtl;
+font-family: Courier, monospace;
+font-size: 20px;
+font-weight: bolder;
+}
+
+#output {
+background-color: #80ffd4;
 }
 
   #reset {
-  /* margin-left: 50; */
-  /* padding: 20px 100px; */
   text-align: left;
   font-family: Courier, monospace;
   font-size: 15px;
   font-weight: bolder;
-  color: #00FF00;
-  border: 3px solid #00FF00;
+  color: #80ffd4;;
+  border: 3px solid #80ffd4;;
   outline-style: none;
-  background-color: black;
-  top: 40px;
-  left: 800px;
+  background-color: #000000;
+  top: 60px;
+  left: 50px;
   position:absolute;
 }
 
@@ -53,12 +53,12 @@ font-size: 15px;
 font-weight: bolder;
 top: 40px;
 right: 40px;
-color: #00FF00;
-border: 3px solid #00FF00;
+color: #80ffd4;;
+border: 3px solid #80ffd4;;
 outline-style: none;
-background-color: black;
-top: 60px;
-left: 880px;
+background-color: #000000;
+top: 30px;
+left: 15px;
 position:absolute;
 }
 
@@ -109,7 +109,7 @@ position:absolute;
     position: absolute;
     bottom: 50px;
     left: 10px;
-    border: 1px solid yellow;
+    /* border: 1px solid yellow; */
   }
 
   #darkDiv{
@@ -120,7 +120,7 @@ position:absolute;
     left:260px;
     bottom: 50px;
     margin-bottom: auto;
-    border: 1px solid yellow;
+    /* border: 1px solid yellow; */
   }
 
   #lightDiv{
@@ -130,13 +130,5 @@ position:absolute;
     position:absolute;
     left:510px;
     bottom:50px;
-    border: 1px solid yellow;
-  }
-
-  #output {
-    text-align: left;
-    font-family: Courier, monospace;
-    font-size: 15px;
-    font-weight: bolder;
-    background-color: blue;
+    /* border: 1px solid yellow; */
   }

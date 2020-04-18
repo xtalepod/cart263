@@ -1,17 +1,15 @@
 "use strict";
 
 class Sound extends Pizzicato.Sound {
-  constructor(name, loop, source, type, attack, release, frequency) {
+  constructor(name, loop, volume) {
     super({
-      source: source,
+      source: 'file',
       options: {
         path: 'assets/sounds/' + name + '.wav',
         loop: loop,
-        volume: 1,
-        type: type, //of wavelength
-        attack: attack,
-        release: release,
-        frequency: frequency
+        volume: volume,
+        // attack: attack,
+        // release: release,
       }
     });
     this.name = name;

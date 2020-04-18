@@ -9,6 +9,7 @@ class Word {
     this.sound = sound;
     this.mood = mood;
     this.effect = null;
+    this.nextWordId = -1;
   }
 
   //this function exists because the ID created within the pushWord() function where the words are initialized
