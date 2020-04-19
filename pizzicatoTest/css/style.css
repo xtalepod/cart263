@@ -1,7 +1,5 @@
 body {
   background-color: #7f7f7f;
-  width: 1000px;
-  height: 800px;
 }
 
 /* p { */
@@ -16,47 +14,45 @@ body {
 padding: 10px 30px;
 position: absolute;
 width: 750px;
-height: 300px;
+height: 200px;
 top: 40px;
 right: 150px;
 color: black;
-border: 5px solid #000000;
-background-color: transparent;
+border: 1px solid #FFCCff;;
+background-color: inherit;
 text-align: rtl;
 font-family: Courier, monospace;
-font-size: 20px;
+font-size: 25px;
 font-weight: bolder;
 }
 
 #output {
-background-color: #80ffd4;
+/* background-color: #ffe6cc; */
 }
 
   #reset {
   text-align: left;
   font-family: Courier, monospace;
-  font-size: 15px;
+  font-size: 25px;
   font-weight: bolder;
-  color: #80ffd4;;
-  border: 3px solid #80ffd4;;
+  color: #80ffd4;
+  border: 1px solid #80ffd4;;
   outline-style: none;
-  background-color: #000000;
-  top: 60px;
-  left: 50px;
+  background-color: inherit;
+  top: 90px;
+  left: 90px;
   position:absolute;
 }
 
 #play {
 text-align: left;
 font-family: Courier, monospace;
-font-size: 15px;
+font-size: 25px;
 font-weight: bolder;
-top: 40px;
-right: 40px;
 color: #80ffd4;;
-border: 3px solid #80ffd4;;
+border: 1px solid #80ffd4;;
 outline-style: none;
-background-color: #000000;
+background-color: inherit;
 top: 30px;
 left: 15px;
 position:absolute;
@@ -64,8 +60,6 @@ position:absolute;
 
 
 .bigDiv{
-  width: 1000px;
-  height: 800px;
   position:relative;
 
 }
@@ -81,15 +75,15 @@ position:absolute;
  }
 
 #pic1{
-  top: 30px;
-  left: 140px;
+  right: 140px;
+  bottom: 0px;
   position: absolute;
 
 }
 
 #pic2{
-  top: 30px;
-  left: 460px;
+  top: 20px;
+  left: 280px;
   position: absolute;
 }
   /* #wordsDiv {
@@ -102,25 +96,22 @@ position:absolute;
     position: absolute;
   } */
 
-  #neutralDiv{
-    background-color: inherit;
-    height:300px;
-    width:250px;
-    position: absolute;
-    bottom: 50px;
-    left: 10px;
-    /* border: 1px solid yellow; */
-  }
-
   #darkDiv{
-    background-color: inherit;
     height:300px;
     width:250px;
     position:absolute;
-    left:260px;
-    bottom: 50px;
+    bottom: 0px;
+    left: 10px;
     margin-bottom: auto;
-    /* border: 1px solid yellow; */
+    border: 1px solid #ccccff;
+  }
+  #neutralDiv{
+    height:300px;
+    width:250px;
+    position: absolute;
+    left:290px;
+    bottom: 0px;
+    border: 1px solid #ccffd9;
   }
 
   #lightDiv{
@@ -128,7 +119,7 @@ position:absolute;
     height:300px;
     width:250px;
     position:absolute;
-    left:510px;
-    bottom:50px;
-    /* border: 1px solid yellow; */
+    left:570px;
+    bottom:0px;
+    border: 1px solid #ffffcc;
   }
