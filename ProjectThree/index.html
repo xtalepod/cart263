@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
+
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+
+  <!-- CSS stylesheet(s) -->
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+
+  <!-- Library script(s) -->
+  <!-- Pizzicato -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pizzicato/0.6.4/Pizzicato.min.js"></script>
+  <!-- My script(s) -->
+  <!-- Library script(s) -->
+  <script src="js/Sound.js"></script>
+  <script src="js/Synth.js"></script>
+  <script src="js/Word.js"></script>
+  <script src="js/script.js"></script>
+</head>
+
+<body>
+
+  <h1>WHISPERS</h1>
+  <p id ="instructions">build your own soundscape by clicking words.
+    preview each word by hovering over and a get a hint about its mood.
+    press play to hear your piece and then add more if you want. to start
+    over press reset. </p>
+
+<!-- <div id="openScene"> -->
+<div class ="bigDiv">
+<button id="play">play</button>
+<button id="reset">reset</button>
+  <div id="openScene">
+  <div id="playScene">
+      <img id="pic1" src="assets/images/lake1.jpg" width="600" height ="500">
+      <img id="pic2" src="assets/images/lake2.jpg" width="600" height ="500">
+        <div id="darkDiv"></div>
+        <div id="neutralDiv"></div>
+        <div id="lightDiv"></div>
+        <div id="scrollbox">
+            <p id="output"></p>
+        </div>
+  </div>
+</div>
+</body>
+
+</html>
