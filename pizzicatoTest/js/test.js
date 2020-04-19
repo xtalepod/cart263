@@ -1,21 +1,20 @@
 "use strict";
 
-//WHISPERS is a sound scape generator. The user can build their own poem and then play it back with preset effects .
+// WHISPERS is an interactive soundscape generator inspired by ASMR and electroacoustic //music. The simple interface allows the user to write poems by selecting words which can then be played back for listening, and if desired built upon. The words are divided into three categories: dark, light, and neutral. Two of categories or “moods” have effects built into them which alter the overall feeling of the soundscape depending on the predominant type in a sentence. In addition, these moods also have their own chord progressions that play back with the words.
+//Pizzicato is used regularly throughout this project: https://github.com/alemangui/pizzicato#sounds-events-end
 //by Christale Terris
 //CART 263 2020 ~ Project 3
 
-//to do tomorrow: play with the effects more, background color?, artist statement, pan
 
+let chordInterval; //a variable for setInterval() to change the chords
 
-
-let chordInterval;//a variable for setInterval() to change the chords
-let panInterval;//a variable for setInterval() to change the pan
 //building chords
 //https://www.youtube.com/watch?v=YSKAt3pmYBs
+//https://github.com/pippinbarr/cart263-2020/tree/master/activities/pizzicato/music-box
 //an array to hold the light frequencies
 let aLightFreq1 = [349.32, 523.25, 783.99, 880.00, 1318.51, 880.00];
-let aLightFreq2 = [415.30, 659.25, 987.77, 1046.50, 1567.98,1046.50];
-let aLightFreq3 = [523.25, 783.99, 1174.66, 1318.51,1975.65, 1318.51];
+let aLightFreq2 = [415.30, 659.25, 987.77, 1046.50, 1567.98, 1046.50];
+let aLightFreq3 = [523.25, 783.99, 1174.66, 1318.51, 1975.65, 1318.51];
 //an array to hold the dark frequencies
 let aDarkFreq1 = [164.81, 220.00, 196.00, 185.00, 164.81, 146.83];
 let aDarkFreq2 = [196.00, 277.18, 246.94, 220.00, 196.00, 185.00];
@@ -38,9 +37,6 @@ const NUM_OF_CHORDS = 6;
 //instatiate the pizzicato effects
 let darkEffect;
 let lightEffect;
-let panLeftEffect;
-let panRightEffect;
-
 
 let aSounds = []; //an array for the Sound.js objects
 
@@ -104,15 +100,14 @@ let $openScene;
 let $wordDiv;
 let $playButton;
 let $resetButton;
-let $panButton;
 //declaring variables for my pics
 let $pic1;
 let $pic2;
 
-let moodScore = 0;//start the score at 0
-let rgbValue = 127;//starting in the middle of the color scale
-const RGB_DARK_STEP = Math.floor(127/aDarkString.length);//determine the deincrement for colour value change
-const RGB_LIGHT_STEP = Math.floor(128/aLightString.length); //determine the increment for colour value change
+let moodScore = 0; //start the score at 0
+let rgbValue = 127; //starting in the middle of the color scale
+const RGB_DARK_STEP = Math.floor(127 / aDarkString.length); //determine the deincrement for colour value change
+const RGB_LIGHT_STEP = Math.floor(128 / aLightString.length); //determine the increment for colour value change
 
 //the thing we do when working with jQuery
 $(document).ready(setup);
@@ -120,9 +115,10 @@ $(document).ready(setup);
 //setup() function
 //this function instatiates the synth objects, effects, jQuery objects
 function setup() {
+
   //create my synth objects
-  synth1 = new Synth('sine',aSynth1Freq[synthFreqIndex] , 0.1, ATTACK, RELEASE);
-  synth2 = new Synth('sine',aSynth2Freq[synthFreqIndex] ,0.1, ATTACK, RELEASE);
+  synth1 = new Synth('sine', aSynth1Freq[synthFreqIndex], 0.1, ATTACK, RELEASE);
+  synth2 = new Synth('sine', aSynth2Freq[synthFreqIndex], 0.1, ATTACK, RELEASE);
   synth3 = new Synth('sine', aSynth3Freq[synthFreqIndex], 0.1, ATTACK, RELEASE);
   //create my effects
   darkEffect = new Pizzicato.Effects.PingPongDelay({
@@ -131,21 +127,15 @@ function setup() {
     mix: 0.6,
     volume: 0.3
   });
+
   lightEffect = new Pizzicato.Effects.Reverb({
-    time:2.0,
+    time: 2.0,
     decay: 2.95,
     reverse: false,
-    mix:0.98,
+    mix: 0.98,
     volume: 0.60
   });
-  panRightEffect = new Pizzicato.Effects.StereoPanner ({
-    pan: 1 // -1 to 1
-  });
-// darkEffect =  new Pizzicato.Effects.StereoPanner ({
-//   pan: -1 // -1 to 1
-//   });
 
-  // console.log(panLightEffect);
   //create my jQuery objects and hiding them at first
   $openScene = $("#openScene");
   $wordDiv = $("#wordDiv");
@@ -154,7 +144,6 @@ function setup() {
   // $playButton.hide();
   $resetButton = $("#reset");
   // $resetButton.hide();
-  $panButton = $("#pan");
   $pic1 = $("#pic1");
   $pic2 = $("#pic2");
 
@@ -163,7 +152,7 @@ function setup() {
   //   setTimeout("playScene()", 1000); //wait this long and then take us to the secondScene
   // });
   playScene();
-//
+  //
 } //endsetup
 
 //playScene() function
@@ -178,10 +167,10 @@ function playScene() {
   $playButton.click(function() {
     applyEffect(moodScore);
     playWordSequence();
-    if(aOutputIndex.length>0){
-        changeChord();
-        playSynth();
-        activateChordInterval();
+    if (aOutputIndex.length > 0) {
+      changeChord();
+      playSynth();
+      activateChordInterval();
     }
   });
 
@@ -253,28 +242,27 @@ function initWordsClick() {
       $("#W" + j.toString()).hide(); //https://www.w3schools.com/jsref/jsref_tostring_number.asp
       // 3. Update Next Word Index Array (W! before pushing j)
       aWords[j].nextWordId = -2; //an 'arbitrarily' chosen value (because it was positive it would interfer with the words and -1 is already being used) that indicates this is the last of the sentence
-      if(aOutputIndex.length > 0){//if there is something inside this array i want the last index
-        let last = aOutputIndex[aOutputIndex.length-1]; //grabbing the last index in the aOutputIndex (before we push the new clicked j)
+      if (aOutputIndex.length > 0) { //if there is something inside this array i want the last index
+        let last = aOutputIndex[aOutputIndex.length - 1]; //grabbing the last index in the aOutputIndex (before we push the new clicked j)
         aWords[last].nextWordId = j; // storing the word index that must follow j when it ends
-        // console.log("last word index", last)
-        // console.log("changing the nextWordId property of word", last, " to", j);
-        // console.log("id est: ", last,  "will be followed by", j);
-      }
-      else{
+        console.log("last word index", last)
+        console.log("changing the nextWordId property of word", last, " to", j);
+        console.log("id est: ", last,  "will be followed by", j);
+      } else {
         // console.log("output sequence is empty");
       }
-       // 4. add the index of the word clicked to the Output Index Array
-       // console.log("now adding", j, "to sequence");
-       aOutputIndex.push(j); //everytime you click, add the corresponding index number
-       // console.log("output:", aOutputIndex);
+      // 4. add the index of the word clicked to the Output Index Array
+      // console.log("now adding", j, "to sequence");
+      aOutputIndex.push(j); //everytime you click, add the corresponding index number
+      // console.log("output:", aOutputIndex);
       // j is nos the last Word Index
       //5. adding the word to the Output String
-       outputString += aWords[j].wordText + " "; //each time we move through the loop add the selected word
-       $("#output").text(outputString); //display the selected words
+      outputString += aWords[j].wordText + " "; //each time we move through the loop add the selected word
+      $("#output").text(outputString); //display the selected words
       //6 . update the mood Score based on the word mood
-       updateMoodScore(aWords[j].mood);
-       changeBackground();
-       // console.log("moodScore", moodScore);
+      updateMoodScore(aWords[j].mood);
+      changeBackground();
+      // console.log("moodScore", moodScore);
     }); //end click j
   } //end for
 } //end initWordsClick();
@@ -283,50 +271,47 @@ function initWordsClick() {
 //designed with Qynn
 //this function goes through all the words that have been clicked and plays them one after the other using Pizzicato on end function.
 //if [anextWordId] is greater than 0, the next word will be player.
-function initPlayNextWord(){
+function initPlayNextWord() {
   for (let i = 0; i < aWords.length; i++) {
-      aWords[i].sound.on('end', function() { //when the sound ends
-        let next = aWords[i].nextWordId; // next word index or -1/-2 codes
-          if (next >= 0 ){// positive indexes point to next word to be played. without this line of code the program would break...
-              aWords[next].sound.play(); //play the next sound
-              // console.log(i, "ended >> playing ", next);
-          }
-          else if(next === -2){ //if you get the last word of the playSequence
-              clearSynth();//clear the synths
-              // console.log("next for ", i, "is -2; stop the synths");
-            }
-            else if(next === -1){ // any word not in the output
-                  // console.log("next for ", i, "is -1, do nothing");
-            }
-      });
-    }// end for
+    aWords[i].sound.on('end', function() { //when the sound ends
+      let next = aWords[i].nextWordId; // next word index or -1/-2 codes
+      if (next >= 0) { // positive indexes point to next word to be played. without this line of code the program would break...
+        aWords[next].sound.play(); //play the next sound
+        // console.log(i, "ended >> playing ", next);
+      } else if (next === -2) { //if you get the last word of the playSequence
+        clearSynth(); //clear the synths
+        // console.log("next for ", i, "is -2; stop the synths");
+      } else if (next === -1) { // any word not in the output
+        // console.log("next for ", i, "is -1, do nothing");
+      }
+    });
+  } // end for
 }
 
 //initHoverOver() function
 //this function gives the user hints at the moods and the ability to preview the word sounds
 function initHoverOver() {
-    for (let r = 0; r < aWords.length; r++) {
-        aWords[r].div.hover(function() {
-          aWords[r].sound.play();
-          // console.log("hover", r);
-          if (aWords[r].mood === "dark") {
-              //https://stackoverflow.com/questions/16781486/jquery-how-to-adjust-css-filter-blur
-              $pic1.css({
-                'filter': 'contrast(50%)'
-              });
-          }
-          else if (aWords[r].mood === "light"){
-            $pic2.css({
-              'filter': 'contrast(50%)'
-              });
-          }
-        }, function() {
-          aWords[r].sound.stop();
-          $pic1.css({
-          'filter': 'none'//this is currently only working for th dark...
+  for (let r = 0; r < aWords.length; r++) {
+    aWords[r].div.hover(function() {
+      aWords[r].sound.play();
+      console.log("hover", r);
+      if (aWords[r].mood === "dark") {
+        //https://stackoverflow.com/questions/16781486/jquery-how-to-adjust-css-filter-blur
+        $pic1.css({
+          'filter': 'contrast(50%)'
         });
+      } else if (aWords[r].mood === "light") {
+        $pic2.css({
+          'filter': 'contrast(50%)'
+        });
+      }
+    }, function() {
+      aWords[r].sound.stop();
+      $pic1.css({
+        'filter': 'none' //this is currently only working for th dark...
       });
-    }// end for
+    });
+  } // end for
 } //end function
 
 // # # # # # # # # # # # # # # # # # # # #
@@ -338,10 +323,10 @@ function initHoverOver() {
 //for the aOutputIndex[l]  and is used to track which sound to play in order of word clicked first to last.
 // it uses the Pizzicato end event to play the next sound after the previous one ends
 function playWordSequence() {
-    // initiate the cascade effect
-  if(aOutputIndex.length > 0){
-      aWords[aOutputIndex[0]].sound.play(); //play the first word, rest will follow
-      console.log("playing", aOutputIndex[0]);
+  // initiate the cascade effect
+  if (aOutputIndex.length > 0) {
+    aWords[aOutputIndex[0]].sound.play(); //play the first word, rest will follow
+    console.log("playing", aOutputIndex[0]);
   }
 } //end playSequence();
 
@@ -352,23 +337,22 @@ function updateMoodScore(mood) {
   //takes a mood as an input
   if (mood === "dark") {
     moodScore -= 1;
-    rgbValue -= RGB_DARK_STEP;//change the background colour by going down a step
-   }
-   else if (mood === "light") {
+    rgbValue -= RGB_DARK_STEP; //change the background colour by going down a step
+  } else if (mood === "light") {
     moodScore += 1;
-    rgbValue += RGB_LIGHT_STEP;//change the background colour by going up a step
-    }
+    rgbValue += RGB_LIGHT_STEP; //change the background colour by going up a step
   }
+}
 
 //changeBackground() function
 //designed with Qynn
 //this function sets the background colour and allows for modularity by using the rbgValue
-  function changeBackground() {
-    //https://stackoverflow.com/questions/2173229/how-do-i-write-a-rgb-color-value-in-javascript
-    let val = (rgbValue).toString();//the intial point
-    // console.log("rgb value:", v);
-    let colour = "rgb(" + val + "," + val +  "," + val + ")";
-    $('body').css('background-color', colour);
+function changeBackground() {
+  //https://stackoverflow.com/questions/2173229/how-do-i-write-a-rgb-color-value-in-javascript
+  let val = (rgbValue).toString(); //the intial point
+  // console.log("rgb value:", v);
+  let colour = "rgb(" + val + "," + val + "," + val + ")";
+  $('body').css('background-color', colour);
 }
 
 //clearOutput() function
@@ -381,7 +365,7 @@ function clearOutput(mood) {
   for (let m = 0; m < aWords.length; m++) {
     // aWords[m].sound.pause();
     aWords[m].sound.stop();
-    aWords[m].nextWordId = -1;//this is resetting all anextWordId to -1
+    aWords[m].nextWordId = -1; //this is resetting all anextWordId to -1
     outputString = "";
     aOutputIndex.splice(0, aOutputIndex.length);
     $("#W" + m.toString()).show(); //show the words again
@@ -389,7 +373,7 @@ function clearOutput(mood) {
     // playSequenceEnabled = false;
   } //end of m
   $("#output").text(outputString);
-    moodScore = 0;
+  moodScore = 0;
 }
 
 //applyEffect() function
@@ -409,11 +393,10 @@ function applyEffect(score) {
 
 //activateChordInterval() function
 //a simple reuseabnle function that activates the chord interval changes and gives a value to the chordInterval variable so that it can be used in the clearSynth function
-function activateChordInterval(){
-  if (moodScore < 0){
-  chordInterval = setInterval('changeChord()', CHORD_DURATION_DARK);
-  }
-  else if (moodScore > 0){
+function activateChordInterval() {
+  if (moodScore < 0) {
+    chordInterval = setInterval('changeChord()', CHORD_DURATION_DARK);
+  } else if (moodScore > 0) {
     chordInterval = setInterval('changeChord()', CHORD_DURATION_LIGHT);
   }
 }
@@ -427,25 +410,23 @@ function changeChord() {
     synth1.frequency = aDarkFreq1[synthFreqIndex];
     synth2.frequency = aDarkFreq2[synthFreqIndex];
     synth3.frequency = aDarkFreq3[synthFreqIndex];
-  }
-  else if (moodScore > 0) { //light
+  } else if (moodScore > 0) { //light
     synth1.frequency = aLightFreq1[synthFreqIndex];
     synth2.frequency = aLightFreq2[synthFreqIndex];
     synth3.frequency = aLightFreq3[synthFreqIndex];
-  }
-  else{ // neutral
+  } else { // neutral
     // TBD
   }
- // increment chord index
+  // increment chord index
   synthFreqIndex++;
-  if (synthFreqIndex === NUM_OF_CHORDS){ //make sure freq. arrays have the same lengths
+  if (synthFreqIndex === NUM_OF_CHORDS) { //make sure freq. arrays have the same lengths
     synthFreqIndex = 0;
   }
 } //end changeChord();
 
 //playSynth() function
 //a simple reuseable function for playing the synths
-function playSynth(){
+function playSynth() {
   console.log(synth1.volume);
   synth1.play();
   synth2.play();
