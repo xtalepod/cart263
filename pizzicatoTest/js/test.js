@@ -141,9 +141,9 @@ function setup() {
   panRightEffect = new Pizzicato.Effects.StereoPanner ({
     pan: 1 // -1 to 1
   });
-  panLeftEffect =  new Pizzicato.Effects.StereoPanner ({
-  pan: -1 // -1 to 1
-  });
+// darkEffect =  new Pizzicato.Effects.StereoPanner ({
+//   pan: -1 // -1 to 1
+//   });
 
   // console.log(panLightEffect);
   //create my jQuery objects and hiding them at first
