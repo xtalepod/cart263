@@ -2,13 +2,28 @@ body {
   background-color: #7f7f7f;
 }
 
-/* p { */
-  /* background-color: inherit; */
-  /* font-family: Courier, monospace; */
-  /* font-weight: bold; */
-  /* font-size: 60; */
-  /* direction: rtl; */
-/* } */
+
+h1{
+  font-family: Courier, monospace;
+  font-size: 80px;
+  font-weight: bolder;
+  padding: 10px 30px;
+  position: absolute;
+  right: 110px;
+  bottom: -30px;
+}
+
+#instructions{
+  font-family: Courier, monospace;
+  font-size: 20px;
+  font-weight: bolder;
+  position: absolute;
+  left: 20px;
+  top: 140px;
+  width: 200px;
+  height: 80px;
+  font-weight: bolder;
+}
 
 #scrollbox {
 padding: 10px 30px;
@@ -26,9 +41,6 @@ font-size: 25px;
 font-weight: bolder;
 }
 
-#output {
-/* background-color: #ffe6cc; */
-}
 
   #reset {
   text-align: left;
@@ -86,21 +98,12 @@ position:absolute;
   left: 280px;
   position: absolute;
 }
-  /* #wordsDiv {
-    font-family: Courier, monospace;
-    font-size: 15px;
-    font-weight: bolder;
-    width: 1000px;
-    height: 800px;
-    background-color: inherit;
-    position: absolute;
-  } */
 
   #darkDiv{
     height:300px;
     width:250px;
     position:absolute;
-    bottom: 0px;
+    bottom: -40px;
     left: 10px;
     margin-bottom: auto;
     border: 1px solid #ccccff;
@@ -110,7 +113,7 @@ position:absolute;
     width:250px;
     position: absolute;
     left:290px;
-    bottom: 0px;
+    bottom: -60px;
     border: 1px solid #ccffd9;
   }
 
@@ -120,6 +123,6 @@ position:absolute;
     width:250px;
     position:absolute;
     left:570px;
-    bottom:0px;
+    bottom:-80px;
     border: 1px solid #ffffcc;
   }

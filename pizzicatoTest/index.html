@@ -6,15 +6,10 @@
   <meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
 
   <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <!-- <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" /> -->
 
   <!-- CSS stylesheet(s) -->
-  <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
   <link rel="stylesheet" type="text/css" href="css/style.css" />
-
-  <!-- Add your required libraries here either as local files or CDN-hosted files -->
-  <!-- Uncomment next two lines to include jQuery UI -->
-  <!-- <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"> -->
-  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> -->
 
   <!-- Library script(s) -->
   <!-- Add your required libraries here either as local files or CDN-hosted files -->
@@ -32,10 +27,16 @@
 
 <body>
 
+  <h1>WHISPERS</h1>
+  <p id ="instructions">build your own soundscape by clicking words.
+    preview each word by hovering over and a get a hint about its mood.
+    press play to hear your piece and then add more if you want. to start
+    over press reset. </p>
+
 <!-- <div id="openScene"> -->
 <div class ="bigDiv">
 <button id="play">play</button>
-  <button id="reset">reset</button>
+<button id="reset">reset</button>
   <div id="openScene">
   <div id="playScene">
       <img id="pic1" src="assets/images/lake1.jpg" width="600" height ="500">

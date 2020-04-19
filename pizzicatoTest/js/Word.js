@@ -27,32 +27,68 @@ class Word {
   }
 
 
-  //getEffect() function
+  //getEffect() method
   //set the effect based on the score. the score id number is set as a global variable "moodScore" in the script
   //the dark and light scores are set as -1 and 1 in the updateMoodScore() function
   getEffect(score) {
     //takes a mood as an input
     let effect;
+    // let panLeftEffect;
+    // let panRightEffect;
+
     if (score < 0) { //dark
-      effect = darkEffect;
-    } else if (score > 0) { //light
+      effect = darkEffect; //panDarkEffect;
+      // panLeftEffect = panDarkEffect;
+    }
+
+    else if (score > 0) { //light
       effect = lightEffect;
-    } else {
+      // panRightEffect = panLightEffect;
+    }
+
+    else {
       effect = null;
+      // panRightEffect = null;
+      // panLeftEffect = null;
     } //end if
+
     return effect;
+    // return [effect, panLeftEffect, panRightEffect];
+    // return panRightEffect;
   } //end method
 
-
+//changeEffect() method passes the score and adds/remove effects based on whether its below or above 0
   changeEffect(score) {
-    // console.log("old effect", this.effect);
+
     if (this.effect != null) {
       this.sound.removeEffect(this.effect);
     }
+
     this.effect = this.getEffect(score); //update new effect
+
     if (this.effect != null) {
       this.sound.addEffect(this.effect);
     }
-    // console.log("new mood:", this.effect);
+
+// /////########PAN###########
+//     if (this.panLeftEffect != null){
+//       this.sound.removeEffect(this.panLeftEffect)
+//     }
+//     if (this.panRightEffect != null){
+//         this.sound.removeEffect(this.panRightEffect)
+//       }
+//       this.panLeftEffect = this.getEffect(score); //update new effect
+//       this.panRightEffect = this.getEffect(score); //update new effect
+//
+//       if (this.panLeftEffect != null) {
+//         this.sound.addEffect(this.panLeftEffect);
+//       }
+//
+//       if (this.panRightEffect != null) {
+//         this.sound.addEffect(this.panRightEffect);
+//       }
+//
+//     this.sound.removeEffect(this.panLeftEffect);
+//     this.sound.removeEffect(this.panRightEffect);
   }
 } //end of script

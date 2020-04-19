@@ -1,6 +1,15 @@
 "use strict";
 
+//WHISPERS is a sound scape generator. The user can build their own poem and then play it back with preset effects .
+//by Christale Terris
+//CART 263 2020 ~ Project 3
+
+//to do tomorrow: play with the effects more, background color?, artist statement, pan
+
+
+
 let chordInterval;//a variable for setInterval() to change the chords
+let panInterval;//a variable for setInterval() to change the pan
 //building chords
 //https://www.youtube.com/watch?v=YSKAt3pmYBs
 //an array to hold the light frequencies
@@ -29,7 +38,8 @@ const NUM_OF_CHORDS = 6;
 //instatiate the pizzicato effects
 let darkEffect;
 let lightEffect;
-let neutralEffect;
+let panLeftEffect;
+let panRightEffect;
 
 
 let aSounds = []; //an array for the Sound.js objects
@@ -94,6 +104,7 @@ let $openScene;
 let $wordDiv;
 let $playButton;
 let $resetButton;
+let $panButton;
 //declaring variables for my pics
 let $pic1;
 let $pic2;
@@ -127,10 +138,14 @@ function setup() {
     mix:0.98,
     volume: 0.60
   });
-  neutralEffect = new Pizzicato.Effects.StereoPanner ({
-    pan: 0.0 // -1 to 1
-  })
+  panRightEffect = new Pizzicato.Effects.StereoPanner ({
+    pan: 1 // -1 to 1
+  });
+  panLeftEffect =  new Pizzicato.Effects.StereoPanner ({
+  pan: -1 // -1 to 1
+  });
 
+  // console.log(panLightEffect);
   //create my jQuery objects and hiding them at first
   $openScene = $("#openScene");
   $wordDiv = $("#wordDiv");
@@ -139,6 +154,7 @@ function setup() {
   // $playButton.hide();
   $resetButton = $("#reset");
   // $resetButton.hide();
+  $panButton = $("#pan");
   $pic1 = $("#pic1");
   $pic2 = $("#pic2");
 
@@ -289,7 +305,6 @@ function initPlayNextWord(){
 //initHoverOver() function
 //this function gives the user hints at the moods and the ability to preview the word sounds
 function initHoverOver() {
-
     for (let r = 0; r < aWords.length; r++) {
         aWords[r].div.hover(function() {
           aWords[r].sound.play();
@@ -352,7 +367,7 @@ function updateMoodScore(mood) {
     //https://stackoverflow.com/questions/2173229/how-do-i-write-a-rgb-color-value-in-javascript
     let val = (rgbValue).toString();//the intial point
     // console.log("rgb value:", v);
-    let colour = "rgb(" + val/2 + "," + val/2 +  "," + val + ")";
+    let colour = "rgb(" + val + "," + val +  "," + val + ")";
     $('body').css('background-color', colour);
 }
 
@@ -379,7 +394,7 @@ function clearOutput(mood) {
 
 //applyEffect() function
 //this function creates a new index from aOutputIndex[k] and changes the effect of a word based on the score
-//it passes score as a parameter and is determined in the getEffect() method in the Word class
+//it passes score as a parameter and is set in the getEffect() method in the Word class
 function applyEffect(score) {
   // apply effect to all words from Output
   for (let k = 0; k < aOutputIndex.length; k++) {

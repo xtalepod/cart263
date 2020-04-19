@@ -11,9 +11,7 @@ class Synth extends Pizzicato.Sound {
         attack: attack,
         release: release,
         frequency: frequency
-        // detached: false
       }
     });
-    // console.log(Synth.type);
   }
 }
