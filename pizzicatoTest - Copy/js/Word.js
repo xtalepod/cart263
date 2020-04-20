@@ -39,7 +39,10 @@ class Word {
       effect = darkEffect;
     } else if (score > 0) { //light
       effect = lightEffect;
-    } else {
+    } else if (score === 0) {
+      effect = neutralEffect;
+    }
+      else {
       effect = null;
     } //end if
     return effect;
@@ -53,7 +56,7 @@ class Word {
       this.sound.removeEffect(this.effect);
     }
     this.effect = this.getEffect(score); //update new effect
-    
+
     if (this.effect != null) {
       this.sound.addEffect(this.effect);
     }

@@ -10,12 +10,12 @@ h1{
   padding: 10px 30px;
   position: absolute;
   right: 110px;
-  bottom: -50px;
+  bottom:-400px;
 }
 
 #instructions{
   font-family: Courier, monospace;
-  font-size: 20px;
+  font-size: 15px;
   font-weight: bolder;
   position: absolute;
   left: 20px;
@@ -28,10 +28,10 @@ h1{
 #scrollbox {
 padding: 10px 30px;
 position: absolute;
-width: 750px;
+width: 550px;
 height: 200px;
 top: 40px;
-right: 150px;
+right: 90px;
 color: black;
 border: 1px solid #FFCCff;;
 background-color: inherit;
@@ -88,7 +88,7 @@ position:absolute;
 
 #pic1{
   right: 140px;
-  bottom: 0px;
+  bottom: 100px;
   position: absolute;
 
 }
@@ -103,7 +103,7 @@ position:absolute;
     height:300px;
     width:250px;
     position:absolute;
-    bottom: -40px;
+    bottom: 60px;
     left: 10px;
     margin-bottom: auto;
     border: 1px solid #ccccff;
@@ -113,7 +113,7 @@ position:absolute;
     width:250px;
     position: absolute;
     left:290px;
-    bottom: -60px;
+    bottom: 40px;
     border: 1px solid #ccffd9;
   }
 
@@ -123,6 +123,6 @@ position:absolute;
     width:250px;
     position:absolute;
     left:570px;
-    bottom:-80px;
+    bottom:20px;
     border: 1px solid #ffffcc;
   }

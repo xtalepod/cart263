@@ -1,10 +1,6 @@
 "use strict";
 
-// WHISPERS is an interactive soundscape generator inspired by ASMR and electroacoustic music.
-// The simple interface allows the user to write poems by selecting words which can then be played back for listening,
-// and if desired built upon. The words are divided into three categories: dark, light, and neutral. Two of categories or
-// “moods” have effects built into them which alter the overall feeling of the soundscape depending on the predominant
-// type in a sentence. In addition, these moods also have their own chord progressions that play back with the words.
+// WHISPERS is an interactive soundscape generator inspired by ASMR and electroacoustic //music. The simple interface allows the user to write poems by selecting words which can then be played back for listening, and if desired built upon. The words are divided into three categories: dark, light, and neutral. Two of categories or “moods” have effects built into them which alter the overall feeling of the soundscape depending on the predominant type in a sentence. In addition, these moods also have their own chord progressions that play back with the words.
 //Pizzicato is used regularly throughout this project: https://github.com/alemangui/pizzicato#sounds-events-end
 //by Christale Terris
 //CART 263 2020 ~ Project 3
@@ -21,8 +17,10 @@ let aLightFreq3 = [523.25, 783.99, 1174.66, 1318.51, 1975.65, 1318.51];
 let aDarkFreq1 = [164.81, 220.00, 196.00, 185.00, 164.81, 146.83];
 let aDarkFreq2 = [196.00, 277.18, 246.94, 220.00, 196.00, 185.00];
 let aDarkFreq3 = [246.94, 329.63, 293.66, 277.18, 246.94, 220.00];
-
-let chordInterval; //a variable for setInterval() to change the chords
+//an array to hold the neutral frequencies, they are a combination of light and dark
+let aNeutralFreq1 = [164.81, 220.00, 196.00, 185.00, 164.81, 146.83];
+let aNeutralFreq2 = [196.00, 277.18, 246.94, 220.00, 196.00, 185.00];
+let aNeutralFreq3 = [523.25, 783.99, 1174.66, 1318.51, 1975.65, 1318.51];
 
 //arrays to hold the frequencies of the synths
 let aSynth1Freq = [];
@@ -33,14 +31,18 @@ let synth1, synth2, synth3; //instatiate the synths
 
 //CONSTANTS related to the sound objects and synths
 const CHORD_DURATION_DARK = 3000; //ms
-const CHORD_DURATION_LIGHT = 1000; //ms
+const CHORD_DURATION_LIGHT = 100; //ms
+const CHORD_DURATION_NEUTRAL = 2000; //ms
+const PAN_DURATION = 1000; //ms
 const ATTACK = 0.2;
 const RELEASE = 0.1;
 const NUM_OF_CHORDS = 6;
+let chordInterval; //a variable for setInterval() to change the chords
 
 //instatiate the pizzicato effects
 let darkEffect;
 let lightEffect;
+let neutralEffect;
 
 let aSounds = []; //an array for the Sound.js objects
 
@@ -138,7 +140,9 @@ function setup() {
     mix: 0.98,
     volume: 0.60
   });
-
+  neutralEffect = new Pizzicato.Effects.StereoPanner({
+    pan: 0
+  })
   //create my jQuery objects and hiding them at first
   $openScene = $("#openScene");
   $wordDiv = $("#wordDiv");
@@ -148,30 +152,31 @@ function setup() {
   $pic2 = $("#pic2");
 
   //initialize the different types of words, the word divs, the click events, the play next word function, and the hover over
-  initWords(aNeutralString, "neutral");
   initWords(aDarkString, "dark");
+  initWords(aNeutralString, "neutral");
   initWords(aLightString, "light");
   initWordDivs();
   initWordsClick();
   initPlayNextWord();
   initHoverOver();
 
-    //the play button and its click functions
-    $playButton.click(function() {
-      applyEffect(moodScore);
-      playWordSequence();
-      if (aOutputIndex.length > 0) {
-        changeChord();
-        playSynth();
-        activateChordInterval();
-      }
-    });
+  //the play button and its click functions
+  $playButton.click(function() {
+    applyEffect(moodScore);
+    playWordSequence();
+    if (aOutputIndex.length > 0) {
+      changeChord();
+      playSynth();
+      activateChordInterval();
+    }
+  });
 
-    //the reset button and its click functions
-    $resetButton.click(function() {
-      clearSynth();
-      clearOutput();
-    });
+  //the reset button and its click functions
+  $resetButton.click(function() {
+    clearSynth();
+    clearPan();
+    clearOutput();
+  });
 } //end setUp();
 
 // # # # # # # # # # # # # # # # # # # # #
@@ -191,7 +196,7 @@ function initWords(aString, mood) {
   let y = paddingTop;
 
   for (let i = 0; i < aString.length; i++) {
-    aSounds.push(new Sound(aString[i], false, 1));
+    aSounds.push(new Sound(aString[i], false, 0.5));
     let lastSoundPushed = aSounds[aSounds.length - 1];
     aWords.push(new Word(aString[i], x, y, "#80ffd4", lastSoundPushed, mood));
     y += lineHeight;
@@ -255,8 +260,6 @@ function initPlayNextWord() {
 
 //initHoverOver() function
 //this function gives the user hints at the moods and the ability to preview the word sounds
-//initHoverOver() function
-//this function gives the user hints at the moods and the ability to preview the word sounds
 function initHoverOver() {
   for (let r = 0; r < aWords.length; r++) {
     aWords[r].div.hover(function() {
@@ -265,11 +268,11 @@ function initHoverOver() {
       if (aWords[r].mood === "dark") {
         //https://stackoverflow.com/questions/16781486/jquery-how-to-adjust-css-filter-blur
         $pic1.css({
-          'filter': 'contrast(50%)'
+          'filter': 'contrast(100%)'
         });
       } else if (aWords[r].mood === "light") {
         $pic2.css({
-          'filter': 'contrast(150%)'
+          'filter': 'contrast(50%)'
         });
       }
     }, function() {
@@ -283,6 +286,7 @@ function initHoverOver() {
     });
   } // end for
 } //end function
+
 // # # # # # # # # # # # # # # # # # # # #
 // # # # # # # # # WORDS # # # # # # # #
 // # # # # # # # # # # # # # # # # # # # #
@@ -309,7 +313,10 @@ function updateMoodScore(mood) {
   } else if (mood === "light") {
     moodScore += 1;
     rgbValue += RGB_LIGHT_STEP; //change the background colour by going up a step
+  } else if (mood === "neutral") {
+    moodScore = 0;
   }
+  console.log(moodScore);
 }
 
 //changeBackground() function
@@ -365,6 +372,8 @@ function activateChordInterval() {
     chordInterval = setInterval('changeChord()', CHORD_DURATION_DARK);
   } else if (moodScore > 0) {
     chordInterval = setInterval('changeChord()', CHORD_DURATION_LIGHT);
+  } else {
+    chordInterval = setInterval('changeChord()', CHORD_DURATION_NEUTRAL);
   }
 }
 
@@ -382,10 +391,13 @@ function changeChord() {
     synth2.frequency = aLightFreq2[synthFreqIndex];
     synth3.frequency = aLightFreq3[synthFreqIndex];
   } else { // neutral
-    // TBD
+    synth1.frequency = aNeutralFreq1[synthFreqIndex];
+    synth2.frequency = aNeutralFreq2[synthFreqIndex];
+    synth3.frequency = aNeutralFreq3[synthFreqIndex];
   }
-  synthFreqIndex++;  // increment chord index
-  if (synthFreqIndex === NUM_OF_CHORDS) { //make sure freq. arrays have the same lengths
+  // increment chord index
+  synthFreqIndex++;
+  if (synthFreqIndex === NUM_OF_CHORDS) {
     synthFreqIndex = 0;
   }
 } //end changeChord();
@@ -393,7 +405,6 @@ function changeChord() {
 //playSynth() function
 //a simple reuseable function for playing the synths
 function playSynth() {
-  console.log(synth1.volume);
   synth1.play();
   synth2.play();
   synth3.play();
